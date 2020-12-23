@@ -26,11 +26,8 @@ Route::get('/', [LayoutController::class, 'index']);
 
 Route::get('/user/list',[ManagementController::class, 'UserList'])->name('user.list');
 
-
-
-
-
 Route::get('/add/product',[ProductController::class, 'addproduct'])->name('add.product');
+
 //User
 Route::get('/user-list',[ManagementController::class, 'UserList'])->name('user.list');
 Route::get('/add-user-list',[ManagementController::class, 'AddUserList'])->name('add.user.list');
@@ -48,6 +45,7 @@ Route::prefix('customer')->group(function(){
     Route::post('/customer-update',[CustomerController::class, 'CustomerUpdate'])->name('customer.update');
     Route::get('/customer-delete/{id}',[CustomerController::class, 'CustomerDelete'])->name('customer.delete');
 });
+
 //Supplier
 Route::prefix('supplier')->group(function(){
 Route::get('/supplier-list',[SupplierController::class, 'SupplierList'])->name('supplier.list');

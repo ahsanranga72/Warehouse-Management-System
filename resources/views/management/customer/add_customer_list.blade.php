@@ -55,16 +55,16 @@
                   
                   <div class="form-group col-md-6">
                     <label for="phone">Phone</label>
-                    <input type="text" name="phone" class="form-control" id="phone" placeholder="">
+                    <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone">
                   </div>
                   <div class="form-group col-md-6">
                     <label for="balace">Balance</label>
-                    <input type="text" name="balace" class="form-control" id="balace" placeholder="">
+                    <input type="text" name="balace" class="form-control" id="balace" placeholder="Balance">
                   </div>
                   
                   <div class="form-group col-md-6">
                     <label for="tax_number">Tax</label>
-                    <input type="text" name="tax_number" class="form-control" id="tax_number" placeholder="Password">
+                    <input type="text" name="tax_number" class="form-control" id="tax_number" placeholder="Tax">
                   </div>
                   <div class="form-group col-md-6">
                     <label for="address">Address</label>
