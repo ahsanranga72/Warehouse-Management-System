@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>Tijarah24 | Dashboard</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -121,9 +121,40 @@
 <script src="{{ asset('public/assets/dist/js/demo.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('public/assets/dist/js/pages/dashboard.js')}}"></script>
+<<<<<<< HEAD
 <!-- Imageupload -->
 <script src="{{ asset('public/assets/plugins/image-uploader.min.js')}}"></script>
 <script src="{{ asset('public/assets/plugins/select2/js/select2.min.js')}}"></script>
 
+=======
+
+<!-- <script type="text/javascript">
+   $(function(){
+     $(document).on('click', '#delete', function(e){
+      e.preventDefault();
+      var link = $ (this).attr("href");
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "Are you file delete",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.value) {
+          window.location.href = link;
+          Swal.fire(
+            'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+  }
+})
+     })
+   }); -->
+
+ </script>
+>>>>>>> 901937d65142d0f86fbe2a6c3866b4ee48c29e86
 </body>
 </html>
