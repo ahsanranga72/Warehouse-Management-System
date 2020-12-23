@@ -23,8 +23,17 @@
   <link rel="stylesheet" href="{{ asset('public/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="{{ asset('public/assets/plugins/daterangepicker/daterangepicker.css')}}">
+  <link rel="stylesheet" href="{{ asset('public/assets/plugins/select2/css/select2.min.css')}}">
   <!-- summernote -->
-  <link rel="stylesheet" href="{{ asset('public/assets/plugins/summernote/summernote-bs4.min.css')}}">
+ 
+  <!-- ImageUpload -->
+  <link  rel="stylesheet" href="{{ asset('public/assets/plugins/image-uploader.min.css')}}">
+ 
+  @yield('stylesheets')
+
+  <script src="{{ asset('public/assets/plugins/jquery/jquery.min.js')}}"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="{{ asset('public/assets/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -65,6 +74,9 @@
 
   @yield('content')
     <!-- /.content -->
+
+  @stack('scripts')
+ 
   </div>
   <!-- /.content-wrapper -->
   @include('layouts.footer')
@@ -78,9 +90,7 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="{{ asset('public/assets/plugins/jquery/jquery.min.js')}}"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="{{ asset('public/assets/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
+
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button)
@@ -102,7 +112,7 @@
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="{{ asset('public/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
 <!-- Summernote -->
-<script src="{{ asset('public/assets/plugins/summernote/summernote-bs4.min.js')}}"></script>
+
 <!-- overlayScrollbars -->
 <script src="{{ asset('public/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
@@ -111,5 +121,9 @@
 <script src="{{ asset('public/assets/dist/js/demo.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('public/assets/dist/js/pages/dashboard.js')}}"></script>
+<!-- Imageupload -->
+<script src="{{ asset('public/assets/plugins/image-uploader.min.js')}}"></script>
+<script src="{{ asset('public/assets/plugins/select2/js/select2.min.js')}}"></script>
+
 </body>
 </html>

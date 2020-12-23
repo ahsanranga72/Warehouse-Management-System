@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LayoutController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,9 @@ use App\Http\Controllers\LayoutController;
 Route::get('/', [LayoutController::class, 'index']);
 
 Route::get('/user/list',[ManagementController::class, 'UserList'])->name('user.list');
+
+
+
+
+
+Route::get('/add/product',[ProductController::class, 'addproduct'])->name('add.product');
