@@ -24,6 +24,7 @@
   <!-- Daterange picker -->
   <link rel="stylesheet" href="{{ asset('public/assets/plugins/daterangepicker/daterangepicker.css')}}">
   <link rel="stylesheet" href="{{ asset('public/assets/plugins/select2/css/select2.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('public/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
   <!-- summernote -->
  
   <!-- ImageUpload -->
@@ -121,12 +122,12 @@
 <script src="{{ asset('public/assets/dist/js/demo.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('public/assets/dist/js/pages/dashboard.js')}}"></script>
-<<<<<<< HEAD
 <!-- Imageupload -->
 <script src="{{ asset('public/assets/plugins/image-uploader.min.js')}}"></script>
 <script src="{{ asset('public/assets/plugins/select2/js/select2.min.js')}}"></script>
+<script src="{{ asset('public/assets/plugins/select2/js/select2.full.min.js')}}"></script>
 
-=======
+
 
 <!-- <script type="text/javascript">
    $(function(){
@@ -155,6 +156,5 @@
    }); -->
 
  </script>
->>>>>>> 901937d65142d0f86fbe2a6c3866b4ee48c29e86
 </body>
 </html>

@@ -28,7 +28,7 @@
           <!-- /.card-header -->
           <div class="card-body">
             <div class="row">
-              <div class="col-lg-6">
+              <div class="col-lg-4">
                 <div class="form-group" >
                   <label>Product Type <span class="required-field">*</span></label>
                   <select class="form-control select2" style="width: 100%;">
@@ -42,7 +42,7 @@
                   </select>
                 </div>
               </div>
-              <div class="col-lg-4">
+              <div class="col-lg-">
                 <div class="form-group">
                   <label for="productName">Product Name <span class="required-field">*</span></label>
                   <input type="productName" name="productName" class="form-control" id="productName">
@@ -180,8 +180,13 @@
 
     $('#summernote').summernote();
 
-    $('.select2').select2()
+    $('.select2').select2({
+      theme: 'bootstrap4'
+    })
 
+    // $('.select2bs4').select2({
+    //   theme: 'bootstrap4'
+    // })
 
   })   
 </script>
