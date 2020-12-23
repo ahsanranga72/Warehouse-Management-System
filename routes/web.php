@@ -26,7 +26,11 @@ Route::get('/', [LayoutController::class, 'index']);
 
 Route::get('/user/list',[ManagementController::class, 'UserList'])->name('user.list');
 
+
+//Product
 Route::get('/add/product',[ProductController::class, 'addproduct'])->name('add.product');
+Route::post('/store/product',[productController::class, 'storeproduct'])->name('store.product');
+
 
 //User
 Route::get('/user-list',[ManagementController::class, 'UserList'])->name('user.list');
