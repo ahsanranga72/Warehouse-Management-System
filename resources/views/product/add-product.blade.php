@@ -42,7 +42,7 @@
                   </select>
                 </div>
               </div>
-              <div class="col-lg-">
+              <div class="col-lg-4">
                 <div class="form-group">
                   <label for="productName">Product Name <span class="required-field">*</span></label>
                   <input type="productName" name="productName" class="form-control" id="productName">
