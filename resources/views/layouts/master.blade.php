@@ -24,6 +24,7 @@
   <!-- Daterange picker -->
   <link rel="stylesheet" href="{{ asset('public/assets/plugins/daterangepicker/daterangepicker.css')}}">
   <link rel="stylesheet" href="{{ asset('public/assets/plugins/select2/css/select2.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('public/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
   <!-- summernote -->
  
   <!-- ImageUpload -->
@@ -124,6 +125,8 @@
 <!-- Imageupload -->
 <script src="{{ asset('public/assets/plugins/image-uploader.min.js')}}"></script>
 <script src="{{ asset('public/assets/plugins/select2/js/select2.min.js')}}"></script>
+<script src="{{ asset('public/assets/plugins/select2/js/select2.full.min.js')}}"></script>
+
 
 
 <!-- <script type="text/javascript">
