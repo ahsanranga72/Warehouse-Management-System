@@ -44,8 +44,8 @@
                     <input type="text" name="last_name" class="form-control" id="last_name" placeholder="Enter Last Name">
                   </div>
                     <div class="form-group col-md-6">
-                    <label for="user_name">User Name</label>
-                    <input type="text" name="user_name" class="form-control"  placeholder="Enter User Name">
+                    <label for="name">User Name</label>
+                    <input type="text" name="name" class="form-control"  placeholder="Enter User Name">
                   </div>
                   <div class="form-group col-md-6">
                     <label for="company_name">Company Name</label>
