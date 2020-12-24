@@ -22,7 +22,7 @@ use App\Http\Controllers\SupplierController;
 //     return view('welcome');
 // });
 
-Route::get('/', [LayoutController::class, 'index']);
+//Route::get('/', [LayoutController::class, 'index']);
 
 Route::get('/user/list',[ManagementController::class, 'UserList'])->name('user.list');
 
@@ -56,6 +56,6 @@ Route::post('/supplier-update',[SupplierController::class, 'SupplierUpdate'])->n
 Route::get('/supplier-delete/{id}',[SupplierController::class, 'SupplierDelete'])->name('supplier.delete');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
+    return view('layouts.home');
 })->name('dashboard');

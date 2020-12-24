@@ -46,7 +46,7 @@
                   @foreach($suppliers as $supplier)
                   <tr>
                     <td>{{$supplier->id}}</td>
-                    <td>{{$supplier->image}}
+                    <td><img src="{{(!empty($supplier->image))?url('public/upload/supplier_images/'.$supplier->image):url('public/upload/no-image.png')}}" height="130px" width="120px"></td>
                     </td>
                     <td>{{$supplier->name}}</td>
                     <td>{{$supplier->company_name}}</td>

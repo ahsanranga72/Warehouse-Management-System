@@ -32,7 +32,7 @@
               <!-- /.card-header -->
               <!-- form start -->
               
-              <form id="quickForm" method="POST" action="{{route('supplier.store')}}">
+              <form id="quickForm" method="POST" action="{{route('supplier.store')}}" enctype="multipart/form-data">
                   @csrf
                 <div class="card-body">
                     <div class="row">
@@ -52,7 +52,7 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="vat_number">Vat Number</label>
-                    <input type="email" name="vat_number" class="form-control" id="vat_number" placeholder="Enter email">
+                    <input type="text" name="vat_number" class="form-control" id="vat_number" placeholder="Enter Your Vat">
                   </div>
                   <div class="form-group col-md-6">
                     <label for="email">Email</label>
