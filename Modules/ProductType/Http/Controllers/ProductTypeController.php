@@ -5,6 +5,7 @@ namespace Modules\ProductType\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\ProductType\Entities\ProductType;
 
 class ProductTypeController extends Controller
 {
@@ -13,8 +14,9 @@ class ProductTypeController extends Controller
      * @return Renderable
      */
     public function index()
-    {
-        return view('producttype::index');
+    { 
+        $producttypes = ProductType::orderBy('id', 'DESC')->get();
+        return view('producttype::index', compact('producttypes'));
     }
 
     /**
@@ -32,8 +34,15 @@ class ProductTypeController extends Controller
      * @return Renderable
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $validated = $request->validate([
+            'name' => 'required|unique:product_types|max:50',
+        ]);
+        $producttype = New ProductType;
+        $producttype->name = $request->name;
+        $producttype->save();
+
+        return redirect()->route('producttype.view')->with('message', 'Product Type Save Successfully');
     }
 
     /**
@@ -53,7 +62,8 @@ class ProductTypeController extends Controller
      */
     public function edit($id)
     {
-        return view('producttype::edit');
+        $producttype = ProductType::where('id', $id)->first();
+        return view('producttype::edit', compact('producttype'));
     }
 
     /**
@@ -64,7 +74,14 @@ class ProductTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|unique:product_types|max:50',
+        ]);
+        $producttype = ProductType::find($id);
+        $producttype->name = $request->name;
+        $producttype->save();
+        return redirect()->route('producttype.view')->with('message', 'Product Type Updated Successfully');
+
     }
 
     /**
@@ -74,6 +91,8 @@ class ProductTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $producttype = ProductType::find($id);
+        $producttype->delete();
+        return redirect()->route('producttype.view')->with('message', 'Product Type Deleted Successfully');
     }
 }

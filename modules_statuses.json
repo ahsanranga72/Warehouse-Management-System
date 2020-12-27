@@ -1,4 +1,11 @@
 {
     "Blog": true,
-    "ProductType": true
+    "ProductType": true,
+    "BarcodeSymbolgy": true,
+    "Brand": true,
+    "Category": true,
+    "ProductUint": true,
+    "SaleUnit": true,
+    "PurchaseUnit": true,
+    "TaxMethod": true
 }

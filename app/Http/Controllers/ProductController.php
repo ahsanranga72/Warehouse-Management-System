@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product\Product;
 use App\Models\Product\ProductType;
-use App\Models\Product\BarcodeSymbology;
+use Modules\BarcodeSymbolgy\Entities\BarcodeSymbol;
 use App\Models\Product\Brand;
 use App\Models\Product\Category;
 use App\Models\Product\ProductUnit;
@@ -20,7 +20,7 @@ class ProductController extends Controller
     public function addproduct(){
         
         $data=ProductType::all();
-        $bar=BarcodeSymbology::all();
+        $bar=BarcodeSymbol::all();
         $brand=Brand::all();
         $category=Category::all();
         $prounit=ProductUnit::all();

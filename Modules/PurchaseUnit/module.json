@@ -1,0 +1,13 @@
+{
+    "name": "PurchaseUnit",
+    "alias": "purchaseunit",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\PurchaseUnit\\Providers\\PurchaseUnitServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -1,0 +1,13 @@
+{
+    "name": "BarcodeSymbolgy",
+    "alias": "barcodesymbolgy",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\BarcodeSymbolgy\\Providers\\BarcodeSymbolgyServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -69,6 +69,66 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fas fas fa-user"></i>
+              <p>
+                Master Setup
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                 <a href="{{route('producttype.view')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Product Type List</p>
+                </a>
+              </li>
+             
+              <li class="nav-item">
+                <a href="{{route('barcodesymbolgy.view')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Barcode Symbol List</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('add.brand')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Brand List</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('category.view')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Category List</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('productunit.view')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>ProductUnit List</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('purchaseunit.view')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Purchase List</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('saleunit.view')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Sale Unit List</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('taxmethod.view')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tax Method List</p>
+                </a>
+              </li>
+            </ul>
+          </li>
 
           <li class="nav-item">
             <a href="#" class="nav-link">

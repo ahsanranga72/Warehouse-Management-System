@@ -99,6 +99,33 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+        
     ],
 
+];
+
+return [
+    'default' => env('LOG_CHANNEL', 'stack'),
+
+    'channels' => [
+        'stack' => [
+            'driver' => 'stack',
+            'channels' => ['daily', 'flare'],
+            'ignore_exceptions' => false,
+        ],
+     ],
+];
+
+return [
+    'channels' => [           
+         'vapor' => [
+             'driver' => 'stack',
+             'channels' => ['flare', 'stderr'],
+             'ignore_exceptions' => false,
+         ],
+         
+         'flare' => [
+             'driver' => 'flare',
+         ],
+     ],
 ];

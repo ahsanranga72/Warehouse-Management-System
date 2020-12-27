@@ -1,0 +1,13 @@
+{
+    "name": "ProductUint",
+    "alias": "productuint",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\ProductUint\\Providers\\ProductUintServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -1,0 +1,13 @@
+{
+    "name": "TaxMethod",
+    "alias": "taxmethod",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\TaxMethod\\Providers\\TaxMethodServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

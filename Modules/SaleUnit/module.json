@@ -1,0 +1,13 @@
+{
+    "name": "SaleUnit",
+    "alias": "saleunit",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\SaleUnit\\Providers\\SaleUnitServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
