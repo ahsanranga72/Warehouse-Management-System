@@ -29,6 +29,8 @@ class CreateProductsTable extends Migration
             $table->Float('alert_quantity')->nullable();
             $table->Float('product_tax')->nullable();
             $table->Integer('tax_method')->nullable();
+            $table->Integer('warehouse_id')->default(0);
+            $table->Integer('stock_quantity')->nullable();
             $table->String('product_image',255)->nullable();
             $table->Text('product_details')->nullable();
             $table->timestamps();

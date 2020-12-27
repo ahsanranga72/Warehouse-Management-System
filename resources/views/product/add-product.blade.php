@@ -34,7 +34,7 @@
                   <select name="productType" id="productType" class="form-control select2" style="width: 100%;">
                     <option value="">--Select Product Type--</option>
                     @foreach ($data as $key)
-                    <option value="{{ $key->id }}">{{ $key->product_type_name }}</option>
+                    <option value="{{ $key->id }}">{{ $key->name }}</option>
                     @endforeach
                   </select>
                 </div>
@@ -158,6 +158,17 @@
                   </select>
                 </div>
               </div>
+              <div class="col-lg-4">
+                <div class="form-group" >
+                  <label for="warehouse">Warehouse <span class="required-field">*</span></label>
+                  <select name="warehouse" id="warehouse" class="form-control select2"  style="width: 100%;">
+                    <option value="">--Select a warehouse--</option>
+                    @foreach ($warehouse as $key)
+                    <option value="{{ $key->id }}">{{ $key->name }}</option>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
             </div>
             <div class="row">
               <div class="col-md-12">
@@ -238,6 +249,7 @@
       var  alertQuantity =$('input[name="alertQuantity"]').val()
       var  productTax =$('input[name="productTax"]').val()
       var  taxMethod =$('select[name="taxMethod"]').val()
+      var  warehouse =$('select[name="warehouse"]').val()
       var  images =$('input[name="images"]').val()
       var  summernote =$('#summernote').summernote('code');
       var file_data = $('input[type="file"]').prop('files')[0];
@@ -260,6 +272,7 @@
       formData.append('alert_quantity', alertQuantity);
       formData.append('product_tax', productTax);
       formData.append('tax_method', taxMethod);
+      formData.append('warehouse', warehouse);
       formData.append('product_unit', productUnit);
       formData.append('product_image', file_data);
       formData.append('product_details', summernote);
@@ -303,63 +316,69 @@
       productType: {
         required: true,
       },
-      // productName: {
-      //   required: true,
-      // },
-      // productCode: {
-      //   required: true,
-      // },
-      // barcodeSymbology: {
-      //   required: true,
-      // },
-      // brand: {
-      //   required: true,
-      // },
-      // category: {
-      //   required: true,
-      // },
-      // productUnit: {
-      //   required: true,
-      // },
-      // productCost: {
-      //   required: true,
-      //   min: 1,
-      // },
-      // productPrice: {
-      //   required: true,
-      //   min: 1,
-      // },
+      productName: {
+        required: true,
+      },
+      productCode: {
+        required: true,
+      },
+      barcodeSymbology: {
+        required: true,
+      },
+      brand: {
+        required: true,
+      },
+      category: {
+        required: true,
+      },
+      productUnit: {
+        required: true,
+      },
+      productCost: {
+        required: true,
+        min: 1,
+      },
+      productPrice: {
+        required: true,
+        min: 1,
+      },
+      warehouse: {
+        required: true,
+      },
     },
     messages: {
       productType: {
         required: "Please select Product Type",
       },
-      // productName: {
-      //   required: "Please enter Product Name",
-      // },
-      // productCode: {
-      //   required: "Please enter Product Code",
-      // },
-      // barcodeSymbology: {
-      //   required: "Please select Barcode Symbology",
-      // },
-      // brand: {
-      //   required: "Please select a Brand",
-      // },
-      // category: {
-      //   required: "Please select Category",
-      // },
-      // productUnit: {
-      //   required: "Please select Product Unit",
-      // },
-      // productCost: {
-      //   required: "Please enter Product Cost",
-      //   min: "Product cost must be greater than 0",
-      // },
-      // productPrice: {
-      //   required: "Please enter Product Price",
-      //   min: "Product price must be greater than 0",
-      // },
+      productName: {
+        required: "Please enter Product Name",
+      },
+      productCode: {
+        required: "Please enter Product Code",
+      },
+      barcodeSymbology: {
+        required: "Please select Barcode Symbology",
+      },
+      brand: {
+        required: "Please select a Brand",
+      },
+      category: {
+        required: "Please select Category",
+      },
+      productUnit: {
+        required: "Please select Product Unit",
+      },
+      productCost: {
+        required: "Please enter Product Cost",
+        min: "Product cost must be greater than 0",
+      },
+      productPrice: {
+        required: "Please enter Product Price",
+        min: "Product price must be greater than 0",
+      },
+      warehouse: {
+        required: "Please select a warehouse"
+      }
     },
     errorElement: 'span',
     errorPlacement: function (error, element) {
