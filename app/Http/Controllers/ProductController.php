@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product\Product;
-use App\Models\Product\ProductType;
-use Modules\BarcodeSymbolgy\Entities\BarcodeSymbol;
+use Modules\ProductType\Entities\ProductType;
+use App\Models\Product\BarcodeSymbology;
 use App\Models\Product\Brand;
 use App\Models\Product\Category;
 use App\Models\Product\ProductUnit;
 use App\Models\Product\PurchaseUnit;
 use App\Models\Product\SaleUnit;
 use App\Models\Product\TaxMethod;
+use App\Models\Product\Warehouse;
 use Response;
 
 class ProductController extends Controller
@@ -27,7 +28,8 @@ class ProductController extends Controller
         $purunit=PurchaseUnit::all();
         $salunit=SaleUnit::all();
         $tax=TaxMethod::all();
-        return view('product.add-product',compact('data','bar','brand','category','prounit','purunit','salunit','tax'));
+        $warehouse=Warehouse::all();
+        return view('product.add-product',compact('data','bar','brand','category','prounit','purunit','salunit','tax','warehouse'));
         //return view('product.add-product',['bar'=>$bar]);
     }
 
@@ -48,6 +50,7 @@ class ProductController extends Controller
         $product->alert_quantity = $request->alert_quantity;
         $product->product_tax = $request->product_tax;
         $product->tax_method = $request->tax_method;
+        $product->warehouse_id = $request->warehouse;
         $product->product_details = $request->product_details;
         
         if($request->hasfile('product_image')){
