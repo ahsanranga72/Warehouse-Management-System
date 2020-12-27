@@ -6,14 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product\Product;
 use Modules\ProductType\Entities\ProductType;
-use App\Models\Product\BarcodeSymbology;
+use Modules\BarcodeSymbolgy\Entities\BarcodeSymbol;
 use App\Models\Product\Brand;
 use App\Models\Product\Category;
 use App\Models\Product\ProductUnit;
 use App\Models\Product\PurchaseUnit;
 use App\Models\Product\SaleUnit;
-use App\Models\Product\TaxMethod;
-use App\Models\Product\Warehouse;
+use Modules\TaxMethod\Entities\TaxMethod;
+use Modules\Warehouse\Entities\Warehouse;
 use Response;
 
 class ProductController extends Controller

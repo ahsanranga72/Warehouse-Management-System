@@ -127,6 +127,12 @@
                   <p>Tax Method List</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{route('warehouse.view')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Ware House List</p>
+                </a>
+              </li>
             </ul>
           </li>
 

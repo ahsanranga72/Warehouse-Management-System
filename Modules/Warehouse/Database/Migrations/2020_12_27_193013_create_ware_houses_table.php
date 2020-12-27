@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-class CreateWarehousesTable extends Migration
+class CreateWareHousesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateWarehousesTable extends Migration
      */
     public function up()
     {
-        Schema::create('warehouses', function (Blueprint $table) {
+        Schema::create('ware_houses', function (Blueprint $table) {
             $table->id();
-            $table->String('name')->nullable();
+            $table->string('name');
+
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateWarehousesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('warehouses');
+        Schema::dropIfExists('ware_houses');
     }
 }

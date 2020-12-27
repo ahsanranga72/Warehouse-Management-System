@@ -59,7 +59,7 @@
                   <select name="barcodeSymbology" id="barcodeSymbology" class="form-control select2" style="width: 100%;">
                     <option value="">--Select Barcode Symbology--</option>
                     @foreach ($bar as $key)
-                    <option value="{{ $key->id }}">{{ $key->barcode_symbologie_name }}</option>
+                    <option value="{{ $key->id }}">{{ $key->name }}</option>
                     @endforeach
                   </select>
                 </div>
@@ -70,7 +70,7 @@
                   <select name="brand" id="brand" class="form-control select2" style="width: 100%;">
                     <option value="">--Select a Brand--</option>
                     @foreach ($brand as $key)
-                    <option value="{{ $key->id }}">{{ $key->brand_name }}</option>
+                    <option value="{{ $key->id }}">{{ $key->name }}</option>
                     @endforeach
                   </select>
                 </div>
@@ -81,7 +81,7 @@
                   <select name="category" id="category" class="form-control select2" style="width: 100%;">
                     <option value="">--Select a Category--</option>
                     @foreach ($category as $key)
-                    <option value="{{ $key->id }}">{{ $key->categorie_name }}</option>
+                    <option value="{{ $key->id }}">{{ $key->name }}</option>
                     @endforeach
                   </select>
                 </div>
@@ -94,7 +94,7 @@
                     <select name="productUnit" id="productUnit" class="form-control select2" style="width: 100%;" >
                     <option value="">--Select a Product Unit--</option>
                     @foreach ($prounit as $key)
-                    <option value="{{ $key->id }}">{{ $key->product_unit_name }}</option>
+                    <option value="{{ $key->id }}">{{ $key->name }}</option>
                     @endforeach
                     </select>
                 </div>
@@ -105,7 +105,7 @@
                   <select name="saleUnit" id="saleUnit" class="form-control select2" style="width: 100%;">
                     <option value="">--Selct Sale Unit--</option>
                     @foreach ($salunit as $key)
-                    <option value="{{ $key->id }}">{{ $key->sale_unit_name }}</option>
+                    <option value="{{ $key->id }}">{{ $key->name }}</option>
                     @endforeach
                   </select>
                 </div>
@@ -116,7 +116,7 @@
                     <select name="purchaseUnit" id="purchaseUnit" class="form-control select2" style="width: 100%;" >
                         <option value="">--Select Purchase Unit--</option>
                         @foreach ($purunit as $key)
-                    <option value="{{ $key->id }}">{{ $key->purchase_unit_name }}</option>
+                    <option value="{{ $key->id }}">{{ $key->name }}</option>
                     @endforeach
                     </select>
                 </div>
@@ -153,7 +153,7 @@
                   <select name="taxMethod" id="taxMethod" class="form-control select2"  style="width: 100%;">
                     <option value="">--Select Tax Method--</option>
                     @foreach ($tax as $key)
-                    <option value="{{ $key->id }}">{{ $key->tax_method_name }}</option>
+                    <option value="{{ $key->id }}">{{ $key->name }}</option>
                     @endforeach
                   </select>
                 </div>

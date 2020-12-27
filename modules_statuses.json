@@ -7,5 +7,6 @@
     "ProductUint": true,
     "SaleUnit": true,
     "PurchaseUnit": true,
-    "TaxMethod": true
+    "TaxMethod": true,
+    "Warehouse": true
 }
