@@ -138,7 +138,7 @@
 
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="fab fa-product-hunt"></i>
+              <i class="nav-icon fas fas fas fa-user"></i>
               <p>
                 Product
                 <i class="fas fa-angle-left right"></i>
@@ -185,6 +185,30 @@
                 <a href="pages/forms/validation.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Stock Count</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fas fas fa-user"></i>
+              <p>
+                Purchase
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                 <a href="{{route('purchase.view')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Purchase List</p>
+                </a>
+              </li>
+             
+              <li class="nav-item">
+                <a href="{{route('purchase.add')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Purchase</p>
                 </a>
               </li>
             </ul>

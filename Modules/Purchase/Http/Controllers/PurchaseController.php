@@ -1,15 +1,17 @@
 <?php
 
-namespace Modules\Warehouse\Http\Controllers;
+namespace Modules\Purchase\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Warehouse\Entities\Warehouse;
+use App\Models\Product\Product;
+use SebastianBergmann\Environment\Console;
+use DB;
 
 
-
-class WarehouseController extends Controller
+class PurchaseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +19,7 @@ class WarehouseController extends Controller
      */
     public function index()
     {
-        $warehouses = Warehouse::orderBy('id', 'DESC')->get();
-        return view('warehouse::index', compact('warehouses'));
+        return view('purchase::index');
     }
 
     /**
@@ -27,7 +28,28 @@ class WarehouseController extends Controller
      */
     public function create()
     {
-        return view('warehouse::create');
+        //return view('purchase::create');
+        $warehouses = Warehouse::orderBy('id', 'DESC')->get();
+        return view('purchase::create', compact('warehouses'));
+    }
+    public function get_product_list_by_product_code(Request $request)
+    {
+     if($request->get('product_code'))
+     {
+      $product_code = $request->get('product_code');
+      $data = DB::table('products')->where('product_code', 'LIKE', "%{$product_code}%")->get();
+      $output = '<ul class="dropdown-menu select-product-list" style="display:block; position:relative">';
+      foreach($data as $row)
+      {
+       $output .= '
+       <li><a href="#">'.$row->product_name.'</a></li>
+       ';
+      }
+      $output .= '</ul>';
+    //   print_r($output);
+      echo $output;
+      exit(0);
+     }
     }
 
     /**
@@ -37,14 +59,7 @@ class WarehouseController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|unique:ware_houses|max:50',
-        ]);
-        $warehouse = New Warehouse;
-        $warehouse->name = $request->name;
-        $warehouse->save();
-
-        return redirect()->route('warehouse.view')->with('message', 'warehouse Save Successfully');
+        //
     }
 
     /**
@@ -54,7 +69,7 @@ class WarehouseController extends Controller
      */
     public function show($id)
     {
-        return view('warehouse::show');
+        return view('purchase::show');
     }
 
     /**
@@ -64,8 +79,7 @@ class WarehouseController extends Controller
      */
     public function edit($id)
     {
-        $warehouse = Warehouse::find($id);
-        return view('warehouse::edit', compact('warehouse'));
+        return view('purchase::edit');
     }
 
     /**
@@ -76,14 +90,7 @@ class WarehouseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
-            'name' => 'required|unique:ware_houses|max:50',
-        ]);
-        $warehouse = Warehouse::find($id);
-        $warehouse->name = $request->name;
-        $warehouse->save();
-
-        return redirect()->route('warehouse.view')->with('message', 'warehouse Updated Successfully');
+        //
     }
 
     /**
@@ -93,10 +100,6 @@ class WarehouseController extends Controller
      */
     public function destroy($id)
     {
-        $warehouse = Warehouse::find($id);
-      
-        $warehouse->delete();
-
-        return redirect()->route('warehouse.view')->with('message', 'warehouse Updated Successfully');
+        //
     }
 }
