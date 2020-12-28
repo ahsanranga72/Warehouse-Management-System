@@ -12,10 +12,14 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
   <section class="content-header">
+  
     <div class="container-fluid">
+    <h3>Add Product
+                 <a class="btn btn-success float-right btn-sm" href="{{route('product.list')}}"><i class="fa fa-list"></i>Product List</a>
+                </h3>
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Add Product</h1>
+        
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -282,7 +286,7 @@
       //var myDropzone = Dropzone.forElement(".input-images");
       //myDropzone.removeAllFiles();
       $.ajax({
-                url :'http://127.0.0.1:8000/store/product',
+                url :"{{route('store.product')}}",
                 type : 'POST',
                 data : formData,
                 contentType : false,

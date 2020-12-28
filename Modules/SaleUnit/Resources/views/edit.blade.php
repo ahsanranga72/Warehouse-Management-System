@@ -13,9 +13,9 @@
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-              <h3>Edit saleunit
+              <h3>Edit Sale Unit
                  <a class="btn btn-success float-right btn-sm" href="{{route('saleunit.view')}}">
-                 <i class="fa fa-list"></i>saleunit List</a>
+                 <i class="fa fa-list"></i>Sale Unit List</a>
                 </h3>
               </div>
               </div>
@@ -33,6 +33,15 @@
                     <font style="color: red">
               		  {{($errors->has('name'))?($errors->first('name')):''}}
               		</font>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="parent_id">Product Unit <span class="required-field">*</span></label>
+                    <select name="parent_id" id="parent_id" class="form-control select2" style="width: 100%;" >
+                    <option value="">--Select a Product Unit--</option>
+                    @foreach ($productunits as $key => $productunit)
+                    <option value="{{ $productunit->id }}" selected>{{ $productunit->name }}</option>
+                    @endforeach
+                    </select>
                   </div>
                 </div>
                     </div>

@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\SaleUnit\Entities\SaleUnit;
+use Modules\ProductUint\Entities\ProductUnit;
 
 class SaleUnitController extends Controller
 {
@@ -16,7 +17,8 @@ class SaleUnitController extends Controller
     public function index()
     {
         $saleunits = SaleUnit::orderBy('id', 'DESC')->get();
-        return view('saleunit::index', compact('saleunits'));
+        $productunits = ProductUnit::all();
+        return view('saleunit::index', compact('saleunits','productunits'));
     }
 
     /**
@@ -25,7 +27,8 @@ class SaleUnitController extends Controller
      */
     public function create()
     {
-        return view('saleunit::create');
+        $productunits = ProductUnit::all();
+        return view('saleunit::create', compact('productunits'));
     }
 
     /**
@@ -40,8 +43,8 @@ class SaleUnitController extends Controller
         ]);
         $saleunit = New SaleUnit;
         $saleunit->name = $request->name;
+        $saleunit->parent_id = $request->parent_id;
         $saleunit->save();
-
         return redirect()->route('saleunit.view')->with('message', 'Sale Unit Save Successfully');
     }
 
@@ -63,7 +66,8 @@ class SaleUnitController extends Controller
     public function edit($id)
     {
         $saleunit = SaleUnit::find($id);
-        return view('saleunit::edit', compact('saleunit'));
+        $productunits = ProductUnit::get();
+        return view('saleunit::edit', compact('saleunit', 'productunits'));
     }
 
     /**
@@ -79,6 +83,7 @@ class SaleUnitController extends Controller
         ]);
         $saleunit =SaleUnit::find($id);
         $saleunit->name = $request->name;
+        $saleunit->parent_id = $request->parent_id;
         $saleunit->save();
         return redirect()->route('saleunit.view')->with('message', 'Sale Unit Updated Successfully');
     }

@@ -9,5 +9,16 @@ class Product extends Model
 {
     use HasFactory;
 
-    //protected $table='product_type';
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo('Modules\Category\Entities\Category', 'id');
+    }
+
+
+   
 }

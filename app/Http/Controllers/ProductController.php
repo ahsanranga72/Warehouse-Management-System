@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 use App\Models\Product\Product;
 use Modules\ProductType\Entities\ProductType;
 use Modules\BarcodeSymbolgy\Entities\BarcodeSymbol;
-use App\Models\Product\Brand;
-use App\Models\Product\Category;
-use App\Models\Product\ProductUnit;
-use App\Models\Product\PurchaseUnit;
-use App\Models\Product\SaleUnit;
+use Modules\Brand\Entities\Brand;
+use Modules\Category\Entities\Category;
+use Modules\ProductUint\Entities\ProductUnit;
+use Modules\PurchaseUnit\Entities\PurchaseUnit;
+use Modules\SaleUnit\Entities\SaleUnit;
 use Modules\TaxMethod\Entities\TaxMethod;
 use Modules\Warehouse\Entities\Warehouse;
 use Response;
@@ -71,6 +71,19 @@ class ProductController extends Controller
             return Response::json(array('success' => 'false', 'message' => 'Product has not been added succesefully.'));
            }
 
+
+    }
+
+    public function productlist(){
+        $productlists = Product::all();
+        return view('product.product-list', compact('productlists'));
+    }
+
+    public function delete($id){
+        $product = Product::find($id);
+        $product->delete();
+
+        return redirect()->route('product.list')->with('message', 'Product Deleted Successfully');
 
     }
 }

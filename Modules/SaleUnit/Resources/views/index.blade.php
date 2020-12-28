@@ -4,9 +4,9 @@
    
 <div class="card">
               <div class="card-header">
-              <h3>Saleunit list
+              <h3>Sale Unit list
               <a class="btn btn-success float-right btn-sm" href="{{route('add.saleunit')}}">
-              <i class="fa fa-plus-circle"></i>Add SaleUnit</a>
+              <i class="fa fa-plus-circle"></i>Add Sale Unit</a>
                 </h3>
               </div>
               <!-- /.card-header -->
@@ -21,7 +21,8 @@
               @endif
                   <tr>
                   <th>SL</th>
-                    <th>Name</th>
+                    <th>Sale Unit Name</th>
+                    <th>Product Unit Name</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -30,6 +31,7 @@
                   <tr>
                     <td>{{$key+1}}</td>
                     <td>{{$saleunit->name}}</td>
+                    <td>{{$saleunit['productunit']['name']}}</td>
                     <td>
                     <a href="{{ route('saleunit.edit',$saleunit->id)}}" class="btn btn-sm btn-primary" title="edit">
                     <i class="fa fa-edit"></i></a>

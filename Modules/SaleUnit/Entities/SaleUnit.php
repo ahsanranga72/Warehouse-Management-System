@@ -15,4 +15,9 @@ class SaleUnit extends Model
     {
         return \Modules\SaleUnit\Database\factories\SaleUnitFactory::new();
     }
+
+    public function productunit()
+    {
+        return $this->belongsTo('Modules\ProductUint\Entities\ProductUnit', 'parent_id' , 'id');
+    }
 }
