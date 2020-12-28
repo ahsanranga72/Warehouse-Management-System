@@ -1,21 +1,21 @@
 <?php
 
-namespace Modules\Blog\Providers;
+namespace Modules\Product\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
-class BlogServiceProvider extends ServiceProvider
+class ProductServiceProvider extends ServiceProvider
 {
     /**
      * @var string $moduleName
      */
-    protected $moduleName = 'Blog';
+    protected $moduleName = 'Product';
 
     /**
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'blog';
+    protected $moduleNameLower = 'product';
 
     /**
      * Boot the application events.

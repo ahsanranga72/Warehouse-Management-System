@@ -146,7 +146,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('product.list')}}" class="nav-link">
+                <a href="{{route('products.list')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Product List</p>
                 </a>

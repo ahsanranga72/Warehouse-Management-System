@@ -9,5 +9,6 @@
     "PurchaseUnit": true,
     "TaxMethod": true,
     "Warehouse": true,
-    "Purchase": true
+    "Purchase": true,
+    "Product": true
 }

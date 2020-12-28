@@ -12,11 +12,11 @@
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
-                  @if(Session::has('message'))
+            @if(Session::has('message'))
                <div class="alert alert-success" role="alert">
                  {{Session::get('message')}}
                </div>
-              @endif
+            @endif
                   <tr>
                   <th>SL</th>
                     <th>Image</th>
@@ -47,7 +47,6 @@
                     <a href="{{ route('customer.edit',$productlist->id)}}" class="btn btn-sm btn-primary" title="edit"><i class="fa fa-edit"></i></a>
                   	<a href="{{ route('product.delete',$productlist->id)}}" id="delete" class="btn btn-sm btn-danger" title="delete"><i class="fa fa-trash"></i></a>
                     </td>
-                  
                   </tr>
                   @endforeach
                   </tfoot>

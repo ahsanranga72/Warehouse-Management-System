@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
-
-use App\Http\Controllers\Controller;
+namespace Modules\Product\Http\Controllers;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
-use App\Models\Product\Product;
+use Illuminate\Routing\Controller;
+use Modules\Product\Entities\Product;
 use Modules\ProductType\Entities\ProductType;
 use Modules\BarcodeSymbolgy\Entities\BarcodeSymbol;
 use Modules\Brand\Entities\Brand;
@@ -15,6 +15,7 @@ use Modules\SaleUnit\Entities\SaleUnit;
 use Modules\TaxMethod\Entities\TaxMethod;
 use Modules\Warehouse\Entities\Warehouse;
 use Response;
+
 
 class ProductController extends Controller
 {
@@ -29,7 +30,7 @@ class ProductController extends Controller
         $salunit=SaleUnit::all();
         $tax=TaxMethod::all();
         $warehouse=Warehouse::all();
-        return view('product.add-product',compact('data','bar','brand','category','prounit','purunit','salunit','tax','warehouse'));
+        return view('product::add-product',compact('data','bar','brand','category','prounit','purunit','salunit','tax','warehouse'));
         //return view('product.add-product',['bar'=>$bar]);
     }
 
@@ -76,7 +77,7 @@ class ProductController extends Controller
 
     public function productlist(){
         $productlists = Product::all();
-        return view('product.product-list', compact('productlists'));
+        return view('product::product-list', compact('productlists'));
     }
 
     public function delete($id){
@@ -84,6 +85,5 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('product.list')->with('message', 'Product Deleted Successfully');
-
     }
 }

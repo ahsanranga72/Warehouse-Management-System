@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Blog\Entities;
+namespace Modules\Product\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Category extends Model
+class Product extends Model
 {
     use HasFactory;
 
@@ -13,6 +13,6 @@ class Category extends Model
     
     protected static function newFactory()
     {
-        return \Modules\Blog\Database\factories\CategoryFactory::new();
+        return \Modules\Product\Database\factories\ProductFactory::new();
     }
 }

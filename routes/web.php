@@ -27,11 +27,6 @@ use App\Http\Controllers\SupplierController;
 Route::get('/user/list',[ManagementController::class, 'UserList'])->name('user.list');
 
 
-//Product
-Route::get('/add/product',[ProductController::class, 'addproduct'])->name('add.product');
-Route::post('/store/product',[productController::class, 'storeproduct'])->name('store.product');
-Route::get('/product-list',[productController::class, 'productlist'])->name('product.list');
-Route::get('/product-delete/{id}',[productController::class, 'delete'])->name('product.delete');
 
 
 //User
