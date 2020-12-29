@@ -83,9 +83,12 @@ class ProductController extends Controller
 
     public function delete($id){
         $product = Product::find($id);
+        if (file_exists('upload/product_images/' .$product->product_image) AND ! empty($product->product_image)) {
+            unlink('upload/product_images/' . $product->product_image);
+        }
         $product->delete();
 
-        return redirect()->route('product.list')->with('message', 'Product Deleted Successfully');
+        return redirect()->route('products.list')->with('message', 'Product Deleted Successfully');
     }
 
     public function check_product_with_warehouse(){
