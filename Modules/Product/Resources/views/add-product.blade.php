@@ -405,7 +405,8 @@
       required: "Please select a warehouse",
       remote: $.validator.format("Product already exists in this warehouse !")	  }
 	},
-	errorElement: 'span',
+  errorElement: 'span',
+  onfocusout: false,
 	errorPlacement: function (error, element) {
 	  error.addClass('invalid-feedback');
 	  element.closest('.form-group').append(error);
@@ -415,7 +416,13 @@
 	},
 	unhighlight: function (element, errorClass, validClass) {
 	  $(element).removeClass('is-invalid');
-	}
+  },
+  invalidHandler: function(form, validator) {
+        var errors = validator.numberOfInvalids();
+        if (errors) {                    
+            validator.errorList[0].element.focus();
+        }
+    } 
   });
 
 
