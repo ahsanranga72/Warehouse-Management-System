@@ -15,6 +15,7 @@ use Modules\SaleUnit\Entities\SaleUnit;
 use Modules\TaxMethod\Entities\TaxMethod;
 use Modules\Warehouse\Entities\Warehouse;
 use Response;
+use DB;
 
 
 class ProductController extends Controller
@@ -85,5 +86,19 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('product.list')->with('message', 'Product Deleted Successfully');
+    }
+
+    public function check_product_with_warehouse(){
+        $warehouse = $_GET['warehouse'];
+        $product_code = $_GET['product_code'];
+        $count=DB::table('products')->where('product_code',$product_code)->where('warehouse_id',$warehouse)->get()->count();
+        //print_r(DB::getQueryLog());
+       
+        if( $count>0){              
+                echo 'false';
+            } else  {            
+                echo 'true';
+            }
+        // }
     }
 }

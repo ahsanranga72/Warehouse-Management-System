@@ -17,4 +17,6 @@ Route::prefix('product')->group(function() {
     Route::post('store-product', 'ProductController@storeproduct')->name('store.product');
     Route::get('list-product', 'ProductController@productlist')->name('products.list');
     Route::get('/product-delete/{id}', 'ProductController@delete')->name('product.delete');
+    Route::get('/product-duplicatecheck', 'ProductController@check_product_with_warehouse')->name('product.duplicatecheck');
+    
 });

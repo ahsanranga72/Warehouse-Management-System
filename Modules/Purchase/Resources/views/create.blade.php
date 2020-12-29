@@ -14,7 +14,8 @@
   ul.dropdown-menu.select-product-list li {
     margin: 5px 0;
   }
-  ul.dropdown-menu.select-product-list li a{
+
+  ul.dropdown-menu.select-product-list li a {
     color: #212529;
   }
 </style>
@@ -100,19 +101,19 @@
                       <th>Net Unit Cost</th>
                       <th>Discount</th>
                       <th>Tax</th>
-                      <th >Sub Total</th>
+                      <th>Sub Total</th>
                       <th>Action</th>
                     </thead>
                     <tbody>
                       <tr class="orderData">
                         <td>Test</td>
                         <td>adgfga</td>
-                        <td ><input type="number" class="form-control quantity" name="quantity" id="quantity"></td>
+                        <td><input type="number" class="form-control quantity" name="quantity" id="quantity"></td>
                         <td class="rcvrow"><input type="number" class="form-control received" name="received" id="received"></td>
                         <td class="unitcost" data-unitcost='1'>1</td>
                         <td class='discount' data-discount='15'>15</td>
-                        <td ><span class="tax" >200</span></td>
-                        <td  ><span class="subtotal" >0</label></td>
+                        <td><span class="tax">200</span></td>
+                        <td><span class="subtotal">0</label></td>
                         <td>
                           <button type="button" class="ibtnDel btn btn-md btn-danger">Delete</button>
                         </td>
@@ -121,11 +122,11 @@
                         <td>Test2</td>
                         <td>1321</td>
                         <td><input type="number" class="form-control quantity" name="quantity" id="quantity"></td>
-                        <td class="rcvrow" ><input type="number" class="form-control received" name="received" id="received"></td>
+                        <td class="rcvrow"><input type="number" class="form-control received" name="received" id="received"></td>
                         <td class="unitcost" data-unitcost='2'>2</td>
                         <td class='discount' data-discount='10'>10</td>
-                        <td ><span class="tax" >1111</span></td>
-                        <td><span class="subtotal" ></label></td>
+                        <td><span class="tax">1111</span></td>
+                        <td><span class="subtotal"></label></td>
                         <td>
                           <button type="button" class="ibtnDel btn btn-md btn-danger">Delete</button>
                         </td>
@@ -139,9 +140,8 @@
                         <td class="ftrcvrow"></td>
                         <td></td>
                         <td></td>
-                       
-                        <td><label class="totaltax" ></label></td>
-                        <td><label class="grandtotal" ></label></td>
+                        <td><label class="totaltax"></label></td>
+                        <td><label class="grandtotal"></label></td>
                         <td></td>
                       </tr>
                     </tfoot>
@@ -223,72 +223,70 @@
         });
       }
     });
-    $('#orderTable').on('click','.ibtnDel',function(){
+    $('#orderTable').on('click', '.ibtnDel', function() {
 
       $(this).closest('tr').remove();
       CalculateTotal();
 
-    }) 
+    })
 
-    $('#orderTable').on('change','.quantity',function(){
+    $('#orderTable').on('change', '.quantity', function() {
 
-     var unitcost = parseFloat($(this).closest('tr').find('.unitcost').attr('data-unitcost'))
-     var discount = parseFloat($(this).closest('tr').find('.discount').attr('data-discount'))
-     var tax = parseFloat($(this).closest('tr').find('.tax').text())
-    
-     var quantity = parseInt($(this).val())
-     
-     subtotal =  (unitcost*quantity)+tax-discount
-     
-     $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
-     CalculateTotal();
+      var unitcost = parseFloat($(this).closest('tr').find('.unitcost').attr('data-unitcost'))
+      var discount = parseFloat($(this).closest('tr').find('.discount').attr('data-discount'))
+      var tax = parseFloat($(this).closest('tr').find('.tax').text())
+
+      var quantity = parseInt($(this).val())
+
+      subtotal = (unitcost * quantity) + tax - discount
+
+      $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
+      CalculateTotal();
     })
 
 
-    function CalculateTotal(){
-  // This will Itearate thru the subtotals and 
-    // claculate the grandTotal and Quantity here
-    
-    var subtotal = $('.subtotal');
-   // var quantityTotal = $('.quantity');
-    var taxTotal = $('.tax');
-    
-    var grandTotal = 0.0;
-    var totalTax = 0.0
-    $.each(subtotal, function(i){
-        if($(subtotal[i]).text()!=''){
-            grandTotal += parseFloat($(subtotal[i]).text()) ;
+    function CalculateTotal() {
+      // This will Itearate thru the subtotals and 
+      // claculate the grandTotal and Quantity here
+
+      var subtotal = $('.subtotal');
+      // var quantityTotal = $('.quantity');
+      var taxTotal = $('.tax');
+
+      var grandTotal = 0.0;
+      var totalTax = 0.0
+      $.each(subtotal, function(i) {
+        if ($(subtotal[i]).text() != '') {
+          grandTotal += parseFloat($(subtotal[i]).text());
         }
-        if($(taxTotal[i]).text()!=''){
-          totalTax += parseFloat($(taxTotal[i]).text()) ;
+        if ($(taxTotal[i]).text() != '') {
+          totalTax += parseFloat($(taxTotal[i]).text());
         }
         //totalTax += parseFloat($(taxTotal[i]).text()) 
-    });
-    
-    $('.totaltax').text(parseFloat(totalTax).toFixed(2));
-    $('.grandtotal').text(parseFloat(grandTotal ).toFixed(2) );       
-   
-}
+      });
 
-$('#AddPurchase').on('change','#purchaseStatus',function(){
-  var status =$(this).val()
-//  alert(status)
-    if(status==2){
-      $('.rcvrow').show()
-      $('.ftrcvrow').show()
-      
-      $('.rcvcolumn').show()
-    }else{
-      $('.rcvrow').hide()
-      $('.ftrcvrow').hide()
-      
-      $('.rcvcolumn').hide()
-      $('input[name="received"]').val('');
+      $('.totaltax').text(parseFloat(totalTax).toFixed(2));
+      $('.grandtotal').text(parseFloat(grandTotal).toFixed(2));
+
     }
-   
-  
-  
-});
+
+    $('#AddPurchase').on('change', '#purchaseStatus', function() {
+      var status = $(this).val()
+      //  alert(status)
+      if (status == 2) {
+        $('.rcvrow').show()
+        $('.ftrcvrow').show()
+        $('.rcvcolumn').show()
+      } else {
+        $('.rcvrow').hide()
+        $('.ftrcvrow').hide()
+        $('.rcvcolumn').hide()
+        $('input[name="received"]').val('');
+      }
+
+
+
+    });
 
     $(document).on('click', 'li', function() {
       $('#product_code').val($(this).text());
@@ -296,7 +294,7 @@ $('#AddPurchase').on('change','#purchaseStatus',function(){
     });
     $('.rcvcolumn').hide()
     $('.rcvrow').hide()
-  // display: none;
+    // display: none;
 
 
   });
