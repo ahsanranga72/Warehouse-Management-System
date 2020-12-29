@@ -71,9 +71,16 @@
                   </select>
                 </div>
               </div>
-              <div class="form-group col-md-6">
-                <label for="document">Attach Document</label>
-                <input type="file" name="document" class="form-control" id="document">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="attachFile">Attach File</label>
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="attachFile">
+                      <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="row">
@@ -113,7 +120,7 @@
                         <td class="unitcost" data-unitcost='1'>1</td>
                         <td class='discount' data-discount='15'>15</td>
                         <td><span class="tax">200</span></td>
-                        <td><span class="subtotal">0</label></td>
+                        <td><span class="subtotal"></label></td>
                         <td>
                           <button type="button" class="ibtnDel btn btn-md btn-danger">Delete</button>
                         </td>
@@ -126,7 +133,7 @@
                         <td class="unitcost" data-unitcost='2'>2</td>
                         <td class='discount' data-discount='10'>10</td>
                         <td><span class="tax">1111</span></td>
-                        <td><span class="subtotal"></label></td>
+                        <td><span class="subtotal"></span></td>
                         <td>
                           <button type="button" class="ibtnDel btn btn-md btn-danger">Delete</button>
                         </td>
@@ -136,7 +143,7 @@
                       <tr>
                         <td>Total</td>
                         <td></td>
-                        <td></td>
+                        <td><label class="totalQuantity"></td>
                         <td class="ftrcvrow"></td>
                         <td></td>
                         <td></td>
@@ -155,26 +162,27 @@
                   <label for="orderTax">Order Tax <span class="required-field">*</span></label>
                   <select name="orderTax" id="orderTax" class="form-control select2" style="width: 100%;">
                     <option value="">--Select order tax--</option>
+                    <option value="1" data-vat='10'>Vat@10</option>
                   </select>
                 </div>
               </div>
               <div class="form-group col-lg-4">
                 <div class="form-group">
-                  <label for="discount">Discount</label>
-                  <input type="number" id="discount" name="discount" class="form-control">
+                  <label class="orderDiscount" for="orderDiscount">Discount</label>
+                  <input type="number" id="orderDiscount" name="orderDiscount" class="form-control" placeholder="Enter Discount here">
                 </div>
               </div>
               <div class="form-group col-lg-4">
                 <div class="form-group">
                   <label for="shippingCost">Shipping Cost</label>
-                  <input type="number" id="shippingCost" name="shippingCost" class="form-control">
+                  <input type="number" id="shippingCost" name="shippingCost" class="form-control" placeholder="Shipping Cost">
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="form-group col-lg-12">
                 <label for="note">Note</label>
-                <textarea name="note" id="note" cols="30" rows="5" class="form-control"></textarea>
+                <textarea name="note" id="note" cols="30" rows="5" class="form-control" placeholder="Note"></textarea>
               </div>
             </div>
             <div class="row ">
@@ -186,12 +194,12 @@
           <div class="table">
             <table id="totalTable" class="table table-bordered table-striped">
               <thead>
-                <th>Items</th>
-                <th>Total</th>
-                <th>Order Tax</th>
-                <th>Order Discounr</th>
-                <th>Shipping Cost</th>
-                <th>Grand Total</th>
+                <th>Items <span class="totalItems"></span>&nbsp(<span class="noRows">0</span>) </th>
+                <th>Total <span class="grandtotal text-right">0.00</span></th>
+                <th>Order Tax <span class="totalorderTax">0.00</span></th>
+                <th>Order Discount <span class="showOrderDiscount">0.00</span></th>
+                <th>Shipping Cost <span class="shippingCost">0.00</span></th>
+                <th>Grand Total <span class="grossTotal">0.00</span></th>
               </thead>
             </table>
           </div>
@@ -235,13 +243,14 @@
       var unitcost = parseFloat($(this).closest('tr').find('.unitcost').attr('data-unitcost'))
       var discount = parseFloat($(this).closest('tr').find('.discount').attr('data-discount'))
       var tax = parseFloat($(this).closest('tr').find('.tax').text())
-
       var quantity = parseInt($(this).val())
 
       subtotal = (unitcost * quantity) + tax - discount
 
       $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
       CalculateTotal();
+
+
     })
 
 
@@ -250,23 +259,66 @@
       // claculate the grandTotal and Quantity here
 
       var subtotal = $('.subtotal');
-      // var quantityTotal = $('.quantity');
       var taxTotal = $('.tax');
+      var quantityTotal = $(".quantity");
+      //alert(quantityTotal)
+
 
       var grandTotal = 0.0;
-      var totalTax = 0.0
+      var totalTax = 0.0;
+      var totalQuantity = 0;
       $.each(subtotal, function(i) {
         if ($(subtotal[i]).text() != '') {
           grandTotal += parseFloat($(subtotal[i]).text());
         }
         if ($(taxTotal[i]).text() != '') {
           totalTax += parseFloat($(taxTotal[i]).text());
+
         }
+        if ($(quantityTotal[i]).val() != '') {
+          totalQuantity += parseInt($(quantityTotal[i]).val());
+        }
+        // if ($(quantityTotal[i]).text() != '') {
+        //   totalQuantity += parseInt($(quantityTotal[i]).text());
+        // }
         //totalTax += parseFloat($(taxTotal[i]).text()) 
       });
+      var grandTotal=parseFloat(grandTotal).toFixed(2)
 
       $('.totaltax').text(parseFloat(totalTax).toFixed(2));
       $('.grandtotal').text(parseFloat(grandTotal).toFixed(2));
+      $('.totalItems').text(parseInt(totalQuantity));
+      $('.noRows').text($('#orderTable').find('.orderData').length);
+      // alert($('select["name=orderTax"]').attr('data-vat'));
+      //$('.showOrderDiscount').text($('.forOrderDiscount').find("input[name='orderDiscount'])"));
+      var orderTax=$('#orderTax option:selected').attr('data-vat');
+      // alert(orderTax)
+      if(orderTax != undefined && orderTax !=''){
+        orderTax = parseFloat(grandTotal).toFixed(2)*(parseFloat(orderTax)/100)
+        //alert(orderTax)
+        $('.totalorderTax').text(parseFloat(orderTax).toFixed(2))
+      }else{
+        orderTax=0.0
+        $('.totalorderTax').text(orderTax)
+      }
+      var orderDiscount = $("input[name='orderDiscount']").val()
+      var shippingCost = $("input[name='shippingCost']").val()
+      if(orderDiscount!=''){
+        $('.showOrderDiscount').text(orderDiscount)
+      }else{
+        orderDiscount=0.0
+        $('.showOrderDiscount').text(orderDiscount)
+      }
+      if(shippingCost!=''){  
+        $('.shippingCost').text(parseFloat(shippingCost).toFixed(2))
+      }else{
+        shippingCost=0.0
+        $('.shippingCost').text(shippingCost)
+      }
+  
+       grossTotal=(parseFloat(grandTotal)+parseFloat(shippingCost)+parseFloat(orderTax))-parseFloat(orderDiscount)
+       $('.grossTotal').text(grossTotal)
+      // grossTotal
 
     }
 
@@ -287,13 +339,26 @@
 
 
     });
+    $('#orderTax').on('change',function(){
+        
+      CalculateTotal();
 
+    })
+    $('#orderDiscount').on('change',function(){
+      CalculateTotal();
+
+    })
+    $('#shippingCost').on('change',function(){
+      CalculateTotal();
+    })
     $(document).on('click', 'li', function() {
       $('#product_code').val($(this).text());
       $('#productList').fadeOut();
     });
     $('.rcvcolumn').hide()
     $('.rcvrow').hide()
+    $('.ftrcvrow').hide()
+
     // display: none;
 
 
