@@ -6,8 +6,9 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Warehouse\Entities\Warehouse;
-use App\Models\Product\Product;
+use Modules\Product\Entities\Product;
 use SebastianBergmann\Environment\Console;
+use Modules\Supplier\Entities\Supplier;
 use DB;
 
 
@@ -30,7 +31,8 @@ class PurchaseController extends Controller
     {
         //return view('purchase::create');
         $warehouses = Warehouse::orderBy('id', 'DESC')->get();
-        return view('purchase::create', compact('warehouses'));
+        $suppliers = Supplier::all();
+        return view('purchase::create', compact('warehouses','suppliers'));
     }
     public function get_product_list_by_product_code(Request $request)
     {

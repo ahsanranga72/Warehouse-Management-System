@@ -10,5 +10,11 @@
     "TaxMethod": true,
     "Warehouse": true,
     "Purchase": true,
-    "Product": true
+    "Product": true,
+    "Management": true,
+    "User": true,
+    "Customer": true,
+    "Supplier": true,
+    "Sale": true,
+    "ParchaseStatus": true
 }

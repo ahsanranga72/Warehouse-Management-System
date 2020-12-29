@@ -55,7 +55,11 @@
                 <div class="form-group">
                   <label for="supplier">Supplier</label>
                   <select name="supplier" id="supplier" class="form-control select2" style="width: 100%;">
+                  
                     <option value="">--Select a Supplier--</option>
+                    @foreach ($suppliers as $key)
+                    <option value="{{ $key->id }}">{{$key->name}}</option>
+                    @endforeach 
                   </select>
                 </div>
               </div>

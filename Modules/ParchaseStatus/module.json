@@ -1,0 +1,13 @@
+{
+    "name": "ParchaseStatus",
+    "alias": "parchasestatus",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\ParchaseStatus\\Providers\\ParchaseStatusServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
