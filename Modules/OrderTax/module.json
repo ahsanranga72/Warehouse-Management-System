@@ -1,0 +1,13 @@
+{
+    "name": "OrderTax",
+    "alias": "ordertax",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\OrderTax\\Providers\\OrderTaxServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

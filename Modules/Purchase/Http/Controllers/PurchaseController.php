@@ -9,6 +9,8 @@ use Modules\Warehouse\Entities\Warehouse;
 use Modules\Product\Entities\Product;
 use SebastianBergmann\Environment\Console;
 use Modules\Supplier\Entities\Supplier;
+use Modules\ParchaseStatus\Entities\PurchaseStatus;
+use Modules\OrderTax\Entities\OrderTax;
 use DB;
 
 
@@ -32,7 +34,9 @@ class PurchaseController extends Controller
         //return view('purchase::create');
         $warehouses = Warehouse::orderBy('id', 'DESC')->get();
         $suppliers = Supplier::all();
-        return view('purchase::create', compact('warehouses','suppliers'));
+        $purchasestatus = PurchaseStatus::all();
+        $ordertax = OrderTax::all();
+        return view('purchase::create', compact('warehouses','suppliers', 'purchasestatus'));
     }
     public function get_product_list_by_product_code(Request $request)
     {

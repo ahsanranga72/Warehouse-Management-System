@@ -5,9 +5,9 @@
     
 <div class="card">
               <div class="card-header">
-              <h3>Purchese list
-              <a class="btn btn-success float-right btn-sm" href="{{route('add.parchasestatus')}}">
-              <i class="fa fa-plus-circle"></i>Add Parchase Status</a>
+              <h3>Order Tax list
+              <a class="btn btn-success float-right btn-sm" href="{{route('add.ordertax')}}">
+              <i class="fa fa-plus-circle"></i>Add OrderTax</a>
                 </h3>
               </div>
               <!-- /.card-header -->
@@ -22,18 +22,20 @@
               @endif
                   <tr>
                   <th>SL</th>
-                    <th>Name</th>
+                    <th>Tax Name</th>
+                    <th>Tax Number</th>
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                  @foreach($parchasestatus as  $key => $parchasestatuss)
+                  @foreach($ordertaxs as  $key => $ordertax)
                   <tr>
                     <td>{{$key+1}}</td>
-                    <td>{{$parchasestatuss->name}}</td>
+                    <td>{{$ordertax->name}}</td>
+                    <td>{{$ordertax->tax_number}}</td>
                     <td>
-                    <a href="{{ route('parchasestatus.edit',$parchasestatuss->id)}}" class="btn btn-sm btn-primary" title="edit"><i class="fa fa-edit"></i></a>
-                  	<a href="{{ route('parchasestatus.delete',$parchasestatuss->id)}}" id="delete" class="btn btn-sm btn-danger" title="delete"><i class="fa fa-trash"></i></a>
+                    <a href="{{ route('ordertax.edit',$ordertax->id)}}" class="btn btn-sm btn-primary" title="edit"><i class="fa fa-edit"></i></a>
+                  	<a href="{{ route('ordertax.delete',$ordertax->id)}}" id="delete" class="btn btn-sm btn-danger" title="delete"><i class="fa fa-trash"></i></a>
                     </td>
                   </tr>
                   @endforeach

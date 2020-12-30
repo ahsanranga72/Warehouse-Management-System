@@ -124,13 +124,25 @@
               <li class="nav-item">
                 <a href="{{route('taxmethod.view')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Tax Method List</p>
+                  <p>Tax Method</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route('warehouse.view')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Ware House List</p>
+                  <p>Ware House</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('parchasestatus.view')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Purchase Status</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('ordertax.view')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Order Tax</p>
                 </a>
               </li>
             </ul>

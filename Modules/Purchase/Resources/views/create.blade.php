@@ -65,13 +65,13 @@
               </div>
               <div class="col-lg-6">
                 <div class="form-group">
-                  <label for="purchaseStatus">Purchase Status</label>
-                  <select name="purchaseStatus" id="purchaseStatus" class="form-control" style="width: 100%;">
+                  <label for="name">Purchase Status</label>
+                  <select name="name" id="name" class="form-control" style="width: 100%;">
                     <option value="">--Select Product Type--</option>
-                    <option value='1'>Received</option>
-                    <option value='2'>Partial</option>
-                    <option value='3'>Pending</option>
-                    <option value='4'>Ordered</option>
+                    @foreach ($purchasestatus as $key)
+                    <option value='{{ $key->id }}'>{{$key->name}}</option>
+                    @endforeach 
+                   
                   </select>
                 </div>
               </div>
@@ -166,7 +166,9 @@
                   <label for="orderTax">Order Tax <span class="required-field">*</span></label>
                   <select name="orderTax" id="orderTax" class="form-control select2" style="width: 100%;">
                     <option value="">--Select order tax--</option>
-                    <option value="1" data-vat='10'>Vat@10</option>
+                    @foreach ($suppliers as $key)
+                    <option value='{{ $key->tax_number }}'>{{$key->name}}</option>
+                    @endforeach
                   </select>
                 </div>
               </div>
