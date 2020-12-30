@@ -1,22 +1,22 @@
 <?php
 
-namespace Modules\ParchaseStatus\Http\Controllers;
+namespace Modules\OrderTax\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Modules\ParchaseStatus\Entities\PurchaseStatus;
+use Modules\OrderTax\Entities\OrderTax;
 
-class ParchaseStatusController extends Controller
+class OrderTaxController extends Controller
 {
-   /**
+    /**
      * Display a listing of the resource.
      * @return Renderable
      */
     public function index()
     {
-        $parchasestatus = PurchaseStatus::orderBy('id','DESC')->get();
-        return view('parchasestatus::index', compact('parchasestatus'));
+        $ordertaxs = OrderTax::orderBy('id','DESC')->get();
+        return view('ordertax::index', compact('ordertaxs'));
     }
 
     /**
@@ -25,7 +25,7 @@ class ParchaseStatusController extends Controller
      */
     public function create()
     {
-        return view('parchasestatus::create');
+        return view('ordertax::create');
     }
 
     /**
@@ -36,13 +36,14 @@ class ParchaseStatusController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|unique:purchase_statuses|max:50',
+            'name' => 'required|unique:order_taxes|max:50',
+            'tax_number' =>'required',
         ]);
-        $parchase = New PurchaseStatus;
-        $parchase->name = $request->name;
-        $parchase->save();
-
-        return redirect()->route('parchasestatus.view')->with('message', 'PachaseStatus Save Successfully');
+        $ordertax = New OrderTax;
+        $ordertax->name = $request->name;
+        $ordertax->tax_number = $request->tax_number;
+        $ordertax->save();
+        return redirect()->route('ordertax.view')->with('message', 'Order Tax Save Successfully');
     }
 
     /**
@@ -52,7 +53,7 @@ class ParchaseStatusController extends Controller
      */
     public function show($id)
     {
-        return view('brand::show');
+        return view('ordertax::show');
     }
 
     /**
@@ -62,8 +63,8 @@ class ParchaseStatusController extends Controller
      */
     public function edit($id)
     {
-        $parchasestatus = PurchaseStatus::find($id);
-        return view('parchasestatus::edit', compact('parchasestatus'));
+        $ordertax = OrderTax::find($id);
+        return view('ordertax::edit', compact('ordertax'));
     }
 
     /**
@@ -75,12 +76,14 @@ class ParchaseStatusController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'name' => 'required|unique:purchase_statuses|max:50',
+            'name' => 'required|unique:order_taxes|max:50',
+            'tax_number' =>'required',
         ]);
-        $parchasestatus = PurchaseStatus::first('id');
-        $parchasestatus->name = $request->name;
-        $parchasestatus->save();
-        return redirect()->route('parchasestatus.view')->with('message', 'Parchase Status Update Save Successfully');
+        $ordertax = OrderTax::find($id);
+        $ordertax->name = $request->name;
+        $ordertax->tax_number = $request->tax_number;
+        $ordertax->save();
+        return redirect()->route('ordertax.view')->with('message', 'Order Tax Update Successfully');
     }
 
     /**
@@ -90,8 +93,8 @@ class ParchaseStatusController extends Controller
      */
     public function destroy($id)
     {
-        $parchasestatus = PurchaseStatus::find($id);
-        $parchasestatus->delete();
-        return redirect()->route('parchasestatus.view')->with('message', 'Parchase Status Successfully Deleted');
+        $ordertax = OrderTax::find($id);
+        $ordertax->delete();
+        return redirect()->route('ordertax.view')->with('message', 'Order Tax Deleted Successfully');
     }
 }

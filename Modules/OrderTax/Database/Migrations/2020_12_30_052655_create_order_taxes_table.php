@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePurchaseStatusesTable extends Migration
+class CreateOrderTaxesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreatePurchaseStatusesTable extends Migration
      */
     public function up()
     {
-        Schema::create('purchase_statuses', function (Blueprint $table) {
+        Schema::create('order_taxes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('tax_number');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreatePurchaseStatusesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('purchase_statuses');
+        Schema::dropIfExists('order_taxes');
     }
 }
