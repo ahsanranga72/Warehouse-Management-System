@@ -21,7 +21,7 @@ class CreatePurchaseProductDetailsTable extends Migration
             $table->integer('received_quantity')->nullable();
             $table->float('subtotal')->nullable();
             $table->integer('purchase_product_invoice_id')->nullable();
-            $table->integer('return_purchase')->default(0);
+            $table->integer('return_purchase')->default(0)->comment('1=Returned');
             $table->timestamps();
         });
     }

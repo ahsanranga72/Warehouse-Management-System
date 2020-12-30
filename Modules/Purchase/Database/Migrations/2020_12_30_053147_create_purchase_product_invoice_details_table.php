@@ -18,7 +18,7 @@ class CreatePurchaseProductInvoiceDetailsTable extends Migration
             $table->id();
             $table->Integer('warehouse_id')->nullable();
             $table->Integer('supplier_id')->nullable();
-            $table->Integer('purchase_status_id')->nullable();
+            $table->Integer('purchase_status_id')->nullable()->comment('1=Received,2=Partial,3=Ordered,4=Pending');
             $table->String('purchase_document',255)->nullable();
             $table->Integer('order_tax_id')->nullable();
             $table->text('note')->nullable();
@@ -28,7 +28,7 @@ class CreatePurchaseProductInvoiceDetailsTable extends Migration
             $table->float('order_discount')->nullable();
             $table->float('order_shipping_cost')->nullable();
             $table->float('grand_total')->nullable();
-            $table->boolean('status')->nullable();
+            $table->boolean('status')->nullable()->comment('True=Active,False=Inactive');
             $table->timestamps();
         });
     }

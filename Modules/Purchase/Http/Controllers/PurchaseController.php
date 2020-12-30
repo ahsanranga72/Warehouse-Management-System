@@ -12,10 +12,15 @@ use Modules\Supplier\Entities\Supplier;
 use Modules\ParchaseStatus\Entities\PurchaseStatus;
 use Modules\OrderTax\Entities\OrderTax;
 use DB;
+use Modules\Purchase\Entities\PurchaseProductInvoiceDetails;
+use Modules\Purchase\Entities\PurchaseProductDetails;
+
 
 
 class PurchaseController extends Controller
 {
+
+    
     /**
      * Display a listing of the resource.
      * @return Renderable
@@ -63,9 +68,84 @@ class PurchaseController extends Controller
      * @param Request $request
      * @return Renderable
      */
-    public function store(Request $request)
+    public function storePurchase(Request $request)
     {
+       
+        $purchase = New PurchaseProductInvoiceDetails;
+        $purchase->warehouse_id = $request->warehouse_id;
+        $purchase->supplier_id = $request->supplier_id;
+        $purchase->purchase_status_id = $request->purchase_status_id;
+        $purchase->purchase_document = $request->purchase_document;
+        $purchase->order_tax_id = $request->order_tax_id;
+        $purchase->note = $request->note;
+        $purchase->items = $request->items;
+        $purchase->total = $request->total;
+        $purchase->order_tax = $request->order_tax;
+        $purchase->order_discount = $request->order_discount;
+        $purchase->order_shipping_cost = $request->order_shipping_cost;
+        $purchase->grand_total = $request->grand_total;
+        //$purchase->status = $request->status;
+        $purchase->save();
+        $purchase_id=$purchase->id;
+     
+
+       $data = array(
+                array('id'=>17,'quantity'=>25,'total'=>'1000'),
+                array('id'=>18,'quantity'=>2000,'total'=>'5000'),
+
+       );
+       for($i=0;$i<sizeof($data);$i++){
+           print_r($data[$i]);
+       }
+        foreach($data as $mydata){
+                // print_r( $mydata['id']);
+
+                $purchaseProductDetails = new PurchaseProductDetails;
+                $purchaseProductDetails->product_id = $mydata['id'];
+                $purchaseProductDetails->quantity = $mydata['quantity'];
+               // $purchaseProductDetails->received_quantity = $request->received_quantity;
+                $purchaseProductDetails->subtotal =$mydata['total'];;
+                $purchaseProductDetails->purchase_product_invoice_id = $purchase_id;
+                $purchaseProductDetails->return_purchase = false;
+                $purchaseProductDetails->save();
         
+            
+        
+                $product = Product::where('id',$mydata['id'])->first(); 
+                $product->stock_quantity= $product->stock_quantity + $mydata['quantity'];
+                $product->save();
+
+        }
+        //  for( i=0; i<=$request->list as $list):
+        //         print_r($list);
+        //  endforeach;
+        //  die();
+       
+
+       
+        //  $updateStock->save();
+
+        // print_r($request->quantity);
+       
+        
+        // if($request->hasfile('product_image')){
+        //     $file = $request->file('product_image');
+        //     $extention = $file->getClientOriginalExtension();
+        //     $filename =date('mdYHis') . uniqid() .'.'.$extention;
+        //     $file->move('upload/product_images/',$filename);
+        //     $product->product_image = $filename;
+        // } else {
+        //     //return $request;
+        //     $product->product_image = "";
+        // }
+     
+        //    $save = $product->save();
+        //    if($save){
+        //     return Response::json(array('success' => 'true', 'message' => 'Product has been added succesefully.'));
+        //    }else{
+        //     return Response::json(array('success' => 'false', 'message' => 'Product has not been added succesefully.'));
+        //    }
+
     }
 
     /**
