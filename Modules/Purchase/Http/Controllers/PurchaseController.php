@@ -36,7 +36,7 @@ class PurchaseController extends Controller
         $suppliers = Supplier::all();
         $purchasestatus = PurchaseStatus::all();
         $ordertax = OrderTax::all();
-        return view('purchase::create', compact('warehouses','suppliers', 'purchasestatus'));
+        return view('purchase::create', compact('warehouses','suppliers', 'purchasestatus','ordertax'));
     }
     public function get_product_list_by_product_code(Request $request)
     {

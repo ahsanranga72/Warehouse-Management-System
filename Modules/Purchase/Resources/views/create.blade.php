@@ -166,7 +166,7 @@
                   <label for="orderTax">Order Tax <span class="required-field">*</span></label>
                   <select name="orderTax" id="orderTax" class="form-control select2" style="width: 100%;">
                     <option value="">--Select order tax--</option>
-                    @foreach ($suppliers as $key)
+                    @foreach ($ordertax as $key)
                     <option value='{{ $key->tax_number }}'>{{$key->name}}</option>
                     @endforeach
                   </select>
