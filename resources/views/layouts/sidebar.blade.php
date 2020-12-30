@@ -195,7 +195,35 @@
                 </a>
               </li>
             </ul>
+           
           </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fas fas fa-user"></i>
+              <p>
+                Sale
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                 <a href="{{route('sale.view')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Sale List</p>
+                </a>
+              </li>
+             
+              <li class="nav-item">
+                <a href="{{route('add.sale')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Sale</p>
+                </a>
+              </li>
+            </ul>
+           
+          </li>
+
+         
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

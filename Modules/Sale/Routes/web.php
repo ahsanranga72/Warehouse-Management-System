@@ -12,5 +12,10 @@
 */
 
 Route::prefix('sale')->group(function() {
-    Route::get('/', 'SaleController@index');
+    Route::get('/', 'SaleController@index')->name('sale.view');
+    Route::get('/add', 'SaleController@create')->name('add.sale');
+    Route::post('/store', 'SaleController@store')->name('sale.store');
+    Route::get('/edit/{id}', 'SaleController@edit')->name('sale.edit');
+    Route::post('/update/{id}', 'SaleController@update')->name('sale.update');
+    Route::get('/delete/{id}', 'SaleController@destroy')->name('sale.delete');
 });

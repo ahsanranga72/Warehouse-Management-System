@@ -5,6 +5,13 @@ namespace Modules\Sale\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Warehouse\Entities\Warehouse;
+use Modules\Product\Entities\Product;
+use SebastianBergmann\Environment\Console;
+use Modules\Customer\Entities\Customer;
+use Modules\ParchaseStatus\Entities\PurchaseStatus;
+use Modules\OrderTax\Entities\OrderTax;
+use Modules\User\Entities\User;
 
 class SaleController extends Controller
 {
@@ -23,7 +30,12 @@ class SaleController extends Controller
      */
     public function create()
     {
-        return view('sale::create');
+        $warehouses = Warehouse::orderBy('id', 'DESC')->get();
+        $customers = Customer::all();
+        $purchasestatus = PurchaseStatus::all();
+        $ordertax = OrderTax::all();
+        $users = User::all();
+        return view('sale::create',compact('warehouses','customers', 'purchasestatus','ordertax', 'users'));
     }
 
     /**
