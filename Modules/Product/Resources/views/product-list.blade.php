@@ -4,7 +4,7 @@
     
 <div class="card">
               <div class="card-header">
-              <h3> Barcode Symbol list
+              <h3> Product list
               <a class="btn btn-success float-right btn-sm" href="{{route('add.product')}}"><i class="fa fa-plus-circle"></i>Add Product</a>
                 </h3>
               </div>
@@ -31,16 +31,16 @@
                   </tr>
                   </thead>
                   <tbody>
-                  @foreach($productlists as $productlist)
+                  @foreach($productlists as $key => $productlist)
                   <tr>
-                  <td>{{$productlist->id}}</td>
+                  <td>{{$key+1}}</td>
                   <td>
                   <img src="{{(!empty($productlist->product_image))?url('/upload/product_images/'.$productlist->product_image):url('/upload/no-image.png')}}" height="100px" width="120px"></td>
                     <td>{{$productlist->product_name}}</td>
                     <td>{{$productlist->product_code}}</td>
-                    <td>{{$productlist['brand']['name']}}</td>
-                    <td>{{$productlist['category']['name']}}</td>
-                    <td></td>
+                    <td>{{$productlist['brands']['name']}}</td>
+                    <td>{{$productlist['categories']['name']}}</td>
+                    <td>{{$productlist->stock_quantity}}</td>
                     <td>{{$productlist->product_unit}}</td>
                     <td>{{$productlist->product_price}}</td>
                     <td>

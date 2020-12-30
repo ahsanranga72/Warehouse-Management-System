@@ -19,8 +19,8 @@ class CreateProductsTable extends Migration
             $table->String('product_name',50)->nullable();
             $table->String('product_code',50)->nullable();
             $table->Integer('barcode_symbology')->nullable();
-            $table->Integer('brand')->nullable();
-            $table->Integer('category')->nullable();
+            $table->integer('brand')->nullable();
+            $table->integer('category')->nullable();
             $table->Integer('product_unit')->nullable();
             $table->Integer('sale_unit')->nullable();
             $table->Integer('purchase_unit')->nullable();

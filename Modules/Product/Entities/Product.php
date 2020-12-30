@@ -15,4 +15,15 @@ class Product extends Model
     {
         return \Modules\Product\Database\factories\ProductFactory::new();
     }
+
+    public function brands()
+    {
+        return $this->belongsTo('Modules\Brand\Entities\Brand', 'brand' , 'id');
+    }
+
+    public function categories()
+    {
+        return $this->belongsTo('Modules\Category\Entities\Category', 'category' , 'id');
+    }
+
 }

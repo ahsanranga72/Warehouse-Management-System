@@ -206,18 +206,88 @@
                   </select>
                  </div>
                </div>
-               <div class="form-group col-lg-4">
-                 <div class="form-group">
-                   <label class="orderDiscount" for="orderDiscount">Payment Status</label>
-                   <select name="warehouse" id="warehouse" class="form-control select2" style="width: 100%;">
-                    <option value="">--Select a Payment--</option>
-                    <option value="">Pending</option>
-                    <option value="">Due</option>
-                    <option value="">Partial</option>
-                    <option value="">Paid</option>
-                  </select>
-                 </div>
-               </div>
+               <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Payment Status *</label>
+                                            <select name="payment_status" class="form-control">
+                                                <option value="1">Pending</option>
+                                                <option value="2">Due</option>
+                                                <option value="3">Partial</option>
+                                                <option value="4">Paid</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                       
+                                    </div>
+                                </div>
+                                <div id="payment">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Paid By</label>
+                                                <select name="paid_by_id" class="form-control">
+                                                    <option value="1">Cash</option>
+                                                    <option value="2">Gift Card</option>
+                                                    <option value="3">Credit Card</option>
+                                                    <option value="4">Cheque</option>
+                                                    <option value="5">Paypal</option>
+                                                    <option value="6">Deposit</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Received Amount *</label>
+                                                <input type="number" name="paying_amount" class="form-control" id="paying-amount" step="any" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Paying Amount *</label>
+                                                <input type="number" name="paid_amount" class="form-control" id="paid-amount" step="any"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Change</label>
+                                                <p id="change" class="ml-2">0.00</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="card-element" class="form-control">
+                                                </div>
+                                                <div class="card-errors" role="alert"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" id="gift-card">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label> Gift Card *</label>
+                                                <select id="gift_card_id" name="gift_card_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Gift Card..."></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" id="cheque">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Cheque Number *</label>
+                                                <input type="text" name="cheque_no" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label>Payment Note</label>
+                                            <textarea rows="3" class="form-control" name="payment_note"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
                </div>
             <div class="row">
               <div class="form-group col-lg-6">
