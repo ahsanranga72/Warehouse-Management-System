@@ -55,11 +55,10 @@
                 <div class="form-group">
                   <label for="supplier">Supplier</label>
                   <select name="supplier" id="supplier" class="form-control select2" style="width: 100%;">
-                  
                     <option value="">--Select a Supplier--</option>
                     @foreach ($suppliers as $key)
                     <option value="{{ $key->id }}">{{$key->name}}</option>
-                    @endforeach 
+                    @endforeach
                   </select>
                 </div>
               </div>
@@ -67,11 +66,11 @@
                 <div class="form-group">
                   <label for="purchaseStatus">Purchase Status</label>
                   <select name="purchaseStatus" id="purchaseStatus" class="form-control" style="width: 100%;">
-                    <option value="">--Select Product Type--</option>
+                    <option value="">--Select Purchase status--</option>
                     @foreach ($purchasestatus as $key)
                     <option value='{{ $key->id }}'>{{$key->name}}</option>
-                    @endforeach 
-                   
+                    @endforeach
+
                   </select>
                 </div>
               </div>
@@ -152,7 +151,7 @@
                         <td></td>
                         <td></td>
                         <td><label class="totaltax"></label></td>
-                        <td><label class="grandtotal"></label></td>
+                        <td><label class="grandtotal" id="grandtotal"></label></td>
                         <td></td>
                       </tr>
                     </tfoot>
@@ -193,7 +192,7 @@
             </div>
             <div class="row ">
               <div class="form-group col-md-12 text-right">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" id="submit" class="btn btn-primary">Submit</button>
               </div>
             </div>
           </form>
@@ -220,8 +219,8 @@
 
 @endsection
 
- @push('scripts')
- <script>
+@push('scripts')
+<script>
   $(document).ready(function() {
 
 
@@ -295,7 +294,7 @@
         // }
         //totalTax += parseFloat($(taxTotal[i]).text()) 
       });
-      var grandTotal=parseFloat(grandTotal).toFixed(2)
+      var grandTotal = parseFloat(grandTotal).toFixed(2)
 
       $('.totaltax').text(parseFloat(totalTax).toFixed(2));
       $('.grandtotal').text(parseFloat(grandTotal).toFixed(2));
@@ -303,40 +302,40 @@
       $('.noRows').text($('#orderTable').find('.orderData').length);
       // alert($('select["name=orderTax"]').attr('data-vat'));
       //$('.showOrderDiscount').text($('.forOrderDiscount').find("input[name='orderDiscount'])"));
-      var orderTax=$('#orderTax option:selected').attr('data-vat');
+      var orderTax = $('#orderTax option:selected').attr('data-vat');
       // alert(orderTax)
-      if(orderTax != undefined && orderTax !=''){
-        orderTax = parseFloat(grandTotal).toFixed(2)*(parseFloat(orderTax)/100)
+      if (orderTax != undefined && orderTax != '') {
+        orderTax = parseFloat(grandTotal).toFixed(2) * (parseFloat(orderTax) / 100)
         //alert(orderTax)
         $('.totalorderTax').text(parseFloat(orderTax).toFixed(2))
-      }else{
-        orderTax=0.0
+      } else {
+        orderTax = 0.0
         $('.totalorderTax').text(orderTax)
       }
       var orderDiscount = $("input[name='orderDiscount']").val()
       var shippingCost = $("input[name='shippingCost']").val()
-      if(orderDiscount!=''){
+      if (orderDiscount != '') {
         $('.showOrderDiscount').text(orderDiscount)
-      }else{
-        orderDiscount=0.0
+      } else {
+        orderDiscount = 0.0
         $('.showOrderDiscount').text(orderDiscount)
       }
-      if(shippingCost!=''){  
+      if (shippingCost != '') {
         $('.shippingCost').text(parseFloat(shippingCost).toFixed(2))
-      }else{
-        shippingCost=0.0
+      } else {
+        shippingCost = 0.0
         $('.shippingCost').text(shippingCost)
       }
-  
-       grossTotal=(parseFloat(grandTotal)+parseFloat(shippingCost)+parseFloat(orderTax))-parseFloat(orderDiscount)
-       $('.grossTotal').text(grossTotal)
+
+      grossTotal = (parseFloat(grandTotal) + parseFloat(shippingCost) + parseFloat(orderTax)) - parseFloat(orderDiscount)
+      $('.grossTotal').text(grossTotal)
       // grossTotal
 
     }
 
     $('#AddPurchase').on('change', '#purchaseStatus', function() {
       var status = $(this).val()
-      //  alert(status)
+      //alert(status)
       if (status == 2) {
         $('.rcvrow').show()
         $('.ftrcvrow').show()
@@ -351,16 +350,16 @@
 
 
     });
-    $('#orderTax').on('change',function(){
-        
+    $('#orderTax').on('change', function() {
+
       CalculateTotal();
 
     })
-    $('#orderDiscount').on('change',function(){
+    $('#orderDiscount').on('change', function() {
       CalculateTotal();
 
     })
-    $('#shippingCost').on('change',function(){
+    $('#shippingCost').on('change', function() {
       CalculateTotal();
     })
     $(document).on('click', 'li', function() {
@@ -370,13 +369,110 @@
     $('.rcvcolumn').hide()
     $('.rcvrow').hide()
     $('.ftrcvrow').hide()
- 
 
 
-    
+
+
+
+    $.validator.setDefaults({
+      submitHandler: function() {
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('input[name="_token"]').val()
+          }
+        });
+        var warehouse = $('select[name="warehouse"]').val()
+        var supplier = $('select[name="supplier"]').val()
+        var purchaseStatus = $('select[name="purchaseStatus"]').val()
+        var orderTax = $('select[name="orderTax"]').val()
+        var orderDiscount = $('input[name="orderDiscount"]').val()
+        var shippingCost = $('input[name="shippingCost"]').val()
+        var note = $('textarea#note').val();
+        var document = $('.custom-file-input').prop('files')[0];
+        var items = $('.totalItems').text()
+        var total = $('#grandtotal').text()
+        var totalOrderTax = $('.totalorderTax').text()
+        var grandTotal = $('.grossTotal').text()
+        //alert(grandTotal)
+
+        var form = $('AddPurchase')[0]; // You need to use standard javascript object here
+        var formData = new FormData(form);
+        formData.append('warehouse', warehouse);
+        formData.append('supplier', supplier);
+        formData.append('purchaseStatus', purchaseStatus);
+        formData.append('orderTax', orderTax);
+        formData.append('orderDiscount', orderDiscount);
+        formData.append('shippingCost', shippingCost);
+        formData.append('note', note);
+        formData.append('document', document);
+        formData.append('items', items);
+        formData.append('total', total);
+        formData.append('totalOrderTax', totalOrderTax);
+        formData.append('grandTotal', grandTotal);
+
+        $.ajax({
+				url :"{{route('purchase.store')}}",
+				type : 'POST',
+				data : formData,
+				contentType : false,
+			  processData : false,
+				success: function(resp) {
+				   console.log(resp)
+				  if(resp.success){
+					Toast.fire({
+					  icon: 'success',
+					  title: resp.message
+					})
+					// $('#AddProduct')[0].reset();
+					//  $('.select2').val(null).trigger('change');
+					//  $('#summernote').summernote('reset');
+					//    $('#AddProduct').find('.uploaded').remove()
+					//    $('#AddProduct').find('.image-uploader').append('<div class="uploaded"></div>');
+				   } else {
+					Toast.fire({
+					  icon: 'danger',
+					  title: resp.message
+					})
+				   }
+
+				}
+			})
+      }
+    })
+
+    $('#AddPurchase').validate({
+      rules: {
+        warehouse: {
+          required: true,
+        },
+      },
+      messages: {
+        warehouse: {
+          required: "Please select a warehouse",
+        },
+      },
+      errorElement: 'span',
+      onfocusout: false,
+      errorPlacement: function(error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function(element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function(element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      },
+      invalidHandler: function(form, validator) {
+        var errors = validator.numberOfInvalids();
+        if (errors) {
+          validator.errorList[0].element.focus();
+        }
+      }
+    })
+
+
 
   });
 </script>
-@endpush 
-
-
+@endpush
