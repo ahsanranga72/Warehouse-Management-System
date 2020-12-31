@@ -214,7 +214,7 @@
                <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Payment Status *</label>
-                                            <select name="payment_status" class="form-control">
+                                            <select name="payment_status" class="form-control payment_status">
                                                 <option value="1">Pending</option>
                                                 <option value="2">Due</option>
                                                 <option value="3">Partial</option>
@@ -321,6 +321,9 @@
 
 <script>
   $(document).ready(function() {
+  //New 
+    $('.checkVisible').hide()
+    $('#payment').hide()
 
     $('.paid_by').on('change',function(){
       if($(this).val()==2){
@@ -332,6 +335,17 @@
       }
 
    })
+    $('.payment_status').on('change',function(){
+
+      if($(this).val()==3){
+        $('#payment').show()
+      }else{
+        $('input[name="paid_amount"]').val('')
+        $('input[name="paying_amount"]').val('')
+        $('#payment').hide()
+      }
+    })
+//
 
 
     $('#product_code').keyup(function() {
@@ -476,7 +490,7 @@
       $('#product_code').val($(this).text());
       $('#productList').fadeOut();
     });
-    $('.checkVisible').hide()
+  
     $('.rcvrow').hide()
     $('.ftrcvrow').hide()
 
