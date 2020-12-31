@@ -18,6 +18,7 @@
   ul.dropdown-menu.select-product-list li a {
     color: #212529;
   }
+
   .rcvrow {
     display: none;
   }
@@ -118,7 +119,7 @@
                       <th>Action</th>
                     </thead>
                     <tbody class="tableBody">
-          
+
                     </tbody>
                     <tfoot>
                       <tr>
@@ -210,7 +211,7 @@
           method: "get",
           data: {
             product_code: product_code,
-            warehouse_id:warehouse,
+            warehouse_id: warehouse,
             _token: _token
           },
           success: function(data) {
@@ -222,47 +223,47 @@
     });
 
     $(document).on('click', 'li', function() {
-          var productId = $(this).attr('data-product')
-          $('#product_code').val('');
-          $('#productList').fadeOut();
-          // alert($('#purchaseStatus').val())
-         
-          if (productId != '') {
-            var _token = $('input[name="_token"]').val();
-          if($('.tableBody').find('.dataRow'+productId).length<1){
-                  $.ajax({
-                  url: "{{ route('order.product') }}",
-                  method: "get",
-                  data: {
-                    product_id: productId,
-                    _token: _token
-                  },
-                  success: function(data) {
-                    $('.tableBody').append(data).fadeIn()
+      var productId = $(this).attr('data-product')
+      $('#product_code').val('');
+      $('#productList').fadeOut();
 
-                    if($('#purchaseStatus').val()==2){
-                        $('#orderTable').find('.rcvrow').removeClass('rcvrow').addClass('showRow');
-                    }else{
-                      $('#orderTable').find('.showRow').removeClass('showRow').addClass('rcvrow');
-                    }
 
-                  }
-                });
-          }else{
+      if (productId != '') {
+        var _token = $('input[name="_token"]').val();
+        if ($('.tableBody').find('.dataRow' + productId).length < 1) {
+          $.ajax({
+            url: "{{ route('order.product') }}",
+            method: "get",
+            data: {
+              product_id: productId,
+              _token: _token
+            },
+            success: function(data) {
+              $('.tableBody').append(data).fadeIn()
 
-              Toast.fire({
-              icon: 'warning',
-              title: "Product already added !"
-              })
-          }
+              if ($('#purchaseStatus').val() == 2) {
+                $('#orderTable').find('.rcvrow').removeClass('rcvrow').addClass('showRow');
+              } else {
+                $('#orderTable').find('.showRow').removeClass('showRow').addClass('rcvrow');
+              }
+
+            }
+          });
+        } else {
+
+          Toast.fire({
+            icon: 'warning',
+            title: "Product already added !"
+          })
+        }
       }
-  
+
     });
 
-      $('#orderTable').on('click', '.ibtnDel', function() {
-        $(this).closest('tr').remove();
-        CalculateTotal();
-      })
+    $('#orderTable').on('click', '.ibtnDel', function() {
+      $(this).closest('tr').remove();
+      CalculateTotal();
+    })
 
     $('#orderTable').on('change', '.quantity', function() {
 
@@ -278,17 +279,17 @@
     })
 
     $('#orderTable').on('change', '.received', function() {
-        var received=$(this).val()
-        var quantity =$(this).parent().parent().find('.quantity').val()
+      var received = $(this).val()
+      var quantity = $(this).parent().parent().find('.quantity').val()
 
-        if(parseInt(quantity)<parseInt(received)){
+      if (parseInt(quantity) <= parseInt(received)) {
 
-          Toast.fire({
-					  icon: 'warning',
-					  title: "Received is not greater than  quantity!"
-					})
-           $(this).val('')
-        }
+        Toast.fire({
+          icon: 'warning',
+          title: "Received can't be greater than  quantity!"
+        })
+        $(this).val('')
+      }
 
     })
 
@@ -300,7 +301,7 @@
       var subtotal = $('.subtotal');
       var taxTotal = $('.tax');
       var quantityTotal = $(".quantity");
-      //alert(quantityTotal)
+
 
 
       var grandTotal = 0.0;
@@ -317,10 +318,8 @@
         if ($(quantityTotal[i]).val() != '') {
           totalQuantity += parseInt($(quantityTotal[i]).val());
         }
-        // if ($(quantityTotal[i]).text() != '') {
-        //   totalQuantity += parseInt($(quantityTotal[i]).text());
-        // }
-        //totalTax += parseFloat($(taxTotal[i]).text()) 
+
+
       });
       var grandTotal = parseFloat(grandTotal).toFixed(2)
 
@@ -328,10 +327,9 @@
       $('.grandtotal').text(parseFloat(grandTotal).toFixed(2));
       $('.totalItems').text(parseInt(totalQuantity));
       $('.noRows').text($('#orderTable').find('.orderData').length);
-      // alert($('select["name=orderTax"]').attr('data-vat'));
-      //$('.showOrderDiscount').text($('.forOrderDiscount').find("input[name='orderDiscount'])"));
+
       var orderTax = $('#orderTax option:selected').attr('data-vat');
-      // alert(orderTax)
+
       if (orderTax != undefined && orderTax != '') {
         orderTax = parseFloat(grandTotal).toFixed(2) * (parseFloat(orderTax) / 100)
         //alert(orderTax)
@@ -391,7 +389,7 @@
     $('#shippingCost').on('change', function() {
       CalculateTotal();
     })
-    
+
 
 
     $('.rcvcolumn').hide()
@@ -409,106 +407,97 @@
             'X-CSRF-TOKEN': $('input[name="_token"]').val()
           }
         });
-        var list =$('.tableBody').find('.orderData').length
-        if(list>0){
-        var warehouse = $('select[name="warehouse"]').val()
-        var supplier = $('select[name="supplier"]').val()
-        var purchaseStatus = $('select[name="purchaseStatus"]').val()
-        var orderTax = $('select[name="orderTax"]').val()
-        var orderDiscount = $('input[name="orderDiscount"]').val()
-        var shippingCost = $('input[name="shippingCost"]').val()
-        var note = $('textarea#note').val();
-        var document = $('.custom-file-input').prop('files')[0];
-        var items = $('.totalItems').text()
-        var total = $('#grandtotal').text()
-        var totalOrderTax = $('.totalorderTax').text()
-        var grandTotal = $('.grossTotal').text()
-      
-        // if ($(quantityTotal[i]).text() != '') {
-        //   totalQuantity += parseInt($(quantityTotal[i]).text());
-        // }
-        products=[]
-        $(".tableBody").find('.orderData').each(function() {
-          let quantity = $(this).find('.quantity').val()
-          let received = $(this).find('.received').val()
-          let subtotal     = $(this).find('.subtotal').text()
+        var list = $('.tableBody').find('.orderData').length
+        if (list > 0) {
+          var warehouse = $('select[name="warehouse"]').val()
+          var supplier = $('select[name="supplier"]').val()
+          var purchaseStatus = $('select[name="purchaseStatus"]').val()
+          var orderTax = $('select[name="orderTax"]').val()
+          var orderDiscount = $('input[name="orderDiscount"]').val()
+          var shippingCost = $('input[name="shippingCost"]').val()
+          var note = $('textarea#note').val();
+          var document = $('.custom-file-input').prop('files')[0];
+          var items = $('.totalItems').text()
+          var total = $('#grandtotal').text()
+          var totalOrderTax = $('.totalorderTax').text()
+          var grandTotal = $('.grossTotal').text()
 
-          let unitcost      =$(this).find('.unitcost').attr('data-unitcost')
-          let discount       =$(this).find('.discount').attr('data-discount')
-          let tax=       $(this).find('.tax').text()
-          let product_id =       $(this).attr('data-id')
-          product_data={
-            "quantity":quantity,
-            "received":received,
 
-            "subtotal":subtotal,
-            "unitcost":unitcost,
-            "tax":tax,
-            "product_id":product_id,
-            "discount":discount,
-          }
-          products.push(product_data)
+          products = []
+          $(".tableBody").find('.orderData').each(function() {
+            let quantity = $(this).find('.quantity').val()
+            let received = $(this).find('.received').val()
+            let subtotal = $(this).find('.subtotal').text()
 
-          //console.log("RCV"+received,"Q "+quantity,"sbT"+subtotal,"U"+unitcost,"D "+discount,"T"+ tax,"p_id" + product_id)
-          
-          
-        });
+            let unitcost = $(this).find('.unitcost').attr('data-unitcost')
+            let discount = $(this).find('.discount').attr('data-discount')
+            let tax = $(this).find('.tax').text()
+            let product_id = $(this).attr('data-id')
+            product_data = {
+              "quantity": quantity,
+              "received": received,
 
-        console.log(products)
+              "subtotal": subtotal,
+              "unitcost": unitcost,
+              "tax": tax,
+              "product_id": product_id,
+              "discount": discount,
+            }
+            products.push(product_data)
 
-        var form = $('AddPurchase')[0]; // You need to use standard javascript object here
-        var formData = new FormData(form);
-        formData.append('warehouse', warehouse);
-        formData.append('supplier', supplier);
-        formData.append('purchaseStatus', purchaseStatus);
-        formData.append('orderTax', orderTax);
-        formData.append('orderDiscount', orderDiscount);
-        formData.append('shippingCost', shippingCost);
-        formData.append('note', note);
-        formData.append('document', document);
-        formData.append('items', items);
-        formData.append('total', total);
-        formData.append('totalOrderTax', totalOrderTax);
-        formData.append('grandTotal', grandTotal);
-        formData.append('products', JSON.stringify(products));
 
-        $.ajax({
-				url :"{{route('purchase.store')}}",
-				type : 'POST',
-				data : formData,
-				contentType : false,
-			  processData : false,
-				success: function(resp) {
-				   console.log(resp)
-				  if(resp.success){
+          });
 
-              Toast.fire({
-                icon: 'success',
-                title: resp.message
-              })
-          
-          window.location.replace('/purchase/list'); 
-					// $('#AddProduct')[0].reset();
-					//  $('.select2').val(null).trigger('change');
-					//  $('#summernote').summernote('reset');
-					//    $('#AddProduct').find('.uploaded').remove()
-					//    $('#AddProduct').find('.image-uploader').append('<div class="uploaded"></div>');
-				   } else {
-					Toast.fire({
-					  icon: 'danger',
-					  title: resp.message
-					})
-				   }
+          console.log(products)
 
-				}
-			})
-      }else{
-        Toast.fire({
-					  icon: 'warning',
-					  title: "Please select product"
-					})
+          var form = $('AddPurchase')[0]; // You need to use standard javascript object here
+          var formData = new FormData(form);
+          formData.append('warehouse', warehouse);
+          formData.append('supplier', supplier);
+          formData.append('purchaseStatus', purchaseStatus);
+          formData.append('orderTax', orderTax);
+          formData.append('orderDiscount', orderDiscount);
+          formData.append('shippingCost', shippingCost);
+          formData.append('note', note);
+          formData.append('document', document);
+          formData.append('items', items);
+          formData.append('total', total);
+          formData.append('totalOrderTax', totalOrderTax);
+          formData.append('grandTotal', grandTotal);
+          formData.append('products', JSON.stringify(products));
+
+          $.ajax({
+            url: "{{route('purchase.store')}}",
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(resp) {
+              console.log(resp)
+              if (resp.success) {
+
+                Toast.fire({
+                  icon: 'success',
+                  title: resp.message
+                })
+
+                window.location.replace('/purchase/list');
+              } else {
+                Toast.fire({
+                  icon: 'danger',
+                  title: resp.message
+                })
+              }
+
+            }
+          })
+        } else {
+          Toast.fire({
+            icon: 'warning',
+            title: "Please select product"
+          })
+        }
       }
-    }
     })
 
     $('#AddPurchase').validate({
@@ -516,16 +505,10 @@
         warehouse: {
           required: true,
         },
-        quantity1: {
-          required: true
-        },
       },
       messages: {
         warehouse: {
           required: "Please select a warehouse",
-        },
-        quantity1: {
-          required: "Quantity can't be null"
         },
       },
       errorElement: 'span',
