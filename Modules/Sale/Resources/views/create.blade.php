@@ -230,7 +230,7 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Paid By</label>
-                                                <select name="paid_by_id" class="form-control">
+                                                <select name="paid_by_id" class="form-control paid_by">
                                                     <option value="1">Cash</option>
                                                     <option value="2">Cheque</option>
                                                 </select>
@@ -255,7 +255,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mt-2">
+                                    <!-- <div class="row mt-2">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <div class="card-element" class="form-control">
@@ -263,7 +263,8 @@
                                                 <div class="card-errors" role="alert"></div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
+                                    <div class="checkVisible">
                                     <div class="row" id="cheque">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -277,6 +278,7 @@
                                             <label>Payment Note</label>
                                             <textarea rows="3" class="form-control" name="payment_note"></textarea>
                                         </div>
+                                    </div>
                                     </div>
                                 </div>
                </div>
@@ -319,6 +321,17 @@
 
 <script>
   $(document).ready(function() {
+
+    $('.paid_by').on('change',function(){
+      if($(this).val()==2){
+        $('.checkVisible').show()
+      }else{
+        $('textarea[name="payment_note"]').val('')
+        $('input[name="cheque_no"]').val('')
+        $('.checkVisible').hide()
+      }
+
+   })
 
 
     $('#product_code').keyup(function() {
@@ -463,12 +476,11 @@
       $('#product_code').val($(this).text());
       $('#productList').fadeOut();
     });
-    $('.rcvcolumn').hide()
+    $('.checkVisible').hide()
     $('.rcvrow').hide()
     $('.ftrcvrow').hide()
 
-    // display: none;
-
+  
 
   });
 </script>

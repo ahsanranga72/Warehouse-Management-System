@@ -77,7 +77,7 @@ class ParchaseStatusController extends Controller
         $validated = $request->validate([
             'name' => 'required|unique:purchase_statuses|max:50',
         ]);
-        $parchasestatus = PurchaseStatus::first('id');
+        $parchasestatus = PurchaseStatus::find($id);
         $parchasestatus->name = $request->name;
         $parchasestatus->save();
         return redirect()->route('parchasestatus.view')->with('message', 'Parchase Status Update Save Successfully');
