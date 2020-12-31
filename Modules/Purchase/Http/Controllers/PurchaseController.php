@@ -46,14 +46,15 @@ class PurchaseController extends Controller
     }
     public function get_product_list_by_product_code(Request $request)
     {
-        if ($request->get('product_code')) {
+        if ($request->get('product_code') && $request->get('warehouse_id')!=null) {
             $product_code = $request->get('product_code');
-            $data = DB::table('products')->where('product_code', 'LIKE', "%{$product_code}%")->get();
+            $warehouse_id = $request->get('warehouse_id');
+            
+            $data = DB::table('products')->where('warehouse_id',$warehouse_id)->where('product_code', 'LIKE', "%{$product_code}%")->get();
             $output = '<ul class="dropdown-menu select-product-list" style="display:block; position:relative">';
             foreach ($data as $row) {
                 $output .= '
-       <li><a href="#">' . $row->product_name . '</a></li>
-       ';
+                        <li data-product='. $row->id.'><a href="#">' . $row->product_code.' - '.$row->product_name . '</a></li>';
             }
             $output .= '</ul>';
             //   print_r($output);
@@ -62,6 +63,16 @@ class PurchaseController extends Controller
         }
     }
 
+    public function get_product_by_id(Request $request)
+    {
+        if ($request->get('product_id')) {
+            $product_id = $request->get('product_id');
+            $data['product'] = Product::where('id',$product_id)->get()->first();
+            return view('purchase::orderlist',$data);
+          //  echo $output;
+            exit(0);
+        }
+    }
     /**
      * Store a newly created resource in storage.
      * @param Request $request
@@ -69,6 +80,10 @@ class PurchaseController extends Controller
      */
     public function storePurchase(Request $request)
     {
+      
+       // print_r(json_decode($request->products));die();
+
+      
         $purchase = new PurchaseProductInvoiceDetails;
         $purchase->warehouse_id = $request->warehouse;
         $purchase->supplier_id = $request->supplier;
@@ -86,9 +101,9 @@ class PurchaseController extends Controller
         
       
        
-        //$purchase->status = $request->status;
+        // $purchase->status = $request->status;
         // $purchase->save();
-        //     $purchase_id=$purchase->id;
+           
         if ($request->hasfile('document')) {
             $file = $request->file('document');
             $extention = $file->getClientOriginalExtension();
@@ -101,41 +116,42 @@ class PurchaseController extends Controller
         }
      
         $save = $purchase->save();
+        $purchase_id=$purchase->id;
         // print_r( $save);die();
-        if ($save) {
-            return Response::json(array('success' => 'true', 'message' => 'Product has been added succesefully.'));
-        } else {
-            return Response::json(array('success' => 'false', 'message' => 'Product has not been added succesefully.'));
-        }
+       
 
 
-        //    $data = array(
-        //             array('id'=>17,'quantity'=>25,'total'=>'1000'),
-        //             array('id'=>18,'quantity'=>2000,'total'=>'5000'),
-
-        //    );
+            $data = json_decode($request->products);
+           
+           
         //    for($i=0;$i<sizeof($data);$i++){
         //        print_r($data[$i]);
         //    }
-        //     foreach($data as $mydata){
-        //             // print_r( $mydata['id']);
+           foreach($data as $mydata){
+                    // print_r( $mydata['id']);
+                    //  print_r( $mydata->received);die();
+                    $purchaseProductDetails = new PurchaseProductDetails;
+                    $purchaseProductDetails->product_id = $mydata->product_id;
+                    $purchaseProductDetails->quantity = $mydata->quantity;
+                    if($mydata->received!=''){
+                        $purchaseProductDetails->received_quantity = $mydata->received;
+                    }
+                  
+                    $purchaseProductDetails->subtotal =$mydata->subtotal;
+                    $purchaseProductDetails->purchase_product_invoice_id = $purchase_id;
+                    $purchaseProductDetails->save();
 
-        //             $purchaseProductDetails = new PurchaseProductDetails;
-        //             $purchaseProductDetails->product_id = $mydata['id'];
-        //             $purchaseProductDetails->quantity = $mydata['quantity'];
-        //            // $purchaseProductDetails->received_quantity = $request->received_quantity;
-        //             $purchaseProductDetails->subtotal =$mydata['total'];;
-        //             $purchaseProductDetails->purchase_product_invoice_id = $purchase_id;
-        //             $purchaseProductDetails->return_purchase = false;
-        //             $purchaseProductDetails->save();
 
+                    $product = Product::where('id',$mydata->product_id)->first(); 
+                    $product->stock_quantity= $product->stock_quantity + $mydata->quantity;
+                    $product->save();
 
-
-        //             $product = Product::where('id',$mydata['id'])->first(); 
-        //             $product->stock_quantity= $product->stock_quantity + $mydata['quantity'];
-        //             $product->save();
-
-        //     }
+            }
+            if ($save) {
+                return Response::json(array('success' => 'true', 'message' => 'Product has been added succesefully.'));
+            } else {
+                return Response::json(array('success' => 'false', 'message' => 'Product has not been added succesefully.'));
+            }
         //  for( i=0; i<=$request->list as $list):
         //         print_r($list);
         //  endforeach;

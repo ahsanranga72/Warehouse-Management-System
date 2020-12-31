@@ -18,6 +18,9 @@
   ul.dropdown-menu.select-product-list li a {
     color: #212529;
   }
+  .rcvrow {
+    display: none;
+  }
 </style>
 @endsection
 @section('content')
@@ -114,33 +117,8 @@
                       <th>Sub Total</th>
                       <th>Action</th>
                     </thead>
-                    <tbody>
-                      <tr class="orderData">
-                        <td>Test</td>
-                        <td>adgfga</td>
-                        <td><input type="number" class="form-control quantity" name="quantity" id="quantity"></td>
-                        <td class="rcvrow"><input type="number" class="form-control received" name="received" id="received"></td>
-                        <td class="unitcost" data-unitcost='1'>1</td>
-                        <td class='discount' data-discount='15'>15</td>
-                        <td><span class="tax">200</span></td>
-                        <td><span class="subtotal"></label></td>
-                        <td>
-                          <button type="button" class="ibtnDel btn btn-md btn-danger">Delete</button>
-                        </td>
-                      </tr>
-                      <tr class="orderData">
-                        <td>Test2</td>
-                        <td>1321</td>
-                        <td><input type="number" class="form-control quantity" name="quantity" id="quantity"></td>
-                        <td class="rcvrow"><input type="number" class="form-control received" name="received" id="received"></td>
-                        <td class="unitcost" data-unitcost='2'>2</td>
-                        <td class='discount' data-discount='10'>10</td>
-                        <td><span class="tax">1111</span></td>
-                        <td><span class="subtotal"></span></td>
-                        <td>
-                          <button type="button" class="ibtnDel btn btn-md btn-danger">Delete</button>
-                        </td>
-                      </tr>
+                    <tbody class="tableBody">
+          
                     </tbody>
                     <tfoot>
                       <tr>
@@ -224,6 +202,7 @@
   $(document).ready(function() {
     $('#product_code').keyup(function() {
       var product_code = $(this).val();
+      var warehouse = $('select[name=warehouse]').val();
       if (product_code != '') {
         var _token = $('input[name="_token"]').val();
         $.ajax({
@@ -231,6 +210,7 @@
           method: "get",
           data: {
             product_code: product_code,
+            warehouse_id:warehouse,
             _token: _token
           },
           success: function(data) {
@@ -240,12 +220,40 @@
         });
       }
     });
-    $('#orderTable').on('click', '.ibtnDel', function() {
 
-      $(this).closest('tr').remove();
-      CalculateTotal();
+    $(document).on('click', 'li', function() {
+          var productId = $(this).attr('data-product')
+          $('#product_code').val('');
+          $('#productList').fadeOut();
+          if (productId != '') {
+            var _token = $('input[name="_token"]').val();
+          if($('.tableBody').find('.dataRow'+productId).length<1){
+                  $.ajax({
+                  url: "{{ route('order.product') }}",
+                  method: "get",
+                  data: {
+                    product_id: productId,
+                    _token: _token
+                  },
+                  success: function(data) {
+                    $('.tableBody').append(data).fadeIn()
+                  }
+                });
+          }else{
 
-    })
+              Toast.fire({
+              icon: 'warning',
+              title: "Product already added !"
+              })
+          }
+      }
+  
+    });
+
+      $('#orderTable').on('click', '.ibtnDel', function() {
+        $(this).closest('tr').remove();
+        CalculateTotal();
+      })
 
     $('#orderTable').on('change', '.quantity', function() {
 
@@ -333,14 +341,15 @@
       var status = $(this).val()
       //alert(status)
       if (status == 2) {
-        $('.rcvrow').show()
+        $('#orderTable').find('.received').val('')
+        $('#orderTable').find('.rcvrow').removeClass('rcvrow').addClass('showRow');
         $('.ftrcvrow').show()
         $('.rcvcolumn').show()
       } else {
-        $('.rcvrow').hide()
+        $('#orderTable').find('.showRow').removeClass('showRow').addClass('rcvrow');
         $('.ftrcvrow').hide()
         $('.rcvcolumn').hide()
-        $('input[name="received"]').val('');
+        $('#orderTable').find('.received').val('')
       }
 
 
@@ -358,12 +367,11 @@
     $('#shippingCost').on('change', function() {
       CalculateTotal();
     })
-    $(document).on('click', 'li', function() {
-      $('#product_code').val($(this).text());
-      $('#productList').fadeOut();
-    });
+    
+
+
     $('.rcvcolumn').hide()
-    $('.rcvrow').hide()
+    $('.tableBody').find('.rcvrow').hide()
     $('.ftrcvrow').hide()
 
 
@@ -377,6 +385,8 @@
             'X-CSRF-TOKEN': $('input[name="_token"]').val()
           }
         });
+        var list =$('.tableBody').find('.orderData').length
+        if(list>0){
         var warehouse = $('select[name="warehouse"]').val()
         var supplier = $('select[name="supplier"]').val()
         var purchaseStatus = $('select[name="purchaseStatus"]').val()
@@ -389,7 +399,38 @@
         var total = $('#grandtotal').text()
         var totalOrderTax = $('.totalorderTax').text()
         var grandTotal = $('.grossTotal').text()
-        //alert(grandTotal)
+      
+        // if ($(quantityTotal[i]).text() != '') {
+        //   totalQuantity += parseInt($(quantityTotal[i]).text());
+        // }
+        products=[]
+        $(".tableBody").find('.orderData').each(function() {
+          let quantity = $(this).find('.quantity').val()
+          let received = $(this).find('.received').val()
+          let subtotal     = $(this).find('.subtotal').text()
+
+          let unitcost      =$(this).find('.unitcost').attr('data-unitcost')
+          let discount       =$(this).find('.discount').attr('data-discount')
+          let tax=       $(this).find('.tax').text()
+          let product_id =       $(this).attr('data-id')
+          product_data={
+            "quantity":quantity,
+            "received":received,
+
+            "subtotal":subtotal,
+            "unitcost":unitcost,
+            "tax":tax,
+            "product_id":product_id,
+            "discount":discount,
+          }
+          products.push(product_data)
+
+          //console.log("RCV"+received,"Q "+quantity,"sbT"+subtotal,"U"+unitcost,"D "+discount,"T"+ tax,"p_id" + product_id)
+          
+          
+        });
+
+        console.log(products)
 
         var form = $('AddPurchase')[0]; // You need to use standard javascript object here
         var formData = new FormData(form);
@@ -405,6 +446,7 @@
         formData.append('total', total);
         formData.append('totalOrderTax', totalOrderTax);
         formData.append('grandTotal', grandTotal);
+        formData.append('products', JSON.stringify(products));
 
         $.ajax({
 				url :"{{route('purchase.store')}}",
@@ -415,10 +457,13 @@
 				success: function(resp) {
 				   console.log(resp)
 				  if(resp.success){
-					Toast.fire({
-					  icon: 'success',
-					  title: resp.message
-					})
+            
+              Toast.fire({
+                icon: 'success',
+                title: resp.message
+              })
+          
+          window.location.replace('/purchase/list'); 
 					// $('#AddProduct')[0].reset();
 					//  $('.select2').val(null).trigger('change');
 					//  $('#summernote').summernote('reset');
@@ -433,7 +478,13 @@
 
 				}
 			})
+      }else{
+        Toast.fire({
+					  icon: 'warning',
+					  title: "Please select product"
+					})
       }
+    }
     })
 
     $('#AddPurchase').validate({
@@ -441,10 +492,16 @@
         warehouse: {
           required: true,
         },
+        quantity1: {
+          required: true
+        },
       },
       messages: {
         warehouse: {
           required: "Please select a warehouse",
+        },
+        quantity1: {
+          required: "Quantity can't be null"
         },
       },
       errorElement: 'span',
