@@ -19,8 +19,6 @@ class CreateSaleProductInvoiceDetailsTable extends Migration
             $table->integer('customer_id')->nullable();
             $table->integer('warehouse_id')->nullable();
             $table->integer('user_id')->nullable();
-            // $table->Integer('purchase_status_id')->nullable()->comment('1=Received,2=Partial,3=Ordered,4=Pending');
-            // $table->String('purchase_document',255)->nullable();
             $table->Integer('order_tax_id')->nullable();
             $table->float('order_discount')->nullable();
             $table->float('order_shipping_cost')->nullable();
@@ -28,7 +26,6 @@ class CreateSaleProductInvoiceDetailsTable extends Migration
             $table->integer('sale_status_id')->nullable();
             $table->integer('payment_status_id')->nullable()->comment('1=cash,2=cheque');
             $table->integer('paid_by_id')->nullable();
-            $table->string('referent_no')->nullable();
             $table->string('received_amount')->nullable();
             $table->string('paying_amount')->nullable();
             $table->string('charge')->nullable();
