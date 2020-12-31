@@ -27,7 +27,8 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        return view('purchase::index');
+        $purchaselists = PurchaseProductInvoiceDetails::orderBy('id','DESC')->get();
+        return view('purchase::index', compact('purchaselists'));
     }
 
     /**
@@ -68,8 +69,6 @@ class PurchaseController extends Controller
      */
     public function storePurchase(Request $request)
     {
-      
-      
         $purchase = new PurchaseProductInvoiceDetails;
         $purchase->warehouse_id = $request->warehouse;
         $purchase->supplier_id = $request->supplier;

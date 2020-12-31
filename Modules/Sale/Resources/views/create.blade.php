@@ -163,9 +163,14 @@
              
            
             <div class="form-group col-lg-4">
-                <div class="form-group">
-                  <label class="orderDiscount" for="orderDiscount">Other Tax</label>
-                  <input type="number" id="orderDiscount" name="orderDiscount" class="form-control" placeholder="Enter Discount here">
+            <div class="form-group">
+                  <label for="orderTax">Order Tax <span class="required-field">*</span></label>
+                  <select name="orderTax" id="orderTax" class="form-control select2" style="width: 100%;">
+                    <option value="">--Select order tax--</option>
+                    @foreach ($ordertax as $key)
+                    <option value='{{ $key->id }}' data-vat='{{$key->tax_number}}'>{{$key->name}}</option>
+                    @endforeach
+                  </select>
                 </div>
               </div>
               
@@ -218,8 +223,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                       
                                     </div>
                                 </div>
                                 <div id="payment">
@@ -229,11 +232,7 @@
                                                 <label>Paid By</label>
                                                 <select name="paid_by_id" class="form-control">
                                                     <option value="1">Cash</option>
-                                                    <option value="2">Gift Card</option>
-                                                    <option value="3">Credit Card</option>
-                                                    <option value="4">Cheque</option>
-                                                    <option value="5">Paypal</option>
-                                                    <option value="6">Deposit</option>
+                                                    <option value="2">Cheque</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -262,14 +261,6 @@
                                                 <div class="card-element" class="form-control">
                                                 </div>
                                                 <div class="card-errors" role="alert"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row" id="gift-card">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label> Gift Card *</label>
-                                                <select id="gift_card_id" name="gift_card_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Gift Card..."></select>
                                             </div>
                                         </div>
                                     </div>

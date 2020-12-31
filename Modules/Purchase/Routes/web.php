@@ -12,7 +12,7 @@
 */
 
 Route::prefix('purchase')->group(function() {
-    Route::get('/', 'PurchaseController@index')->name('purchase.view');
+    Route::get('/list', 'PurchaseController@index')->name('purchase.view');
     Route::get('/add','PurchaseController@create')->name('purchase.add');
     Route::get('/get_products', 'PurchaseController@get_product_list_by_product_code')->name('product.list');
     Route::post('/store','PurchaseController@storePurchase')->name('purchase.store');

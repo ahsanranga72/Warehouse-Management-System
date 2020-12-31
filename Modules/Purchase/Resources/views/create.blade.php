@@ -222,8 +222,6 @@
 @push('scripts')
 <script>
   $(document).ready(function() {
-
-
     $('#product_code').keyup(function() {
       var product_code = $(this).val();
       if (product_code != '') {
@@ -260,8 +258,6 @@
 
       $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
       CalculateTotal();
-
-
     })
 
 
