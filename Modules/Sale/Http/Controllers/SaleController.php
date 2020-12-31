@@ -14,6 +14,7 @@ use Modules\OrderTax\Entities\OrderTax;
 use Modules\User\Entities\User;
 use Modules\Sale\Entities\SaleProductDetails;
 use Modules\Sale\Entities\SaleProductInvoiceDetail;
+use Response;
 
 class SaleController extends Controller
 {
@@ -47,34 +48,56 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
+        $data = json_decode($request->products);
+        $insert=true;$name="";
+        foreach ($data as $mydata) {
+            
+            $product = Product::where('id', $mydata->product_id)->first();
+           
+            if( $product->stock_quantity < $mydata->quantity){
+                $name=$product->product_name;
+                $insert=false;
+                break;
+            }
+          
+        }
+
+        if($insert){
+
         $sale = new SaleProductInvoiceDetail;
-        $sale->referent_no = $request->referent_no;
+        $sale->referent_no = $request->reference_no;
         $sale->warehouse_id = $request->warehouse;
         $sale->customer_id = $request->customer;
-        $sale->user_id = $request->user;
-        $sale->order_tax_id = $request->order_tax_id;
-        $sale->order_discount = $request->order_discount;
-        $sale->order_shipping_cost = $request->order_shipping_cost;
-        $sale->sale_document = $request->sale_document;
-        $sale->sale_status_id = $request->sale_status_id;
-        $sale->payment_status_id = $request->payment_status_id;
+        $sale->user_id = $request->biller;
+        $sale->order_tax_id = $request->orderTax;
+        $sale->order_discount = $request->orderDiscount;
+        $sale->order_shipping_cost = $request->shippingCost;
+        $sale->sale_status_id = $request->sale_status;
+        $sale->payment_status_id = $request->payment_status;
         $sale->paid_by_id = $request->paid_by_id;
-        $sale->paying_amount = $request->paying_amount;
-        $sale->charge = $request->charge;
-        $sale->payment_note = $request->payment_note;
-        $sale->sale_note = $request->sale_note;
-        $sale->staff_note = $request->staff_note;
+        if($request->receive_amount!=''){
+            $sale->receive_amount = $request->receive_amount;
+        }
+        if($request->receive_amount!=''){
+            $sale->paying_amount = $request->paid_amount;
+        }
+         
+        if($request->cheque_no!=''){
+                $sale->cheque_no = $request->cheque_no;
+        }
+        if($request->payment_note !=''){
+            $sale->sale_note = $request->payment_note;
+        }
+        if($request->stuff_note !=''){
+            $sale->staff_note = $request->stuff_note;
+        }
+       
+        
         $sale->items = $request->items;
         $sale->total = $request->total;
         $sale->order_tax = $request->totalOrderTax;
-        $sale->grand_total = $request->grand_total;
+        $sale->grand_total = $request->grandTotal;
 
-        
-      
-       
-        //$sale->status = $request->status;
-        // $sale->save();
-        //     $sale_id=$sale->id;
         if ($request->hasfile('document')) {
             $file = $request->file('document');
             $extention = $file->getClientOriginalExtension();
@@ -82,17 +105,50 @@ class SaleController extends Controller
             $file->move('upload/sale_documents/', $filename);
             $sale->sale_document = $filename;
         } else {
-            //return $request;
             $sale->sale_document = "";
         }
-     
+
         $save = $sale->save();
-        // print_r( $save);die();
-        if ($save) {
-            return Response::json(array('success' => 'true', 'message' => 'Product has been added succesefully.'));
-        } else {
-            return Response::json(array('success' => 'false', 'message' => 'Product has not been added succesefully.'));
+        $sale_id = $sale->id;
+
+        $data = json_decode($request->products);
+        foreach ($data as $mydata) {
+            $saleProductDetails = new SaleProductDetails;
+            $saleProductDetails->product_id = $mydata->product_id;
+            $saleProductDetails->quantity = $mydata->quantity;
+            $saleProductDetails->subtotal = $mydata->subtotal;
+            $saleProductDetails->sale_product_invoice_id = $sale_id;
+            $saleProductDetails->save();
+
+
+            $product = Product::where('id', $mydata->product_id)->first();
+            $product->stock_quantity = $product->stock_quantity - $mydata->quantity;
+
+            
+            $product->save();
         }
+        if ($save) {
+            return Response::json(array('success' => true, 'message' => 'Product has been added succesefully.'));
+        } else {
+            return Response::json(array('success' => false, 'message' => 'Product has not been added succesefully.'));
+        }
+
+        }else{
+            return Response::json(array('success' => false, 'message' => $name.' is out of stock'));
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     /**

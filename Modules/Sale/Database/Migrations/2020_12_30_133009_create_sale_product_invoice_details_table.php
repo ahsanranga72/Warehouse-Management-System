@@ -28,7 +28,6 @@ class CreateSaleProductInvoiceDetailsTable extends Migration
             $table->integer('paid_by_id')->nullable();
             $table->string('received_amount')->nullable();
             $table->string('paying_amount')->nullable();
-            $table->string('charge')->nullable();
             $table->string('cheque_number')->nullable();
             $table->string('payment_note')->nullable();
             $table->text('sale_note')->nullable();
@@ -37,6 +36,7 @@ class CreateSaleProductInvoiceDetailsTable extends Migration
             $table->float('total')->nullable();
             $table->float('order_tax')->nullable();
             $table->float('grand_total')->nullable();
+            $table->integer('sale_product_invoice_id')->nullable();
             $table->boolean('status')->nullable()->comment('True=Active,False=Inactive');
             $table->timestamps();
         });

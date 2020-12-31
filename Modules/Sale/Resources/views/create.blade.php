@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('layouts.master')
 @section('content')
 @section('stylesheets')
 <style>
@@ -17,6 +17,10 @@
 
   ul.dropdown-menu.select-product-list li a {
     color: #212529;
+  }
+
+  .rcvrow {
+    display: none;
   }
 </style>
 @endsection
@@ -40,23 +44,23 @@
           <form name="AddPurchase" id="AddPurchase" action="javascript:void(0)" enctype="multipart/form-data">
             @csrf
             <div class="row">
-            <div class="form-group col-md-4">
-                    <label for="name">Reference No</label>
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Enter name">
-                    <font style="color: red">
-              		  {{($errors->has('name'))?($errors->first('name')):''}}
-              		</font>
-                  </div>
+              <div class="form-group col-md-4">
+                <label for="reference_no">Reference No</label>
+                <input type="text" name="reference_no" class="form-control" id="reference_no" placeholder="Enter a referance name" style="width: 100%;">
+                <font style="color: red">
+                  {{($errors->has('name'))?($errors->first('name')):''}}
+                </font>
+              </div>
 
-                  <div class="col-lg-4">
+              <div class="col-lg-4">
                 <div class="form-group">
                   <label for="customer">Customer</label>
                   <select name="customer" id="customer" class="form-control select2" style="width: 100%;">
-                  
+
                     <option value="">--Select a Customer--</option>
                     @foreach ($customers as $key)
                     <option value="{{ $key->id }}">{{$key->name}}</option>
-                    @endforeach 
+                    @endforeach
                   </select>
                 </div>
               </div>
@@ -71,20 +75,20 @@
                   </select>
                 </div>
               </div>
-             
+
               <div class="col-lg-4">
                 <div class="form-group">
-                  <label for="name">Biller</label>
-                  <select name="name" id="name" class="form-control" style="width: 100%;">
+                  <label for="biller">Biller</label>
+                  <select name="biller" id="biller" class="form-control" style="width: 100%;">
                     <option value="">--Select biller Type--</option>
                     @foreach ($users as $key)
                     <option value='{{ $key->id }}'>{{$key->name}}</option>
-                    @endforeach 
-                   
+                    @endforeach
+
                   </select>
                 </div>
               </div>
-             
+
             </div>
             <div class="row">
               <div class="form-group col-md-12">
@@ -114,33 +118,8 @@
                       <th>Sub Total</th>
                       <th>Action</th>
                     </thead>
-                    <tbody>
-                      <tr class="orderData">
-                        <td>Test</td>
-                        <td>adgfga</td>
-                        <td><input type="number" class="form-control quantity" name="quantity" id="quantity"></td>
-                        <td class="rcvrow"><input type="number" class="form-control received" name="received" id="received"></td>
-                        <td class="unitcost" data-unitcost='1'>1</td>
-                        <td class='discount' data-discount='15'>15</td>
-                        <td><span class="tax">200</span></td>
-                        <td><span class="subtotal"></label></td>
-                        <td>
-                          <button type="button" class="ibtnDel btn btn-md btn-danger">Delete</button>
-                        </td>
-                      </tr>
-                      <tr class="orderData">
-                        <td>Test2</td>
-                        <td>1321</td>
-                        <td><input type="number" class="form-control quantity" name="quantity" id="quantity"></td>
-                        <td class="rcvrow"><input type="number" class="form-control received" name="received" id="received"></td>
-                        <td class="unitcost" data-unitcost='2'>2</td>
-                        <td class='discount' data-discount='10'>10</td>
-                        <td><span class="tax">1111</span></td>
-                        <td><span class="subtotal"></span></td>
-                        <td>
-                          <button type="button" class="ibtnDel btn btn-md btn-danger">Delete</button>
-                        </td>
-                      </tr>
+                    <tbody class="tableBody">
+
                     </tbody>
                     <tfoot>
                       <tr>
@@ -151,7 +130,7 @@
                         <td></td>
                         <td></td>
                         <td><label class="totaltax"></label></td>
-                        <td><label class="grandtotal"></label></td>
+                        <td><label class="grandtotal" id="grandtotal"></label></td>
                         <td></td>
                       </tr>
                     </tfoot>
@@ -160,10 +139,10 @@
               </div>
             </div>
             <div class="row">
-             
-           
-            <div class="form-group col-lg-4">
-            <div class="form-group">
+
+
+              <div class="form-group col-lg-4">
+                <div class="form-group">
                   <label for="orderTax">Order Tax <span class="required-field">*</span></label>
                   <select name="orderTax" id="orderTax" class="form-control select2" style="width: 100%;">
                     <option value="">--Select order tax--</option>
@@ -173,7 +152,7 @@
                   </select>
                 </div>
               </div>
-              
+
               <div class="form-group col-lg-4">
                 <div class="form-group">
                   <label class="orderDiscount" for="orderDiscount">Other Discount</label>
@@ -189,73 +168,73 @@
             </div>
 
             <div class="row">
-             
-           
-             <div class="form-group col-lg-4">
-                 <div class="form-group">
-                   <label class="attachFile" for="attachFile">Attach Document</label>
-                   <input type="file" id="orderDiscount" name="orderDiscount" class="form-control">
-                   
-                 </div>
-               
-               </div>
-               
-               <div class="form-group col-lg-4">
-                 <div class="form-group">
-                   <label class="orderDiscount" for="orderDiscount">Sale Status</label>
-                   <select name="warehouse" id="warehouse" class="form-control select2" style="width: 100%;">
+
+
+              <div class="form-group col-lg-4">
+                <div class="form-group">
+                  <label class="feaa" for="saleDocument">Attach Document</label>
+                  <input  type="file" id="saleDocument" name="saleDocument" class="form-control saleDocument">
+
+                </div>
+
+              </div>
+
+              <div class="form-group col-lg-4">
+                <div class="form-group">
+                  <label for="sale_status">Sale Status</label>
+                  <select name="sale_status" id="sale_status" class="form-control select2" style="width: 100%;">
                     <option value="">--Select a Payment--</option>
                     <option value="">Complate</option>
                     <option value="">Pending</option>
-                
+
                   </select>
-                 </div>
-               </div>
-               <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Payment Status *</label>
-                                            <select name="payment_status" class="form-control payment_status">
-                                                <option value="1">Pending</option>
-                                                <option value="2">Due</option>
-                                                <option value="3">Partial</option>
-                                                <option value="4">Paid</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                    </div>
-                                </div>
-                                <div id="payment">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Paid By</label>
-                                                <select name="paid_by_id" class="form-control paid_by">
-                                                    <option value="1">Cash</option>
-                                                    <option value="2">Cheque</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Received Amount *</label>
-                                                <input type="number" name="paying_amount" class="form-control" id="paying-amount" step="any" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Paying Amount *</label>
-                                                <input type="number" name="paid_amount" class="form-control" id="paid-amount" step="any"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Change</label>
-                                                <p id="change" class="ml-2">0.00</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- <div class="row mt-2">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Payment Status *</label>
+                  <select name="payment_status" class="form-control payment_status">
+                    <option value="1">Pending</option>
+                    <option value="2">Due</option>
+                    <option value="3">Partial</option>
+                    <option value="4">Paid</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div id="payment">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Paid By</label>
+              <select name="paid_by_id" class="form-control paid_by">
+                <option value="1">Cash</option>
+                <option value="2">Cheque</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Received Amount *</label>
+              <input type="number" name="receive_amount" class="form-control" id="receive_amount" step="any" />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Paying Amount *</label>
+              <input type="number" name="paid_amount" class="form-control" id="paid_amount" step="any" />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Change</label>
+              <p name="change" id="change" class="ml-2">0.00</p>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row mt-2">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <div class="card-element" class="form-control">
@@ -264,92 +243,94 @@
                                             </div>
                                         </div>
                                     </div> -->
-                                    <div class="checkVisible">
-                                    <div class="row" id="cheque">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Cheque Number *</label>
-                                                <input type="text" name="cheque_no" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label>Payment Note</label>
-                                            <textarea rows="3" class="form-control" name="payment_note"></textarea>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-               </div>
-            <div class="row">
-              <div class="form-group col-lg-6">
-                <label for="note">Sale Note</label>
-                <textarea name="note" id="note" cols="30" rows="5" class="form-control" placeholder="Note"></textarea>
-              </div>
-            
-        
-              <div class="form-group col-lg-6">
-                <label for="note">Staff Note</label>
-                <textarea name="note" id="note" cols="30" rows="5" class="form-control" placeholder="Note"></textarea>
+        <div class="checkVisible">
+          <div class="row" id="cheque">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Cheque Number *</label>
+                <input type="text" name="cheque_no" id="cheque_no" class="form-control">
               </div>
             </div>
-
-            <div class="row ">
-              <div class="form-group col-md-12 text-right">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label for="payment_note">Payment Note</label>
+              <textarea rows="3" class="form-control" name="payment_note" id="payment_note"></textarea>
             </div>
-          </form>
-          <div class="table">
-            <table id="totalTable" class="table table-bordered table-striped">
-              <thead>
-                <th>Items <span class="totalItems"></span>&nbsp(<span class="noRows">0</span>) </th>
-                <th>Total <span class="grandtotal text-right">0.00</span></th>
-                <th>Order Tax <span class="totalorderTax">0.00</span></th>
-                <th>Order Discount <span class="showOrderDiscount">0.00</span></th>
-                <th>Shipping Cost <span class="shippingCost">0.00</span></th>
-                <th>Grand Total <span class="grossTotal">0.00</span></th>
-              </thead>
-            </table>
           </div>
         </div>
       </div>
     </div>
-  </section>
-</div>
+    <div class="row">
+      <div class="form-group col-lg-6">
+        <label for="sale_note">Sale Note</label>
+        <textarea name="sale_note" id="sale_note" cols="30" rows="5" class="form-control" placeholder="Note"></textarea>
+      </div>
 
+
+      <div class="form-group col-lg-6">
+        <label for="stuff_note">Staff Note</label>
+        <textarea name="stuff_note" id="stuff_note" cols="30" rows="5" class="form-control" placeholder="Note"></textarea>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="form-group col-md-12 text-right">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+    </form>
+    <div class="table">
+      <table id="totalTable" class="table table-bordered table-striped">
+        <thead>
+          <th>Items <span class="totalItems"></span>&nbsp(<span class="noRows">0</span>) </th>
+          <th>Total <span class="grandtotal text-right">0.00</span></th>
+          <th>Order Tax <span class="totalorderTax">0.00</span></th>
+          <th>Order Discount <span class="showOrderDiscount">0.00</span></th>
+          <th>Shipping Cost <span class="shippingCost">0.00</span></th>
+          <th>Grand Total <span class="grossTotal">0.00</span></th>
+        </thead>
+      </table>
+    </div>
+</div>
+</div>
+</div>
+</section>
+</div>
+@endsection
+
+@push('scripts')
 <script>
   $(document).ready(function() {
-  //New 
+
+
     $('.checkVisible').hide()
     $('#payment').hide()
 
-    $('.paid_by').on('change',function(){
-      if($(this).val()==2){
+    $('.paid_by').on('change', function() {
+      if ($(this).val() == 2) {
         $('.checkVisible').show()
-      }else{
+      } else {
         $('textarea[name="payment_note"]').val('')
         $('input[name="cheque_no"]').val('')
         $('.checkVisible').hide()
       }
 
-   })
-    $('.payment_status').on('change',function(){
+    })
+    $('.payment_status').on('change', function() {
 
-      if($(this).val()==3){
+      if ($(this).val() == 3) {
         $('#payment').show()
-      }else{
+      } else {
         $('input[name="paid_amount"]').val('')
         $('input[name="paying_amount"]').val('')
         $('#payment').hide()
       }
     })
-//
-
 
     $('#product_code').keyup(function() {
       var product_code = $(this).val();
+      var warehouse = $('select[name=warehouse]').val();
       if (product_code != '') {
         var _token = $('input[name="_token"]').val();
         $.ajax({
@@ -357,6 +338,7 @@
           method: "get",
           data: {
             product_code: product_code,
+            warehouse_id: warehouse,
             _token: _token
           },
           success: function(data) {
@@ -366,11 +348,48 @@
         });
       }
     });
-    $('#orderTable').on('click', '.ibtnDel', function() {
 
+    $(document).on('click', 'li', function() {
+      var productId = $(this).attr('data-product')
+      $('#product_code').val('');
+      $('#productList').fadeOut();
+
+
+      if (productId != '') {
+        var _token = $('input[name="_token"]').val();
+        if ($('.tableBody').find('.dataRow' + productId).length < 1) {
+          $.ajax({
+            url: "{{ route('order.product') }}",
+            method: "get",
+            data: {
+              product_id: productId,
+              _token: _token
+            },
+            success: function(data) {
+              $('.tableBody').append(data).fadeIn()
+
+              if ($('#purchaseStatus').val() == 2) {
+                $('#orderTable').find('.rcvrow').removeClass('rcvrow').addClass('showRow');
+              } else {
+                $('#orderTable').find('.showRow').removeClass('showRow').addClass('rcvrow');
+              }
+
+            }
+          });
+        } else {
+
+          Toast.fire({
+            icon: 'warning',
+            title: "Product already added !"
+          })
+        }
+      }
+
+    });
+
+    $('#orderTable').on('click', '.ibtnDel', function() {
       $(this).closest('tr').remove();
       CalculateTotal();
-
     })
 
     $('#orderTable').on('change', '.quantity', function() {
@@ -384,7 +403,20 @@
 
       $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
       CalculateTotal();
+    })
 
+    $('#orderTable').on('change', '.received', function() {
+      var received = $(this).val()
+      var quantity = $(this).parent().parent().find('.quantity').val()
+
+      if (parseInt(quantity) <= parseInt(received)) {
+
+        Toast.fire({
+          icon: 'warning',
+          title: "Received can't be greater than  quantity!"
+        })
+        $(this).val('')
+      }
 
     })
 
@@ -396,7 +428,7 @@
       var subtotal = $('.subtotal');
       var taxTotal = $('.tax');
       var quantityTotal = $(".quantity");
-      //alert(quantityTotal)
+
 
 
       var grandTotal = 0.0;
@@ -413,287 +445,231 @@
         if ($(quantityTotal[i]).val() != '') {
           totalQuantity += parseInt($(quantityTotal[i]).val());
         }
-        // if ($(quantityTotal[i]).text() != '') {
-        //   totalQuantity += parseInt($(quantityTotal[i]).text());
-        // }
-        //totalTax += parseFloat($(taxTotal[i]).text()) 
+
+
       });
-      var grandTotal=parseFloat(grandTotal).toFixed(2)
+      var grandTotal = parseFloat(grandTotal).toFixed(2)
 
       $('.totaltax').text(parseFloat(totalTax).toFixed(2));
       $('.grandtotal').text(parseFloat(grandTotal).toFixed(2));
       $('.totalItems').text(parseInt(totalQuantity));
       $('.noRows').text($('#orderTable').find('.orderData').length);
-      // alert($('select["name=orderTax"]').attr('data-vat'));
-      //$('.showOrderDiscount').text($('.forOrderDiscount').find("input[name='orderDiscount'])"));
-      var orderTax=$('#orderTax option:selected').attr('data-vat');
-      // alert(orderTax)
-      if(orderTax != undefined && orderTax !=''){
-        orderTax = parseFloat(grandTotal).toFixed(2)*(parseFloat(orderTax)/100)
+
+      var orderTax = $('#orderTax option:selected').attr('data-vat');
+
+      if (orderTax != undefined && orderTax != '') {
+        orderTax = parseFloat(grandTotal).toFixed(2) * (parseFloat(orderTax) / 100)
         //alert(orderTax)
         $('.totalorderTax').text(parseFloat(orderTax).toFixed(2))
-      }else{
-        orderTax=0.0
+      } else {
+        orderTax = 0.0
         $('.totalorderTax').text(orderTax)
       }
       var orderDiscount = $("input[name='orderDiscount']").val()
       var shippingCost = $("input[name='shippingCost']").val()
-      if(orderDiscount!=''){
+      if (orderDiscount != '') {
         $('.showOrderDiscount').text(orderDiscount)
-      }else{
-        orderDiscount=0.0
+      } else {
+        orderDiscount = 0.0
         $('.showOrderDiscount').text(orderDiscount)
       }
-      if(shippingCost!=''){  
+      if (shippingCost != '') {
         $('.shippingCost').text(parseFloat(shippingCost).toFixed(2))
-      }else{
-        shippingCost=0.0
+      } else {
+        shippingCost = 0.0
         $('.shippingCost').text(shippingCost)
       }
-  
-       grossTotal=(parseFloat(grandTotal)+parseFloat(shippingCost)+parseFloat(orderTax))-parseFloat(orderDiscount)
-       $('.grossTotal').text(grossTotal)
+
+      grossTotal = (parseFloat(grandTotal) + parseFloat(shippingCost) + parseFloat(orderTax)) - parseFloat(orderDiscount)
+      $('.grossTotal').text(grossTotal)
       // grossTotal
 
     }
 
     $('#AddPurchase').on('change', '#purchaseStatus', function() {
       var status = $(this).val()
-      //  alert(status)
+      //alert(status)
       if (status == 2) {
-        $('.rcvrow').show()
+        $('#orderTable').find('.received').val('')
+        $('#orderTable').find('.rcvrow').removeClass('rcvrow').addClass('showRow');
         $('.ftrcvrow').show()
         $('.rcvcolumn').show()
       } else {
-        $('.rcvrow').hide()
+        $('#orderTable').find('.showRow').removeClass('showRow').addClass('rcvrow');
         $('.ftrcvrow').hide()
         $('.rcvcolumn').hide()
-        $('input[name="received"]').val('');
+        $('#orderTable').find('.received').val('')
       }
 
 
 
     });
-    $('#orderTax').on('change',function(){
-        
+    $('#orderTax').on('change', function() {
+
       CalculateTotal();
 
     })
-    $('#orderDiscount').on('change',function(){
+    $('#orderDiscount').on('change', function() {
       CalculateTotal();
 
     })
-    $('#shippingCost').on('change',function(){
+    $('#shippingCost').on('change', function() {
       CalculateTotal();
     })
-    $(document).on('click', 'li', function() {
-      $('#product_code').val($(this).text());
-      $('#productList').fadeOut();
-    });
-  
-    $('.rcvrow').hide()
+
+
+
+    $('.rcvcolumn').hide()
+    $('.tableBody').find('.rcvrow').hide()
     $('.ftrcvrow').hide()
 
-  
+
+
+
+
+    $.validator.setDefaults({
+      submitHandler: function() {
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('input[name="_token"]').val()
+          }
+        });
+        var list = $('.tableBody').find('.orderData').length
+        if (list > 0) {
+          var reference_no = $("input[name='reference_no']").val()
+          var customer_id = $("select[name='customer']").val()
+          var warehouse = $('select[name="warehouse"]').val()
+          var biller = $('select[name="biller"]').val()
+          var orderTax = $('select[name="orderTax"]').val()
+          var orderDiscount = $('input[name="orderDiscount"]').val()
+          var shippingCost = $('input[name="shippingCost"]').val()
+          var document = $('.saleDocument').prop('files')[0];
+          var sale_status = $('select[name="sale_status"]').val()
+          var payment_status = $('select[name="payment_status"]').val()
+          var paid_by_id = $('select[name="paid_by_id"]').val()
+          var receive_amount = $('input[name="receive_amount"]').val()
+          var paid_amount = $('input[name="paid_amount"]').val()
+          var cheque_no = $('input[name="cheque_no"]').val()
+          var payment_note = $('textarea#payment_note').val();
+          var sale_note = $('textarea#sale_note').val();
+          var stuff_note = $('textarea#stuff_note').val();
+
+          var items = $('.totalItems').text()
+          var total = $('#grandtotal').text()
+          var totalOrderTax = $('.totalorderTax').text()
+          var grandTotal = $('.grossTotal').text()
+
+
+          products = []
+          $(".tableBody").find('.orderData').each(function() {
+            let quantity = $(this).find('.quantity').val()
+            let subtotal = $(this).find('.subtotal').text()
+            let product_id = $(this).attr('data-id')
+            product_data = {
+              "quantity": quantity,
+              "subtotal": subtotal,
+              "product_id": product_id,
+            }
+            products.push(product_data)
+
+
+          });
+
+          console.log(products)
+
+          var form = $('AddPurchase')[0]; // You need to use standard javascript object here
+          var formData = new FormData(form);
+          formData.append('reference_no', reference_no);
+          formData.append('customer_id', customer_id);
+          formData.append('warehouse', warehouse);
+          formData.append('biller', biller);
+          formData.append('orderTax', orderTax);
+          formData.append('orderDiscount', orderDiscount);
+          formData.append('shippingCost', shippingCost);
+          formData.append('document', document);
+          formData.append('sale_status', sale_status);
+          formData.append('payment_status', payment_status);
+          formData.append('paid_by_id', paid_by_id);
+          formData.append('receive_amount', receive_amount);
+          formData.append('paid_amount', paid_amount);
+          formData.append('cheque_no', cheque_no);
+          formData.append('payment_note', payment_note);
+          formData.append('sale_note', sale_note);
+          formData.append('stuff_note', stuff_note);
+          formData.append('items', items);
+          formData.append('total', total);
+          formData.append('totalOrderTax', totalOrderTax);
+          formData.append('grandTotal', grandTotal);
+
+          formData.append('products', JSON.stringify(products));
+
+          $.ajax({
+            url: "{{route('sale.store')}}",
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(resp) {
+              console.log(resp)
+              if (resp.success) {
+
+                Toast.fire({
+                  icon: 'success',
+                  title: resp.message
+                })
+
+                window.location.replace('/sale/list');
+              } else {
+                Toast.fire({
+                  icon: 'danger',
+                  title: resp.message
+                })
+              }
+
+            }
+          })
+        } else {
+          Toast.fire({
+            icon: 'warning',
+            title: "Please select product"
+          })
+        }
+      }
+    })
+
+    $('#AddPurchase').validate({
+      rules: {
+        warehouse: {
+          required: true,
+        },
+      },
+      messages: {
+        warehouse: {
+          required: "Please select a warehouse",
+        },
+      },
+      errorElement: 'span',
+      onfocusout: false,
+      errorPlacement: function(error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function(element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function(element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      },
+      invalidHandler: function(form, validator) {
+        var errors = validator.numberOfInvalids();
+        if (errors) {
+          validator.errorList[0].element.focus();
+        }
+      }
+    })
+
+
 
   });
 </script>
-
-
-@endsection
-
-<!-- @push('scripts')
-<script src="{{ asset('assets/plugins/summernote/summernote-bs4.min.js')}}"></script>
-<script type="text/javascript">
-  $(document).ready(function(){
-
-	// alert("dwe")
-	$('.input-images').imageUploader({
-	  imagesInputName: 'images',
-	  preloadedInputName: 'preloaded',
-	  //acceptedFiles: null,
-	  label: 'Drag & Drop files here or click to browse',
-	  //extensions: ['.png'],
-	  //mimes: ['image/jpeg','image/png','image/gif','image/svg+xml'],
-	});
-
-	$('#summernote').summernote({
-	  height: 200,
-	  });
-
-	$('.select2').select2({theme: 'bootstrap4'});
-
-	$.validator.setDefaults({
-	submitHandler: function () {
-	  $.ajaxSetup({
-		headers: {
-		  'X-CSRF-TOKEN': $('input[name="_token"]').val()
-		}
-	  });
-
-	  var  productType =$('select[name="productType"]').val()
-	  var  productName =$('input[name="productName"]').val()
-	  var  productCode =$('input[name="productCode"]').val()
-	  var  barcodeSymbology =$('select[name="barcodeSymbology"]').val()
-	  var  brand =$('select[name="brand"]').val()
-	  var  category =$('select[name="category"]').val()
-	  var  productUnit =$('select[name="productUnit"]').val()
-	  var  saleUnit =$('select[name="saleUnit"]').val()
-	  var  purchaseUnit =$('select[name="purchaseUnit"]').val()
-	  var  purchaseUnit =$('select[name="purchaseUnit"]').val()
-	  var  productCost =$('input[name="productCost"]').val()
-	  var  productPrice =$('input[name="productPrice"]').val()
-	  var  alertQuantity =$('input[name="alertQuantity"]').val()
-	  var  productTax =$('input[name="productTax"]').val()
-	  var  taxMethod =$('select[name="taxMethod"]').val()
-	  var  warehouse =$('select[name="warehouse"]').val()
-	  var  images =$('input[name="images"]').val()
-	  var  summernote =$('#summernote').summernote('code');
-	  var file_data = $('input[type="file"]').prop('files')[0];
-	 // alert(productCost)
-
-
-	  console.log(file_data)
-	  var form = $('AddProduct')[0];// You need to use standard javascript object here
-	  var formData = new FormData(form);
-	  formData.append('product_type', productType);
-	  formData.append('product_name', productName);
-	  formData.append('product_code', productCode);
-	  formData.append('barcode_symbology', barcodeSymbology);
-	  formData.append('brand', brand);
-	  formData.append('category', category);
-	  formData.append('sale_unit', saleUnit);
-	  formData.append('purchase_unit', purchaseUnit);
-	  formData.append('product_cost', productCost);
-	  formData.append('product_price', productPrice);
-	  formData.append('alert_quantity', alertQuantity);
-	  formData.append('product_tax', productTax);
-	  formData.append('tax_method', taxMethod);
-	  formData.append('warehouse', warehouse);
-	  formData.append('product_unit', productUnit);
-	  formData.append('product_image', file_data);
-	  formData.append('product_details', summernote);
-
-
-
-	  //var myDropzone = Dropzone.forElement(".input-images");
-	  //myDropzone.removeAllFiles();
-	  $.ajax({
-				url :'http://127.0.0.1:8000/store/product',
-				type : 'POST',
-				data : formData,
-				contentType : false,
-				processData : false,
-				success: function(resp) {
-				   console.log(resp)
-				  if(resp.success){
-					Toast.fire({
-					  icon: 'success',
-					  title: resp.message
-					})
-					$('#AddProduct')[0].reset();
-					 $('.select2').val(null).trigger('change');
-					 $('#summernote').summernote('reset');
-					   $('#AddProduct').find('.uploaded').remove()
-					   $('#AddProduct').find('.image-uploader').append('<div class="uploaded"></div>');
-				   } else {
-					Toast.fire({
-					  icon: 'danger',
-					  title: resp.message
-					})
-				   }
-
-				}
-			});
-	  // alert( "Form successful submitted!" );
-	}
-  });
-  $('#AddProduct').validate({
-	rules: {
-	  productType: {
-		required: true,
-	  },
-	  productName: {
-		required: true,
-	  },
-	  productCode: {
-		required: true,
-	  },
-	  barcodeSymbology: {
-		required: true,
-	  },
-	  brand: {
-		required: true,
-	  },
-	  category: {
-		required: true,
-	  },
-	  productUnit: {
-		required: true,
-	  },
-	  productCost: {
-		required: true,
-		min: 1,
-	  },
-	  productPrice: {
-		required: true,
-		min: 1,
-	  },
-	  warehouse: {
-		required: true,
-	  },
-	},
-	messages: {
-	  productType: {
-		required: "Please select Product Type",
-	  },
-	  productName: {
-		required: "Please enter Product Name",
-	  },
-	  productCode: {
-		required: "Please enter Product Code",
-	  },
-	  barcodeSymbology: {
-		required: "Please select Barcode Symbology",
-	  },
-	  brand: {
-		required: "Please select a Brand",
-	  },
-	  category: {
-		required: "Please select Category",
-	  },
-	  productUnit: {
-		required: "Please select Product Unit",
-	  },
-	  productCost: {
-		required: "Please enter Product Cost",
-		min: "Product cost must be greater than 0",
-	  },
-	  productPrice: {
-		required: "Please enter Product Price",
-		min: "Product price must be greater than 0",
-	  },
-	  warehouse: {
-		required: "Please select a warehouse"
-	  }
-	},
-	errorElement: 'span',
-	errorPlacement: function (error, element) {
-	  error.addClass('invalid-feedback');
-	  element.closest('.form-group').append(error);
-	},
-	highlight: function (element, errorClass, validClass) {
-	  $(element).addClass('is-invalid');
-	},
-	unhighlight: function (element, errorClass, validClass) {
-	  $(element).removeClass('is-invalid');
-	}
-  });
-
-
-  })
-</script>
-@endpush -->
-
-
-@endsection
+@endpush
