@@ -27,7 +27,8 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        return view('purchase::index');
+        $purchaselists = PurchaseProductInvoiceDetails::orderBy('id','DESC')->get();
+        return view('purchase::index', compact('purchaselists'));
     }
 
     /**

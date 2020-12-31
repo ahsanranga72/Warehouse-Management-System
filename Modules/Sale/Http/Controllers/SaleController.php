@@ -12,6 +12,8 @@ use Modules\Customer\Entities\Customer;
 use Modules\ParchaseStatus\Entities\PurchaseStatus;
 use Modules\OrderTax\Entities\OrderTax;
 use Modules\User\Entities\User;
+use Modules\Sale\Entities\SaleProductDetails;
+use Modules\Sale\Entities\SaleProductInvoiceDetail;
 
 class SaleController extends Controller
 {
@@ -45,7 +47,52 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $sale = new SaleProductInvoiceDetail;
+        $sale->referent_no = $request->referent_no;
+        $sale->warehouse_id = $request->warehouse;
+        $sale->customer_id = $request->customer;
+        $sale->user_id = $request->user;
+        $sale->order_tax_id = $request->order_tax_id;
+        $sale->order_discount = $request->order_discount;
+        $sale->order_shipping_cost = $request->order_shipping_cost;
+        $sale->sale_document = $request->sale_document;
+        $sale->sale_status_id = $request->sale_status_id;
+        $sale->payment_status_id = $request->payment_status_id;
+        $sale->paid_by_id = $request->paid_by_id;
+        $sale->paying_amount = $request->paying_amount;
+        $sale->charge = $request->charge;
+        $sale->payment_note = $request->payment_note;
+        $sale->sale_note = $request->sale_note;
+        $sale->staff_note = $request->staff_note;
+        $sale->items = $request->items;
+        $sale->total = $request->total;
+        $sale->order_tax = $request->totalOrderTax;
+        $sale->grand_total = $request->grand_total;
+
+        
+      
+       
+        //$sale->status = $request->status;
+        // $sale->save();
+        //     $sale_id=$sale->id;
+        if ($request->hasfile('document')) {
+            $file = $request->file('document');
+            $extention = $file->getClientOriginalExtension();
+            $filename = date('mdYHis') . uniqid() . '.' . $extention;
+            $file->move('upload/sale_documents/', $filename);
+            $sale->sale_document = $filename;
+        } else {
+            //return $request;
+            $sale->sale_document = "";
+        }
+     
+        $save = $sale->save();
+        // print_r( $save);die();
+        if ($save) {
+            return Response::json(array('success' => 'true', 'message' => 'Product has been added succesefully.'));
+        } else {
+            return Response::json(array('success' => 'false', 'message' => 'Product has not been added succesefully.'));
+        }
     }
 
     /**
