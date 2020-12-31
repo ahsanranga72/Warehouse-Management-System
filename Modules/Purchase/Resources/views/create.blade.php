@@ -227,6 +227,8 @@
           var productId = $(this).attr('data-product')
           $('#product_code').val('');
           $('#productList').fadeOut();
+          // alert($('#purchaseStatus').val())
+         
           if (productId != '') {
             var _token = $('input[name="_token"]').val();
           if($('.tableBody').find('.dataRow'+productId).length<1){
@@ -239,6 +241,13 @@
                   },
                   success: function(data) {
                     $('.tableBody').append(data).fadeIn()
+
+                    if($('#purchaseStatus').val()==2){
+                        $('#orderTable').find('.rcvrow').removeClass('rcvrow').addClass('showRow');
+                    }else{
+                      $('#orderTable').find('.showRow').removeClass('showRow').addClass('rcvrow');
+                    }
+
                   }
                 });
           }else{
@@ -269,6 +278,21 @@
       $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
       CalculateTotal();
 
+
+    })
+
+    $('#orderTable').on('change', '.received', function() {
+        var received=$(this).val()
+        var quantity =$(this).parent().parent().find('.quantity').val()
+
+        if(parseInt(quantity)<parseInt(received)){
+
+          Toast.fire({
+					  icon: 'warning',
+					  title: "Received is not greater than  quantity!"
+					})
+           $(this).val('')
+        }
 
     })
 
@@ -461,7 +485,7 @@
 				success: function(resp) {
 				   console.log(resp)
 				  if(resp.success){
-            
+
               Toast.fire({
                 icon: 'success',
                 title: resp.message
