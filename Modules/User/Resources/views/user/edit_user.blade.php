@@ -46,7 +46,7 @@
                   </div>
                     <div class="form-group col-md-6">
                     <label for="user_name">User Name</label>
-                    <input type="text" name="user_name" value="{{$user->user_name}}" class="form-control" id="user_name" placeholder="Enter User Name">
+                    <input type="text" name="user_name" value="{{$user->name}}" class="form-control" id="user_name" placeholder="Enter User Name">
                   </div>
                   <div class="form-group col-md-6">
                     <label for="company_name">Company Name</label>
