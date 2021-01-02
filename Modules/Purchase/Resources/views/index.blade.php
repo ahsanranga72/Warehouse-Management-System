@@ -4,7 +4,7 @@
     
 <div class="card">
               <div class="card-header">
-              <h3> Purchase list
+              <h3> Purchase List
               <a class="btn btn-success float-right btn-sm" href="{{route('purchase.add')}}"><i class="fa fa-plus-circle">
               </i>Add Purchase</a>
                 </h3>
@@ -21,13 +21,11 @@
                   <tr>
                   <th>SL</th>
                     <th>Date</th>
-                    <th>Reference</th>
+         
                     <th>Supplier</th>
                     <th>Purchase Status</th>
                     <th>Grand Total</th>
-                    <th>paid</th>
-                    <th>Due</th>
-                    <th>Payment Status</th>
+                    
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -35,14 +33,11 @@
                   @foreach($purchaselists as $key => $purchaselist)
                   <tr>
                   <td>{{$key+1}}</td>
-                    <td>{{$purchaselist->created_at}}</td>
-                    <td></td>
-                    <td>{{$purchaselist->supplier_id}}</td>
-                    <td>{{$purchaselist->purchase_status_id}}</td>
+                    <td><?php  echo date('d-m-Y h:i A',strtotime($purchaselist->created_at)) ?></td>
+                 
+                    <td>{{$purchaselist['suplier']['name']}}</td>
+                    <td>{{$purchaselist['purchasestatus']['name']}}</td>
                     <td>{{$purchaselist->grand_total}}</td>
-                    <td></td>
-                    <td></td>
-                    <td>{{$purchaselist->status}}</td>
                     <td>
                     <a href="{{ route('customer.edit',$purchaselist->id)}}" class="btn btn-sm btn-primary" title="edit"><i class="fa fa-edit"></i></a>
                   	<a href="{{ route('product.delete',$purchaselist->id)}}" id="delete" class="btn btn-sm btn-danger" title="delete"><i class="fa fa-trash"></i></a>

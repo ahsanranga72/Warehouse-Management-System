@@ -34,12 +34,12 @@ class CustomerController extends Controller
     }
 
     public function CustomerEdit ($id){
-        $customer = Customer::where('id', $id)->first();
+        $customer = Customer::find($id);
         return view('customer::customer.customer_edit', compact('customer'));
     }
 
-    public function CustomerUpdate(Request $request){
-        $customer = Customer::find($request->id);
+    public function CustomerUpdate(Request $request, $id){
+        $customer = Customer::find($id);
         $customer->customer_group = $request->customer_group;
         $customer->name = $request->name;
         $customer->company_name = $request->company_name;

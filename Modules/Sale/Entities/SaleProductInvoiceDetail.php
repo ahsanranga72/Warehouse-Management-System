@@ -15,4 +15,16 @@ class SaleProductInvoiceDetail extends Model
     {
         return \Modules\Sale\Database\factories\SaleProductInvoiceDetailFactory::new();
     }
+
+    public function user(){
+        return $this->belongsTo('Modules\User\Entities\User', 'user_id', 'id' );
+    }
+
+    public function customer(){
+        return $this->belongsTo('Modules\Customer\Entities\Customer', 'customer_id', 'id' );
+    }
+
+    public function paymentstats(){
+        return $this->belongsTo('Modules\Customer\Entities\Customer', 'customer_id', 'id' );
+    }
 }

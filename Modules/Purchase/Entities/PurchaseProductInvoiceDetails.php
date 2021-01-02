@@ -15,4 +15,13 @@ class PurchaseProductInvoiceDetails extends Model
     {
         return \Modules\Purchase\Database\factories\PurchaseProductInvoiceDetailsFactory::new();
     }
+
+    public function suplier(){
+        return $this->belongsTo('Modules\Supplier\Entities\Supplier', 'supplier_id', 'id' );
+    }
+
+    public function purchasestatus()
+    {
+        return $this->belongsTo('Modules\ParchaseStatus\Entities\PurchaseStatus', 'purchase_status_id' , 'id');
+    }
 }

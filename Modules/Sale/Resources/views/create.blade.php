@@ -84,7 +84,6 @@
                     @foreach ($users as $key)
                     <option value='{{ $key->id }}'>{{$key->name}}</option>
                     @endforeach
-
                   </select>
                 </div>
               </div>
@@ -184,8 +183,8 @@
                   <label for="sale_status">Sale Status</label>
                   <select name="sale_status" id="sale_status" class="form-control select2" style="width: 100%;">
                     <option value="">--Select a Payment--</option>
-                    <option value="">Complate</option>
-                    <option value="">Pending</option>
+                    <option value="1">Complate</option>
+                    <option value="2">Pending</option>
 
                   </select>
                 </div>

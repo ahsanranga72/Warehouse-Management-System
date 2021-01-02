@@ -16,6 +16,6 @@ Route::prefix('customer')->group(function() {
     Route::get('/add-customer-list','CustomerController@AddcustomerList')->name('add.customer.list');
     Route::post('/customer-store','CustomerController@CustomerStore')->name('customer.store');
     Route::get('/customer-edit/{id}','CustomerController@CustomerEdit')->name('customer.edit');
-    Route::post('/customer-update','CustomerController@CustomerUpdate')->name('customer.update');
+    Route::post('/customer-update/{id}','CustomerController@CustomerUpdate')->name('customer.update');
     Route::get('/customer-delete/{id}','CustomerController@CustomerDelete')->name('customer.delete');
 });

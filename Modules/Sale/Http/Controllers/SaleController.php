@@ -26,7 +26,7 @@ class SaleController extends Controller
      */
     public function index()
     {
-        $salelists = Sale::orderBy('id', 'DESC')->get();
+        $salelists = SaleProductInvoiceDetail::orderBy('id', 'DESC')->get();
         return view('sale::index', compact('salelists'));
     }
 
@@ -70,7 +70,7 @@ class SaleController extends Controller
         $sale = new SaleProductInvoiceDetail;
         $sale->referent_no = $request->reference_no;
         $sale->warehouse_id = $request->warehouse;
-        $sale->customer_id = $request->customer;
+        $sale->customer_id = $request->customer_id;
         $sale->user_id = $request->biller;
         $sale->order_tax_id = $request->orderTax;
         $sale->order_discount = $request->orderDiscount;
