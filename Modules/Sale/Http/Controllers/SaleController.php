@@ -79,17 +79,20 @@ class SaleController extends Controller
         $sale->payment_status_id = $request->payment_status;
         $sale->paid_by_id = $request->paid_by_id;
         if($request->receive_amount!=''){
-            $sale->receive_amount = $request->receive_amount;
+            $sale->received_amount = $request->receive_amount;
         }
-        if($request->receive_amount!=''){
+        if($request->paying_amount!=''){
             $sale->paying_amount = $request->paid_amount;
         }
          
         if($request->cheque_no!=''){
-                $sale->cheque_no = $request->cheque_no;
+                $sale->cheque_number = $request->cheque_no;
         }
         if($request->payment_note !=''){
-            $sale->sale_note = $request->payment_note;
+            $sale->payment_note = $request->payment_note;
+        }
+        if($request->sale_note != ''){
+            $sale->sale_note = $request->sale_note;
         }
         if($request->stuff_note !=''){
             $sale->staff_note = $request->stuff_note;
