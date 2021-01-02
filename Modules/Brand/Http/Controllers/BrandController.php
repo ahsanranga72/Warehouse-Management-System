@@ -77,7 +77,7 @@ class BrandController extends Controller
         $validated = $request->validate([
             'name' => 'required|unique:brands|max:50',
         ]);
-        $brand = Brand::first('id');
+        $brand = Brand::find($id);
         $brand->name = $request->name;
         $brand->save();
         return redirect()->route('brand.view')->with('message', 'Band Update Save Successfully');

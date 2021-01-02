@@ -12,8 +12,10 @@ use Modules\Customer\Entities\Customer;
 use Modules\ParchaseStatus\Entities\PurchaseStatus;
 use Modules\OrderTax\Entities\OrderTax;
 use Modules\User\Entities\User;
+use Modules\Sale\Entities\Sale;
 use Modules\Sale\Entities\SaleProductDetails;
 use Modules\Sale\Entities\SaleProductInvoiceDetail;
+
 use Response;
 
 class SaleController extends Controller
@@ -24,7 +26,8 @@ class SaleController extends Controller
      */
     public function index()
     {
-        return view('sale::index');
+        $salelists = Sale::orderBy('id', 'DESC')->get();
+        return view('sale::index', compact('salelists'));
     }
 
     /**
