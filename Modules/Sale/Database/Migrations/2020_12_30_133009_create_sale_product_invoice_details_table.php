@@ -16,6 +16,7 @@ class CreateSaleProductInvoiceDetailsTable extends Migration
         Schema::create('sale_product_invoice_details', function (Blueprint $table) {
             $table->id();
             $table->string('referent_no')->nullable();
+            $table->string('input_customer')->nullable();
             $table->integer('customer_id')->nullable();
             $table->integer('warehouse_id')->nullable();
             $table->integer('user_id')->nullable();
@@ -29,7 +30,8 @@ class CreateSaleProductInvoiceDetailsTable extends Migration
             $table->string('received_amount')->nullable();
             $table->string('paying_amount')->nullable();
             $table->string('cheque_number')->nullable();
-            $table->string('payment_note')->nullable();
+            $table->integer('bank_id')->nullable();
+            $table->string('bank_branch')->nullable();
             $table->text('sale_note')->nullable();
             $table->text('staff_note')->nullable();
             $table->integer('items')->nullable();

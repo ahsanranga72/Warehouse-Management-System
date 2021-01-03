@@ -82,7 +82,7 @@
   </nav>
   <!-- /.navbar -->
 
- @include('layouts.sidebar');
+ @include('layouts.sidebar')
 
   @yield('content')
     <!-- /.content -->

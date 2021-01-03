@@ -17,5 +17,6 @@
     "Supplier": true,
     "Sale": true,
     "ParchaseStatus": true,
-    "OrderTax": true
+    "OrderTax": true,
+    "Bank": true
 }

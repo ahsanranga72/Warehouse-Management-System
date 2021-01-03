@@ -15,6 +15,7 @@ use Modules\User\Entities\User;
 use Modules\Sale\Entities\Sale;
 use Modules\Sale\Entities\SaleProductDetails;
 use Modules\Sale\Entities\SaleProductInvoiceDetail;
+use Modules\Bank\Entities\Bank;
 
 use Response;
 
@@ -41,7 +42,8 @@ class SaleController extends Controller
         $purchasestatus = PurchaseStatus::all();
         $ordertax = OrderTax::all();
         $users = User::all();
-        return view('sale::create',compact('warehouses','customers', 'purchasestatus','ordertax', 'users'));
+        $bank = Bank::all();
+        return view('sale::create',compact('warehouses','customers', 'purchasestatus','ordertax', 'users','bank'));
     }
 
     /**
@@ -70,7 +72,8 @@ class SaleController extends Controller
         $sale = new SaleProductInvoiceDetail;
         $sale->referent_no = $request->reference_no;
         $sale->warehouse_id = $request->warehouse;
-        $sale->customer_id = $request->customer_id;
+        $sale->input_customer = $request->input_customer;
+        $sale->customer_id = $request->select_customer;
         $sale->user_id = $request->biller;
         $sale->order_tax_id = $request->orderTax;
         $sale->order_discount = $request->orderDiscount;
@@ -88,8 +91,11 @@ class SaleController extends Controller
         if($request->cheque_no!=''){
                 $sale->cheque_number = $request->cheque_no;
         }
-        if($request->payment_note !=''){
-            $sale->payment_note = $request->payment_note;
+        if($request->bank !=''){
+            $sale->bank_id = $request->bank;
+        }
+        if($request->bank_branch !=''){
+            $sale->bank_branch = $request->bank_branch;
         }
         if($request->sale_note != ''){
             $sale->sale_note = $request->sale_note;

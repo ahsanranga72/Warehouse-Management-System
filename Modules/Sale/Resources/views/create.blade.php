@@ -44,18 +44,18 @@
           <form name="AddPurchase" id="AddPurchase" action="javascript:void(0)" enctype="multipart/form-data">
             @csrf
             <div class="row">
-              <div class="form-group col-md-4">
-                <label for="reference_no">Reference No</label>
-                <input type="text" name="reference_no" class="form-control" id="reference_no" placeholder="Enter a referance name" style="width: 100%;">
+              <div class="form-group col-md-4 input_customer">
+                <label for="input_customer">Customer</label>
+                <input type="text" name="input_customer" class="form-control" id="input_customer" placeholder="Enter customer name" style="width: 100%;">
                 <font style="color: red">
                   {{($errors->has('name'))?($errors->first('name')):''}}
                 </font>
               </div>
 
-              <div class="col-lg-4">
+              <div class="col-lg-4 slct_customer">
                 <div class="form-group">
-                  <label for="customer">Customer</label>
-                  <select name="customer" id="customer" class="form-control select2" style="width: 100%;">
+                  <label for="select_customer">Customer</label>
+                  <select name="select_customer" id="select_customer" class="form-control select2 select_customer" style="width: 100%;">
 
                     <option value="">--Select a Customer--</option>
                     @foreach ($customers as $key)
@@ -67,7 +67,7 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="warehouse">Warehouse <span class="required-field">*</span></label>
-                  <select name="warehouse" id="warehouse" class="form-control select2" style="width: 100%;">
+                  <select name="warehouse" id="warehouse" class="form-control" style="width: 100%;">
                     <option value="">--Select a warehouse--</option>
                     @foreach ($warehouses as $key)
                     <option value="{{ $key->id }}">{{ $key->name }}</option>
@@ -172,7 +172,7 @@
               <div class="form-group col-lg-4">
                 <div class="form-group">
                   <label class="feaa" for="saleDocument">Attach Document</label>
-                  <input  type="file" id="saleDocument" name="saleDocument" class="form-control saleDocument">
+                  <input type="file" id="saleDocument" name="saleDocument" class="form-control saleDocument">
 
                 </div>
 
@@ -233,15 +233,6 @@
             </div>
           </div>
         </div>
-        <!-- <div class="row mt-2">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <div class="card-element" class="form-control">
-                                                </div>
-                                                <div class="card-errors" role="alert"></div>
-                                            </div>
-                                        </div>
-                                    </div> -->
         <div class="checkVisible">
           <div class="row" id="cheque">
             <div class="col-md-12">
@@ -252,9 +243,20 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-12">
-              <label for="payment_note">Payment Note</label>
-              <textarea rows="3" class="form-control" name="payment_note" id="payment_note"></textarea>
+            <div class="col-md-6">
+              <label for="bank">Bank</label>
+              <select name="bank" id="bank" class="form-control select2" style="width: 100%;">
+                <option value="">--Select a Payment--</option>
+                @foreach ($bank as $key)
+                <option value="{{$key->id}}">{{$key->name}}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="bank_branch">Branch</label>
+                <input type="text" name="bank_branch" id="bank_branch" class="form-control">
+              </div>
             </div>
           </div>
         </div>
@@ -301,6 +303,27 @@
 @push('scripts')
 <script>
   $(document).ready(function() {
+
+    $('.select2').select2({
+      theme: 'bootstrap4'
+    });
+
+    $('.select_customer').on('change', function() {
+      if ($(this).val() != '') {
+        $('#input_customer').val('')
+        $('.input_customer').hide()
+        
+      } 
+    })
+
+    $('#input_customer').keyup(function() {
+      if ($(this).val() != '') {
+        $('#select_customer').val('')
+        $('.slct_customer').hide()
+        
+      } 
+    });
+
 
 
     $('.checkVisible').hide()
@@ -536,7 +559,8 @@
         var list = $('.tableBody').find('.orderData').length
         if (list > 0) {
           var reference_no = $("input[name='reference_no']").val()
-          var customer_id = $("select[name='customer']").val()
+          var input_customer = $("input[name='input_customer']").val()
+          var select_customer = $("select[name='select_customer']").val()
           var warehouse = $('select[name="warehouse"]').val()
           var biller = $('select[name="biller"]').val()
           var orderTax = $('select[name="orderTax"]').val()
@@ -549,7 +573,8 @@
           var receive_amount = $('input[name="receive_amount"]').val()
           var paid_amount = $('input[name="paid_amount"]').val()
           var cheque_no = $('input[name="cheque_no"]').val()
-          var payment_note = $('textarea#payment_note').val();
+          var bank_branch = $('input[name="bank_branch"]').val()
+          var bank = $('select[name="bank"]').val()
           var sale_note = $('textarea#sale_note').val();
           var stuff_note = $('textarea#stuff_note').val();
 
@@ -579,7 +604,8 @@
           var form = $('AddPurchase')[0]; // You need to use standard javascript object here
           var formData = new FormData(form);
           formData.append('reference_no', reference_no);
-          formData.append('customer_id', customer_id);
+          formData.append('input_customer', input_customer);
+          formData.append('select_customer', select_customer);
           formData.append('warehouse', warehouse);
           formData.append('biller', biller);
           formData.append('orderTax', orderTax);
@@ -592,7 +618,8 @@
           formData.append('receive_amount', receive_amount);
           formData.append('paid_amount', paid_amount);
           formData.append('cheque_no', cheque_no);
-          formData.append('payment_note', payment_note);
+          formData.append('bank', bank);
+          formData.append('bank_branch', bank_branch);
           formData.append('sale_note', sale_note);
           formData.append('stuff_note', stuff_note);
           formData.append('items', items);
