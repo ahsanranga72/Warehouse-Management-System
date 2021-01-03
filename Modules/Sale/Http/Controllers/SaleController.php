@@ -26,7 +26,7 @@ class SaleController extends Controller
      */
     public function index()
     {
-        $salelists = SaleProductInvoiceDetail::orderBy('id', 'DESC')->get();
+        $salelists = SaleProductInvoiceDetail::orderBy('warehouse_id', 'ASC')->get();
         return view('sale::index', compact('salelists'));
     }
 

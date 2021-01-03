@@ -65,7 +65,7 @@ class ProductUintController extends Controller
     {
     
         $productunit = ProductUnit::find($id);
-        return view('productunit::edit', compact('productunit'));
+        return view('productuint::edit', compact('productunit'));
     }
 
     /**

@@ -23,6 +23,7 @@
             <th>Reference</th>
             <th>Biller</th>
             <th>Customer</th>
+            <th>Warehouse</th>
             <th>Grand Total</th>
             <th>Action</th>
           </tr>
@@ -37,6 +38,7 @@
             <td>{{$salelist['customer']['name']}}</td>
             <!-- <td>{{$salelist->sale_status}}</td>
                     <td>{{$salelist->payment_status_id}}</td> -->
+            <td>{{$salelist['wareee']['name']}}</td>
             <td>{{$salelist->grand_total}}</td>
             <td>
               <a href="{{ route('customer.edit',$salelist->id)}}" class="btn btn-sm btn-primary" title="edit"><i class="fa fa-edit"></i></a>

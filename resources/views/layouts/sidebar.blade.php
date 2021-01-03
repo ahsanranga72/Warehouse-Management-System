@@ -84,13 +84,13 @@
              <li class="nav-item">
                <a href="{{route('productunit.view')}}" class="nav-link">
                  <i class="far fa-circle nav-icon"></i>
-                 <p>ProductUnit List</p>
+                 <p>Product Unit List</p>
                </a>
              </li>
              <li class="nav-item">
                <a href="{{route('purchaseunit.view')}}" class="nav-link">
                  <i class="far fa-circle nav-icon"></i>
-                 <p>Purchase List</p>
+                 <p>Purchase Unit List</p>
                </a>
              </li>
              <li class="nav-item">

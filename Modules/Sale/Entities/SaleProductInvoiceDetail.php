@@ -27,4 +27,8 @@ class SaleProductInvoiceDetail extends Model
     public function paymentstats(){
         return $this->belongsTo('Modules\Customer\Entities\Customer', 'customer_id', 'id' );
     }
+
+    public function wareee(){
+        return $this->belongsTo('Modules\Warehouse\Entities\Warehouse', 'warehouse_id', 'id' );
+    }
 }

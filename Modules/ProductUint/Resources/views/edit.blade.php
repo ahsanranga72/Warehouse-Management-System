@@ -13,9 +13,9 @@
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-              <h3>Edit Productunit
+              <h3>Edit Product Unit
                  <a class="btn btn-success float-right btn-sm" href="{{route('productunit.view')}}">
-                 <i class="fa fa-list"></i>Productunit List</a>
+                 <i class="fa fa-list"></i>Product Unit List</a>
                 </h3>
               </div>
               </div>

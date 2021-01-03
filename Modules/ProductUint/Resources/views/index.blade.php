@@ -5,7 +5,7 @@
     
 <div class="card">
               <div class="card-header">
-              <h3>Productunit list
+              <h3>Product Unit list
               <a class="btn btn-success float-right btn-sm" href="{{route('add.productunit')}}">
               <i class="fa fa-plus-circle"></i>Add Productunit</a>
                 </h3>

@@ -21,8 +21,8 @@
                   <tr>
                   <th>SL</th>
                     <th>Date</th>
-         
                     <th>Supplier</th>
+                    <th>Warehouse</th>
                     <th>Purchase Status</th>
                     <th>Grand Total</th>
                     
@@ -34,8 +34,8 @@
                   <tr>
                   <td>{{$key+1}}</td>
                     <td><?php  echo date('d-m-Y h:i A',strtotime($purchaselist->created_at)) ?></td>
-                 
                     <td>{{$purchaselist['suplier']['name']}}</td>
+                    <td>{{$purchaselist['wareee']['name']}}</td>
                     <td>{{$purchaselist['purchasestatus']['name']}}</td>
                     <td>{{$purchaselist->grand_total}}</td>
                     <td>

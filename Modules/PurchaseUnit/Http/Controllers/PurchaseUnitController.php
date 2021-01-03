@@ -42,7 +42,7 @@ class PurchaseUnitController extends Controller
         $purchaseunit->name = $request->name;
         $purchaseunit->save();
 
-        return redirect()->route('saleunit.view')->with('message', 'Purchase Unit Save Successfully');
+        return redirect()->route('purchaseunit.view')->with('message', 'Purchase Unit Save Successfully');
     }
 
     /**
