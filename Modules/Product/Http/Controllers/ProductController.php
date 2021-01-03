@@ -104,4 +104,44 @@ class ProductController extends Controller
             }
         // }
     }
+
+    public function editproduct($id){
+        $data=ProductType::all();
+        $bar=BarcodeSymbol::all();
+        $brand=Brand::all();
+        $category=Category::all();
+        $prounit=ProductUnit::all();
+        $purunit=PurchaseUnit::all();
+        $salunit=SaleUnit::all();
+        $tax=TaxMethod::all();
+        $warehouse=Warehouse::all();
+        $productlists = Product::find($id);
+        return view('product::product-edit', compact('productlists','data','bar','brand','category','prounit','purunit','salunit','tax','warehouse'));
+
+    }
+
+    public function updateproduct(Request $request, $id){
+        $product = Product::find($id);
+        $product->product_type = $request->product_type;
+        $product->product_name = $request->product_name;
+        $product->product_code = $request->product_code;
+        $product->barcode_symbology = $request->barcode_symbology;
+        $product->brand = $request->brand;
+        $product->category = $request->category;
+        $product->product_unit = $request->product_unit;
+        $product->sale_unit = $request->sale_unit;
+        $product->purchase_unit = $request->purchase_unit;
+        $product->product_cost = $request->product_cost;
+        $product->product_price = $request->product_price;
+        $product->alert_quantity = $request->alert_quantity;
+        $product->product_tax = $request->product_tax;
+        $product->tax_method = $request->tax_method;
+        $product->warehouse_id = $request->warehouse;
+        $product->product_details = $request->product_details;
+
+       
+            $product->save();
+
+            return redirect()->route('products.list')->with('message', 'Product Updated Successfully');
+    }
 }

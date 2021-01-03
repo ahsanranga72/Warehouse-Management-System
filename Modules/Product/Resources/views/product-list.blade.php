@@ -44,7 +44,7 @@
             <td>{{$productlist->product_unit}}</td>
             <td>{{$productlist->product_price}}</td>
             <td>
-              <a href="{{ route('customer.edit',$productlist->id)}}" class="btn btn-sm btn-primary" title="edit"><i class="fa fa-edit"></i></a>
+              <a href="{{ route('products.edit',$productlist->id)}}" class="btn btn-sm btn-primary" title="edit"><i class="fa fa-edit"></i></a>
               <a href="{{ route('product.delete',$productlist->id)}}" id="delete" class="btn btn-sm btn-danger" title="delete"><i class="fa fa-trash"></i></a>
             </td>
           </tr>
