@@ -517,7 +517,7 @@
     $('#shippingCost').on('change', function() {
       CalculateTotal();
     })
-
+    
     $('#receive_amount').on('change', function() {
       var rcv = $(this).val()
       $('#paid_amount').on('change', function() {
