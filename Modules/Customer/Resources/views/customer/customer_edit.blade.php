@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add Customer</h1>
+            <h1>Edit Customer</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -27,14 +27,14 @@
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Quick Example <small>jQuery Validation</small></h3>
+                <h3 class="card-title">Edit Customer</small></h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
               
-              <form id="quickForm" method="POST" action="{{route('customer.update')}}">
+              <form id="quickForm" method="POST" action="{{route('customer.update', $customer->id)}}">
                   @csrf
-                  <input type="hidden" name="id" value={{$customer->id}} />
+                  <input type="hidden" name="id" value="{{$customer->id}}" />
                 <div class="card-body">
                     <div class="row">
                     <div class="form-group col-md-6">

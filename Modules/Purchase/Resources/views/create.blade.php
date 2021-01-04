@@ -8,7 +8,7 @@
 
   ul.dropdown-menu.select-product-list {
     padding: 10px 15px;
-    min-width: 20rem;
+    min-width: 20zrem;
   }
 
   ul.dropdown-menu.select-product-list li {

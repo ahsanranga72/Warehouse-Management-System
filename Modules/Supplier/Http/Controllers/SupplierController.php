@@ -43,7 +43,7 @@ class SupplierController extends Controller
 
     public function edit($id){
         $supplier = Supplier::find($id);
-        return view('supplier::supplier.supplier_edit', compact('customer'));
+        return view('supplier::supplier.supplier_edit', compact('supplier'));
     }
 
     public function update(Request $request , $id){
