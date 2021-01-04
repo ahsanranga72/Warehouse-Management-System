@@ -86,7 +86,7 @@ class UserController extends Controller
         $user->phone = $request->phone;
         $user->email = $request->email;
         $user->save();
-        return redirect()->route('user.list')->with('message', 'User Delete Successfully');
+        return redirect()->route('user.list')->with('message', 'User Updated Successfully');
     }
 
     /**

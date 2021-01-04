@@ -25,7 +25,11 @@ class PurchaseController extends Controller
     public function index()
     {
         $purchaselists = PurchaseProductInvoiceDetails::orderBy('warehouse_id', 'ASC')->get();
-        return view('purchase::index', compact('purchaselists'));
+        $warehouses = Warehouse::all();
+        $suppliers = Supplier::all();
+        $purchasestatus = PurchaseStatus::all();
+        $ordertax = OrderTax::all();
+        return view('purchase::index', compact('purchaselists','warehouses', 'suppliers', 'purchasestatus', 'ordertax'));
     }
 
   
@@ -163,5 +167,10 @@ class PurchaseController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function view ($id){
+        $purchase = PurchaseProductInvoiceDetails::find($id);
+        return view('purchase::view');
     }
 }

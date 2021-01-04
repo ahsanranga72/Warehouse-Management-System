@@ -27,4 +27,5 @@ class PurchaseProductInvoiceDetails extends Model
     public function wareee(){
         return $this->belongsTo('Modules\Warehouse\Entities\Warehouse', 'warehouse_id', 'id' );
     }
+
 }

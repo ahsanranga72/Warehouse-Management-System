@@ -14,6 +14,7 @@
 Route::prefix('purchase')->group(function() {
     Route::get('/list', 'PurchaseController@index')->name('purchase.view');
     Route::get('/add','PurchaseController@create')->name('purchase.add');
+    Route::get('/view/{id}','PurchaseController@view')->name('purchase.list.view');
     Route::get('/get_products', 'PurchaseController@get_product_list_by_product_code')->name('product.list');
     Route::post('/store','PurchaseController@storePurchase')->name('purchase.store');
     Route::get('/get_product_by_id','PurchaseController@get_product_by_id')->name('order.product');
