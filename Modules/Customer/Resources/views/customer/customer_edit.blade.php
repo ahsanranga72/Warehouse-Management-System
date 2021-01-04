@@ -7,15 +7,12 @@
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1>Edit Customer</h1>
-<<<<<<< HEAD
-=======
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">Customer</li>
             </ol>
->>>>>>> a86a5d37596a57a3ddb1b5ab3e38059b22da608c
           </div>
         </div>
       </div>
@@ -30,11 +27,7 @@
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-<<<<<<< HEAD
-                <h3 class="card-title">Edit Customer</h3>
-=======
                 <h3 class="card-title">Edit Customer</small></h3>
->>>>>>> a86a5d37596a57a3ddb1b5ab3e38059b22da608c
               </div>
               <!-- /.card-header -->
               <!-- form start -->
