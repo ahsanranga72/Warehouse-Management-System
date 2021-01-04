@@ -17,6 +17,6 @@ Route::get('/supplier-list',[SupplierController::class, 'SupplierList'])->name('
 Route::get('/supplier-add',[SupplierController::class, 'create'])->name('add.supplier.list');
 Route::post('/supplier-store',[SupplierController::class, 'store'])->name('supplier.store');
 Route::get('/supplier-edit/{id}',[SupplierController::class, 'edit'])->name('supplier.edit');
-Route::post('/supplier-update',[SupplierController::class, 'update'])->name('supplier.update');
+Route::post('/supplier-update/{id}',[SupplierController::class, 'update'])->name('supplier.update');
 Route::get('/supplier-delete/{id}',[SupplierController::class, 'destroy'])->name('supplier.delete');
 });

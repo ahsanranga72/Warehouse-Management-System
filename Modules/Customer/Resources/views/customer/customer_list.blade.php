@@ -42,9 +42,9 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach($customer as $customers)
+                @foreach($customer as $key => $customers)
                 <tr>
-                  <td>{{$customers->id}}</td>
+                  <td>{{$key+1}}</td>
                   <td>{{$customers->customer_group}}</td>
                   <td>{{$customers->name}}</td>
                   <td>{{$customers->company_name}}</td>

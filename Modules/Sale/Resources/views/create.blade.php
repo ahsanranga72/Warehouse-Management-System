@@ -51,12 +51,10 @@
                   {{($errors->has('name'))?($errors->first('name')):''}}
                 </font>
               </div>
-
               <div class="col-lg-4 slct_customer">
                 <div class="form-group">
                   <label for="select_customer">Customer</label>
                   <select name="select_customer" id="select_customer" class="form-control select2 select_customer" style="width: 100%;">
-
                     <option value="">--Select a Customer--</option>
                     @foreach ($customers as $key)
                     <option value="{{ $key->id }}">{{$key->name}}</option>
@@ -75,7 +73,6 @@
                   </select>
                 </div>
               </div>
-
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="biller">Biller</label>
@@ -87,7 +84,6 @@
                   </select>
                 </div>
               </div>
-
             </div>
             <div class="row">
               <div class="form-group col-md-12">
@@ -138,11 +134,9 @@
               </div>
             </div>
             <div class="row">
-
-
               <div class="form-group col-lg-4">
                 <div class="form-group">
-                  <label for="orderTax">Order Tax <span class="required-field">*</span></label>
+                  <label for="orderTax">Order Tax</label>
                   <select name="orderTax" id="orderTax" class="form-control select2" style="width: 100%;">
                     <option value="">--Select order tax--</option>
                     @foreach ($ordertax as $key)
@@ -151,7 +145,6 @@
                   </select>
                 </div>
               </div>
-
               <div class="form-group col-lg-4">
                 <div class="form-group">
                   <label class="orderDiscount" for="orderDiscount">Other Discount</label>
@@ -165,19 +158,13 @@
                 </div>
               </div>
             </div>
-
             <div class="row">
-
-
               <div class="form-group col-lg-4">
                 <div class="form-group">
                   <label class="feaa" for="saleDocument">Attach Document</label>
                   <input type="file" id="saleDocument" name="saleDocument" class="form-control saleDocument">
-
                 </div>
-
               </div>
-
               <div class="form-group col-lg-4">
                 <div class="form-group">
                   <label for="sale_status">Sale Status</label>
@@ -185,118 +172,112 @@
                     <option value="">--Select a Payment--</option>
                     <option value="1">Complate</option>
                     <option value="2">Pending</option>
-
                   </select>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
-                  <label>Payment Status *</label>
+                  <label>Payment Status <span class="required-field">*</span></label>
                   <select name="payment_status" class="form-control payment_status">
-                    <option value="1">Pending</option>
+                    <option value="">--Select payment status--</option>
+                    <option value="1">Paid</option>
                     <option value="2">Due</option>
                     <option value="3">Partial</option>
-                    <option value="4">Paid</option>
+                    <option value="4">Pending</option>
                   </select>
                 </div>
               </div>
             </div>
-        </div>
-      </div>
-      <div id="payment">
-        <div class="row">
-          <div class="col-md-3">
-            <div class="form-group">
-              <label>Paid By</label>
-              <select name="paid_by_id" class="form-control paid_by">
-                <option value="1">Cash</option>
-                <option value="2">Cheque</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label>Received Amount *</label>
-              <input type="number" name="receive_amount" class="form-control" id="receive_amount" step="any" />
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label>Paying Amount *</label>
-              <input type="number" name="paid_amount" class="form-control" id="paid_amount" step="any" />
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label>Change</label>
-              <p name="change" id="change" class="ml-2">0.00</p>
-            </div>
-          </div>
-        </div>
-        <div class="checkVisible">
-          <div class="row" id="cheque">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label>Cheque Number *</label>
-                <input type="text" name="cheque_no" id="cheque_no" class="form-control">
+            <div id="payment">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Paid By</label>
+                    <select name="paid_by_id" class="form-control paid_by">
+                      <option value="1">Cash</option>
+                      <option value="2">Cheque</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Received Amount <span class="required-field">*</span></label>
+                    <input type="number" name="receive_amount" class="form-control" id="receive_amount" step="any" />
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Paying Amount <span class="required-field">*</span></label>
+                    <input type="number" name="paid_amount" class="form-control" id="paid_amount" step="any" />
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Change</label>
+                    <p name="change" id="change" class="ml-2 change">0.00</p>
+                  </div>
+                </div>
+              </div>
+              <div class="checkVisible">
+                <div class="row" id="cheque">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Cheque Number <span class="required-field">*</span></label>
+                      <input type="text" name="cheque_no" id="cheque_no" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="bank">Bank <span class="required-field">*</span></label>
+                    <select name="bank" id="bank" class="form-control select2" style="width: 100%;">
+                      <option value="">--Select a Bank--</option>
+                      @foreach ($bank as $key)
+                      <option value="{{$key->id}}">{{$key->name}}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="bank_branch">Branch</label>
+                      <input type="text" name="bank_branch" id="bank_branch" class="form-control">
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label for="bank">Bank</label>
-              <select name="bank" id="bank" class="form-control select2" style="width: 100%;">
-                <option value="">--Select a Payment--</option>
-                @foreach ($bank as $key)
-                <option value="{{$key->id}}">{{$key->name}}</option>
-                @endforeach
-              </select>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="bank_branch">Branch</label>
-                <input type="text" name="bank_branch" id="bank_branch" class="form-control">
+            <div class="row">
+              <div class="form-group col-lg-6">
+                <label for="sale_note">Sale Note</label>
+                <textarea name="sale_note" id="sale_note" cols="30" rows="5" class="form-control" placeholder="Note"></textarea>
+              </div>
+              <div class="form-group col-lg-6">
+                <label for="stuff_note">Staff Note</label>
+                <textarea name="stuff_note" id="stuff_note" cols="30" rows="5" class="form-control" placeholder="Note"></textarea>
               </div>
             </div>
+            <div class="row ">
+              <div class="form-group col-md-12 text-right">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </form>
+          <div class="table">
+            <table id="totalTable" class="table table-bordered table-striped">
+              <thead>
+                <th>Items <span class="totalItems"></span>&nbsp(<span class="noRows">0</span>) </th>
+                <th>Total <span class="grandtotal text-right">0.00</span></th>
+                <th>Order Tax <span class="totalorderTax">0.00</span></th>
+                <th>Order Discount <span class="showOrderDiscount">0.00</span></th>
+                <th>Shipping Cost <span class="shippingCost">0.00</span></th>
+                <th>Grand Total <span class="grossTotal">0.00</span></th>
+              </thead>
+            </table>
           </div>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="form-group col-lg-6">
-        <label for="sale_note">Sale Note</label>
-        <textarea name="sale_note" id="sale_note" cols="30" rows="5" class="form-control" placeholder="Note"></textarea>
-      </div>
-
-
-      <div class="form-group col-lg-6">
-        <label for="stuff_note">Staff Note</label>
-        <textarea name="stuff_note" id="stuff_note" cols="30" rows="5" class="form-control" placeholder="Note"></textarea>
-      </div>
-    </div>
-
-    <div class="row ">
-      <div class="form-group col-md-12 text-right">
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </div>
-    </div>
-    </form>
-    <div class="table">
-      <table id="totalTable" class="table table-bordered table-striped">
-        <thead>
-          <th>Items <span class="totalItems"></span>&nbsp(<span class="noRows">0</span>) </th>
-          <th>Total <span class="grandtotal text-right">0.00</span></th>
-          <th>Order Tax <span class="totalorderTax">0.00</span></th>
-          <th>Order Discount <span class="showOrderDiscount">0.00</span></th>
-          <th>Shipping Cost <span class="shippingCost">0.00</span></th>
-          <th>Grand Total <span class="grossTotal">0.00</span></th>
-        </thead>
-      </table>
-    </div>
-</div>
-</div>
-</div>
-</section>
+  </section>
 </div>
 @endsection
 
@@ -312,19 +293,17 @@
       if ($(this).val() != '') {
         $('#input_customer').val('')
         $('.input_customer').hide()
-        
-      } 
+
+      }
     })
 
     $('#input_customer').keyup(function() {
       if ($(this).val() != '') {
         $('#select_customer').val('')
         $('.slct_customer').hide()
-        
-      } 
+
+      }
     });
-
-
 
     $('.checkVisible').hide()
     $('#payment').hide()
@@ -539,6 +518,17 @@
       CalculateTotal();
     })
 
+    $('#receive_amount').on('change', function() {
+      var rcv = $(this).val()
+      $('#paid_amount').on('change', function() {
+        var pyn = $(this).val()
+        if (rcv != '' && pyn != '') {
+          var change = rcv - pyn
+          $('.change').text(change.toFixed(2))
+        }
+      })
+    })
+
 
 
     $('.rcvcolumn').hide()
@@ -668,11 +658,43 @@
         warehouse: {
           required: true,
         },
+        payment_status: {
+          required: true,
+        },
+        bank: {
+          required: true,
+        },
+        receive_amount: {
+          required: true,
+        },
+        paid_amount: {
+          required: true,
+        },
+        cheque_no: {
+          required: true,
+        }
+
       },
       messages: {
         warehouse: {
           required: "Please select a warehouse",
         },
+        payment_status: {
+          required: "Please select a Payment Status",
+        },
+        bank: {
+          required: "Please select a Bank",
+        },
+        receive_amount: {
+          required: "Please Enter Receive Amount",
+        },
+        paid_amount: {
+          required: "Please Enter Paying Amount",
+        },
+        cheque_no: {
+          required: "Please Enter Cheque No",
+        }
+
       },
       errorElement: 'span',
       onfocusout: false,

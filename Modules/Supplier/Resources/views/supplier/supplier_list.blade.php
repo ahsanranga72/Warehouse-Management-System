@@ -19,7 +19,7 @@
         <div class="col-md-12">
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Customer List</h3>
+              <h3 class="card-title">Supplier List</h3>
             </div>
             <table id="example1" class="table table-bordered table-striped">
               <thead>
@@ -41,9 +41,9 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach($suppliers as $supplier)
+                @foreach($suppliers as $key => $supplier)
                 <tr>
-                  <td>{{$supplier->id}}</td>
+                  <td>{{$key+1}}</td>
                   <td><img src="{{(!empty($supplier->image))?url('upload/supplier_images/'.$supplier->image):url('upload/no-image.png')}}" height="130px" width="120px"></td>
                   </td>
                   <td>{{$supplier->name}}</td>

@@ -6,13 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add Supplier</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Supplier</li>
-            </ol>
+            <h1>Edit Supplier</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -27,7 +21,7 @@
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Quick Example <small>jQuery Validation</small></h3>
+                <h3 class="card-title">Edit Supplier</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -43,7 +37,7 @@
                   </div>
 
                   <div class="form-group col-md-4">
-              				<label for="image"> Image</label>
+              				<label for="image">Supplier Image</label>
               				<input type="file" name="image" class="form-control" id="image">
               			</div>
               			<div class="form-group col-md-2">

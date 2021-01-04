@@ -5,7 +5,7 @@
     
 <div class="card">
               <div class="card-header">
-              <h3>Purchese list
+              <h3>Purchese Satus List
               <a class="btn btn-success float-right btn-sm" href="{{route('add.parchasestatus')}}">
               <i class="fa fa-plus-circle"></i>Add Parchase Status</a>
                 </h3>

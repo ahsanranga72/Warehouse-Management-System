@@ -12,9 +12,9 @@
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-              <h3>Add taxmethod
+              <h3>Add Tax Method
                  <a class="btn btn-success float-right btn-sm" href="{{route('taxmethod.view')}}">
-                 <i class="fa fa-list"></i>taxmethod list</a>
+                 <i class="fa fa-list"></i>Tax Method list</a>
                 </h3>
               </div>
               <!-- /.card-header -->
@@ -25,8 +25,8 @@
                 <div class="card-body">
                     <div class="row">
                     <div class="form-group col-md-6">
-                    <label for="name">taxmethod Name</label>
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Enter name">
+                    <label for="name">Tax method name</label>
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Enter tax method name here">
                     <font style="color: red">
               		  {{($errors->has('name'))?($errors->first('name')):''}}
               		</font>

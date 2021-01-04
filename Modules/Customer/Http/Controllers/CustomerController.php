@@ -49,6 +49,7 @@ class CustomerController extends Controller
         $customer->balace = $request->balace;
         $customer->address = $request->address;
         $customer->save();
+     
         return redirect()->route('customer.list')->with('message' , 'Customer Updated Successfully');
     }
 
