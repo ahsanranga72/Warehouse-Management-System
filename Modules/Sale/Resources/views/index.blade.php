@@ -65,7 +65,7 @@
   <div class="modal-dialog order-table-custom-css" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Purchase Invoice</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Sale Invoice</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -87,9 +87,9 @@
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                      <label for="warehouse"> Supplier Name: </label>
+                      <label for="warehouse"> Customer Name: </label>
 
-                      {{$salelist['suplier']['name']}}
+                      {{$salelist['customer']['name']}}
                       </div>
                     </div>
                     <div class="col-lg-6">
