@@ -4,9 +4,9 @@
    
 <div class="card">
               <div class="card-header">
-              <h3>warehouse list
+              <h3>Warehouse list
               <a class="btn btn-success float-right btn-sm" href="{{route('add.warehouse')}}">
-              <i class="fa fa-plus-circle"></i>Add warehouse</a>
+              <i class="fa fa-plus-circle"></i>Add Warehouse</a>
                 </h3>
               </div>
               <!-- /.card-header -->

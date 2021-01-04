@@ -68,9 +68,10 @@ class SaleController extends Controller
         }
 
         if($insert){
+           
 
         $sale = new SaleProductInvoiceDetail;
-        $sale->referent_no = $request->reference_no;
+        $sale->referent_no = str_pad(1, 4, '0', STR_PAD_LEFT);
         $sale->warehouse_id = $request->warehouse;
         $sale->input_customer = $request->input_customer;
         $sale->customer_id = $request->select_customer;

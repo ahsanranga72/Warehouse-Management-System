@@ -13,9 +13,9 @@
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-              <h3>Edit warehouse
+              <h3>Edit Warehouse
                  <a class="btn btn-success float-right btn-sm" href="{{route('warehouse.view')}}">
-                 <i class="fa fa-list"></i>warehouse List</a>
+                 <i class="fa fa-list"></i>Warehouse List</a>
                 </h3>
               </div>
               </div>
@@ -27,7 +27,7 @@
                 <div class="card-body">
                     <div class="row">
                     <div class="form-group col-md-6">
-                    <label for="name">Edit warehouse </label>
+                    <label for="name">Edit Warehouse </label>
                     <input type="text" name="name" value="{{$warehouse->name}}" class="form-control" id="name" 
                     placeholder="Enter name">
                     <font style="color: red">

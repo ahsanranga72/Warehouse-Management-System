@@ -12,9 +12,9 @@
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-              <h3>Add warehouse
+              <h3>Add Warehouse
                  <a class="btn btn-success float-right btn-sm" href="{{route('warehouse.view')}}">
-                 <i class="fa fa-list"></i>warehouse list</a>
+                 <i class="fa fa-list"></i>Warehouse List</a>
                 </h3>
               </div>
               <!-- /.card-header -->
@@ -25,7 +25,7 @@
                 <div class="card-body">
                     <div class="row">
                     <div class="form-group col-md-6">
-                    <label for="name">warehouse Name</label>
+                    <label for="name">Warehouse Name</label>
                     <input type="text" name="name" class="form-control" id="name" placeholder="Enter name">
                     <font style="color: red">
               		  {{($errors->has('name'))?($errors->first('name')):''}}

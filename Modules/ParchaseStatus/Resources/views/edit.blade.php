@@ -27,8 +27,8 @@
                 <div class="card-body">
                     <div class="row">
                     <div class="form-group col-md-6">
-                    <label for="name">Edit brand</label>
-                    <input type="text" name="name" value="{{$parchasestatus->name}}" class="form-control" id="name" placeholder="Enter name">
+                    <label for="name">Edit Parchase Status</label>
+                    <input type="text" name="name" value="{{$parchasestatus->name}}" class="form-control" id="name" placeholder="Enter Purchase Status">
                     <font style="color: red">
               		  {{($errors->has('name'))?($errors->first('name')):''}}
               		</font>

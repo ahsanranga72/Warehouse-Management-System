@@ -13,9 +13,9 @@
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-              <h3>Edit taxmethod
+              <h3>Edit Tax Method
                  <a class="btn btn-success float-right btn-sm" href="{{route('taxmethod.view')}}">
-                 <i class="fa fa-list"></i>taxmethod List</a>
+                 <i class="fa fa-list"></i>Tax Method List</a>
                 </h3>
               </div>
               </div>

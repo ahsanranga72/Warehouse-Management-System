@@ -4,9 +4,9 @@
    
 <div class="card">
               <div class="card-header">
-              <h3>taxmethod list
+              <h3>Tax Method list
               <a class="btn btn-success float-right btn-sm" href="{{route('add.taxmethod')}}">
-              <i class="fa fa-plus-circle"></i>Add taxmethod</a>
+              <i class="fa fa-plus-circle"></i>Add Tax Method</a>
                 </h3>
               </div>
               <!-- /.card-header -->

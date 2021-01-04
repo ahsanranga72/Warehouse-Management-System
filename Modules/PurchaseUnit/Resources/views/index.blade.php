@@ -7,7 +7,7 @@
               <div class="card-header">
               <h3>Purchase Unit list
               <a class="btn btn-success float-right btn-sm" href="{{route('add.purchaseunit')}}">
-              <i class="fa fa-plus-circle"></i>Add purchase Unit</a>
+              <i class="fa fa-plus-circle"></i>Add Purchase Unit</a>
                 </h3>
               </div>
               <!-- /.card-header -->

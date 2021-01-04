@@ -62,7 +62,6 @@
                  <p>Product Type List</p>
                </a>
              </li>
-
              <li class="nav-item">
                <a href="{{route('barcodesymbolgy.view')}}" class="nav-link">
                  <i class="far fa-circle nav-icon"></i>
@@ -70,7 +69,7 @@
                </a>
              </li>
              <li class="nav-item">
-               <a href="{{route('add.brand')}}" class="nav-link">
+               <a href="{{route('brand.view')}}" class="nav-link">
                  <i class="far fa-circle nav-icon"></i>
                  <p>Brand List</p>
                </a>
@@ -102,31 +101,31 @@
              <li class="nav-item">
                <a href="{{route('taxmethod.view')}}" class="nav-link">
                  <i class="far fa-circle nav-icon"></i>
-                 <p>Tax Method</p>
+                 <p>Tax Method List</p>
                </a>
              </li>
              <li class="nav-item">
                <a href="{{route('warehouse.view')}}" class="nav-link">
                  <i class="far fa-circle nav-icon"></i>
-                 <p>Ware House</p>
+                 <p>Warehouse List</p>
                </a>
              </li>
              <li class="nav-item">
                <a href="{{route('parchasestatus.view')}}" class="nav-link">
                  <i class="far fa-circle nav-icon"></i>
-                 <p>Purchase Status</p>
+                 <p>Purchase Status List</p>
                </a>
              </li>
              <li class="nav-item">
                <a href="{{route('ordertax.view')}}" class="nav-link">
                  <i class="far fa-circle nav-icon"></i>
-                 <p>Order Tax</p>
+                 <p>Order Tax List</p>
                </a>
              </li>
              <li class="nav-item">
-               <a href="{{route('add.bank')}}" class="nav-link">
+               <a href="{{route('bank.view')}}" class="nav-link">
                  <i class="far fa-circle nav-icon"></i>
-                 <p>Bank</p>
+                 <p>Bank List</p>
                </a>
              </li>
            </ul>

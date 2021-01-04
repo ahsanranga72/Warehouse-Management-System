@@ -26,7 +26,7 @@
                 <div class="card-body">
                     <div class="row">
                     <div class="form-group col-md-6">
-                    <label for="name">Edit BarcodeSymbol</label>
+                    <label for="name">Edit Bank</label>
                     <input type="text" name="name" value="{{$bank->name}}" class="form-control" id="name" placeholder="Enter bank name">
                     <font style="color: red">
               		  {{($errors->has('name'))?($errors->first('name')):''}}

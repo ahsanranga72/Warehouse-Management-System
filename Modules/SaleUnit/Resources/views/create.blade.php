@@ -12,7 +12,7 @@
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-              <h3>Add SaleUnit
+              <h3>Add Sale Unit
                  <a class="btn btn-success float-right btn-sm" href="{{route('saleunit.view')}}">
                  <i class="fa fa-list"></i>Sale Unit List</a>
                 </h3>
