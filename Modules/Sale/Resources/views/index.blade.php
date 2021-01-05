@@ -81,22 +81,25 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label for="warehouse">Warehouse Name: </label>
-
+                        @foreach($salelists as $key => $salelist)
                          {{$salelist['wareee']['name']}}
+                         @endforeach
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                       <label for="warehouse"> Customer Name: </label>
-
+                      @foreach($salelists as $key => $salelist)
                       {{$salelist['customer']['name']}}
+                      @endforeach
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                       <label for="warehouse"> Supplier Name: </label>
-
+                      @foreach($salelists as $key => $salelist)
                       {{$salelist['purchasestatus']['name']}}
+                      @endforeach
                       </div>
                     </div>
                    
@@ -107,26 +110,34 @@
                     <div class="form-group col-lg-4">
                       <div class="form-group">
                         <label for="orderTax">Order Tax :  </label>
+                        @foreach($salelists as $key => $salelist)
                         {{$salelist->order_tax_id}}
+                        @endforeach
                       </div>
                     </div>
                     <div class="form-group col-lg-4">
                       <div class="form-group">
                         <label class="orderDiscount" for="orderDiscount">Discount :</label>
+                        @foreach($salelists as $key => $salelist)
                         {{$salelist->order_discount}}
+                        @endforeach
                       </div>
                     </div>
                     <div class="form-group col-lg-4">
                       <div class="form-group">
                         <label for="shippingCost">Shipping Cost</label>
+                        @foreach($salelists as $key => $salelist)
                         {{$salelist->order_shipping_cost}}
+                        @endforeach
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="form-group col-lg-12">
                       <label for="note">Note</label>
+                      @foreach($salelists as $key => $salelist)
                       {{$salelist->note}}
+                      @endforeach
                     </div>
                   </div>
                   
@@ -148,6 +159,7 @@
                           </tbody>
                           <tfoot>
                             <tr>
+                            @foreach($salelists as $key => $salelist)
                               <td>{{$salelist->product_id}}</td>
                             
                               <td><label class="totalQuantity">{{$salelist->items}}</td>
@@ -156,6 +168,7 @@
                               <td>{{$salelist->order_discount}}</td>
                               <td><label class="totaltax"></label>{{$salelist->order_tax}}</td>
                               <td><label class="grandtotal" id="grandtotal"></label>{{$salelist->grand_total}}</td>
+                              @endforeach
                             </tr>
                           </tfoot>
                         </table>
