@@ -46,7 +46,7 @@
             <div class="row">
               <div class="form-group col-md-4 input_customer">
                 <label for="input_customer">Customer</label>
-                <input type="text" name="input_customer" value="{{$sale->customer_id}}" class="form-control" id="input_customer" placeholder="Enter customer name" style="width: 100%;">
+                <input type="text" name="input_customer" value="{{$sale->input_customer}}"  class="form-control" id="input_customer" placeholder="Enter customer name" style="width: 100%;">
                 <font style="color: red">
                   {{($errors->has('name'))?($errors->first('name')):''}}
                 </font>
@@ -57,7 +57,7 @@
                   <select name="select_customer" id="select_customer" class="form-control select2 select_customer" style="width: 100%;">
                     <option value="">--Select a Customer--</option>
                     @foreach ($customers as $key)
-                    <option value="{{ $key->id }}">{{$key->name}}</option>
+                    <option value="{{ $key->id }}" selected>{{$key->name}}</option>
                     @endforeach
                   </select>
                 </div>
@@ -68,7 +68,7 @@
                   <select name="warehouse" id="warehouse" class="form-control" style="width: 100%;">
                     <option value="">--Select a warehouse--</option>
                     @foreach ($warehouses as $key)
-                    <option value="{{ $key->id }}">{{ $key->name }}</option>
+                    <option value="{{ $key->id }}" selected>{{ $key->name }}</option>
                     @endforeach
                   </select>
                 </div>
@@ -79,7 +79,7 @@
                   <select name="biller" id="biller" class="form-control" style="width: 100%;">
                     <option value="">--Select biller Type--</option>
                     @foreach ($users as $key)
-                    <option value='{{ $key->id }}'>{{$key->name}}</option>
+                    <option value='{{ $key->id }}' selected>{{$key->name}}</option>
                     @endforeach
                   </select>
                 </div>
@@ -87,8 +87,8 @@
             </div>
             <div class="row">
               <div class="form-group col-md-12">
-                <lebel for="product_code">Select Product</lebel>
-                <input type="text" name="product_code" class="form-control" placeholder="Type your product code here" id="product_code">
+                <lebel for="">Select Product</lebel>
+                <input type="text" name="" value="{{$sale->product_id}}" class="form-control" placeholder="Type your product code here" id="">
                 <div id="productList">
                 </div>
               </div>
@@ -119,14 +119,14 @@
                     <tfoot>
                       <tr>
                         <td>Total</td>
-                        <td></td>
-                        <td><label class="totalQuantity"></td>
-                        <td class="ftrcvrow"></td>
-                        <td></td>
-                        <td></td>
-                        <td><label class="totaltax"></label></td>
-                        <td><label class="grandtotal" id="grandtotal"></label></td>
-                        <td></td>
+                        <td>{{$sale->product_id}}</td>
+                        <td><label class="totalQuantity">{{$sale->quantity}}</td>
+                        <td class="ftrcvrow">{{$sale->product_id}}</td>
+                        <td>{{$sale->product_id}}</td>
+                        <td>{{$sale->product_id}}</td>
+                        <td>{{$sale->product_id}}<label class="totaltax"></label></td>
+                        <td>{{$sale->product_id}}<label class="grandtotal" id="grandtotal"></label></td>
+                        <td>{{$sale->product_id}}</td>
                       </tr>
                     </tfoot>
                   </table>
@@ -140,7 +140,7 @@
                   <select name="orderTax" id="orderTax" class="form-control select2" style="width: 100%;">
                     <option value="">--Select order tax--</option>
                     @foreach ($ordertax as $key)
-                    <option value='{{ $key->id }}' data-vat='{{$key->tax_number}}'>{{$key->name}}</option>
+                    <option value='{{ $key->id }}' selected  data-vat='{{$key->tax_number}}'>{{$key->name}}</option>
                     @endforeach
                   </select>
                 </div>
@@ -148,13 +148,14 @@
               <div class="form-group col-lg-4">
                 <div class="form-group">
                   <label class="orderDiscount" for="orderDiscount">Other Discount</label>
-                  <input type="number" id="orderDiscount" name="orderDiscount" class="form-control" placeholder="Enter Discount here">
+                  <input type="number"  id="orderDiscount" 
+                  name="orderDiscount" value="{{$sale->order_discount}}" class="form-control" placeholder="Enter Discount here">
                 </div>
               </div>
               <div class="form-group col-lg-4">
                 <div class="form-group">
                   <label for="shippingCost">Shipping Cost</label>
-                  <input type="number" id="shippingCost" name="shippingCost" class="form-control" placeholder="Shipping Cost">
+                  <input type="number" id="shippingCost" value="{{$sale->order_discount}}" name="shippingCost" class="form-control" placeholder="Shipping Cost">
                 </div>
               </div>
             </div>
@@ -169,7 +170,7 @@
                 <div class="form-group">
                   <label for="sale_status">Sale Status</label>
                   <select name="sale_status" id="sale_status" class="form-control select2" style="width: 100%;">
-                    <option value="">--Select a Payment--</option>
+                    <option value="" selected>--Select a Payment--</option>
                     <option value="1">Complate</option>
                     <option value="2">Pending</option>
                   </select>
@@ -179,7 +180,7 @@
                 <div class="form-group">
                   <label>Payment Status <span class="required-field">*</span></label>
                   <select name="payment_status" class="form-control payment_status">
-                    <option value="">--Select payment status--</option>
+                    <option value="" selected>--Select payment status--</option>
                     <option value="1">Paid</option>
                     <option value="2">Due</option>
                     <option value="3">Partial</option>
@@ -194,7 +195,7 @@
                   <div class="form-group">
                     <label>Paid By</label>
                     <select name="paid_by_id" class="form-control paid_by">
-                      <option value="1">Cash</option>
+                      <option value="1" selected>Cash</option>
                       <option value="2">Cheque</option>
                     </select>
                   </div>
@@ -233,7 +234,7 @@
                     <select name="bank" id="bank" class="form-control select2" style="width: 100%;">
                       <option value="">--Select a Bank--</option>
                       @foreach ($bank as $key)
-                      <option value="{{$key->id}}">{{$key->name}}</option>
+                      <option value="{{$key->id}}" selected>{{$key->name}}</option>
                       @endforeach
                     </select>
                   </div>

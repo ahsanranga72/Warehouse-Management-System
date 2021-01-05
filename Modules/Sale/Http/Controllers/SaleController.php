@@ -43,7 +43,8 @@ class SaleController extends Controller
         $ordertax = OrderTax::all();
         $users = User::all();
         $bank = Bank::all();
-        return view('sale::create',compact('warehouses','customers', 'purchasestatus','ordertax', 'users','bank'));
+        $products = Product::all();
+        return view('sale::create',compact('warehouses','customers', 'purchasestatus','ordertax', 'users','bank', 'products'));
     }
 
     /**
@@ -176,7 +177,8 @@ class SaleController extends Controller
         $users = User::all();
         $bank = Bank::all();
         $sale = SaleProductInvoiceDetail::find($id);
-        return view('sale::edit', compact('warehouses','customers', 'purchasestatus','ordertax', 'users','bank', 'sale'));
+        $products = Product::all();
+        return view('sale::edit', compact('warehouses','customers', 'purchasestatus','ordertax', 'users','bank', 'sale','products'));
     }
 
     /**

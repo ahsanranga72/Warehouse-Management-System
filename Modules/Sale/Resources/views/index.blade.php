@@ -168,7 +168,6 @@
                               <td>{{$salelist->order_discount}}</td>
                               <td><label class="totaltax"></label>{{$salelist->order_tax}}</td>
                               <td><label class="grandtotal" id="grandtotal"></label>{{$salelist->grand_total}}</td>
-                             
                             </tr>
                           </tfoot>
                         </table>
