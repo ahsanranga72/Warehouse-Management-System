@@ -175,7 +175,7 @@ class SaleController extends Controller
         $ordertax = OrderTax::all();
         $users = User::all();
         $bank = Bank::all();
-        $sale = Sale::find($id);
+        $sale = SaleProductInvoiceDetail::find($id);
         return view('sale::edit', compact('warehouses','customers', 'purchasestatus','ordertax', 'users','bank', 'sale'));
     }
 
