@@ -150,18 +150,6 @@ class SaleController extends Controller
             return Response::json(array('success' => false, 'message' => $name.' is out of stock'));
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     /**
@@ -181,7 +169,14 @@ class SaleController extends Controller
      */
     public function edit($id)
     {
-        return view('sale::edit');
+        $warehouses = Warehouse::orderBy('id', 'DESC')->get();
+        $customers = Customer::all();
+        $purchasestatus = PurchaseStatus::all();
+        $ordertax = OrderTax::all();
+        $users = User::all();
+        $bank = Bank::all();
+        $sale = Sale::find($id);
+        return view('sale::edit', compact('warehouses','customers', 'purchasestatus','ordertax', 'users','bank', 'sale'));
     }
 
     /**
