@@ -51,7 +51,7 @@
               			</div>
 
                   <div class="form-group col-md-6">
-                    <label for="company_name">Company Name</label>
+                    <label for="company_name">Organization Name</label>
                     <input type="text" name="company_name" value="{{$supplier->company_name}}" class="form-control" id="company_name" placeholder="Enter Company Name">
                   </div>
                   <div class="form-group col-md-6">
@@ -65,7 +65,7 @@
                   
                   
                   <div class="form-group col-md-6">
-                    <label for="phone">Phone Number</label>
+                    <label for="phone">Contact Number</label>
                     <input type="text" name="phone" value="{{$supplier->phone}}" class="form-control" id="phone" placeholder="phone">
                   </div>
                 

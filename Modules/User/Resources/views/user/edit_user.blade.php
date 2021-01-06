@@ -37,20 +37,20 @@
                     <input type="text" name="user_name" value="{{$user->name}}" class="form-control" id="user_name" placeholder="Enter User Name">
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="company_name">Company Name</label>
-                    <input type="text" name="company_name" value="{{$user->company_name}}" class="form-control" id="company_name" placeholder="Enter Company Name">
+                    <label for="company_name">Organization Name</label>
+                    <input type="text" name="company_name" value="{{$user->company_name}}" class="form-control" id="company_name" placeholder="Enter Organization Name">
                   </div>
                   <div class="form-group col-md-6">
                     <label for="usertype">Role</label>
-                    <input type="text" name="usertype" value="{{$user->usertype}}" class="form-control" id="usertype" placeholder="Role">
+                    <input type="text" name="usertype" value="{{$user->usertype}}" class="form-control" id="usertype" placeholder="Enter Role">
                   </div>
                   <div class="form-group col-md-6">
                     <label for="exampleInputPassword1">Password</label>
-                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Enter Password">
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="phone">Phone Number</label>
-                    <input type="text" name="phone" value="{{$user->phone}}" class="form-control" id="phone" placeholder="Phone Number">
+                    <label for="phone">Contact Number</label>
+                    <input type="text" name="phone" value="{{$user->phone}}" class="form-control" id="phone" placeholder="Enter Contact Number">
                   </div>
                   <div class="form-group col-md-6">
                     <label for="exampleInputEmail1">Email address</label>

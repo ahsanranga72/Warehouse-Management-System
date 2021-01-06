@@ -16,6 +16,7 @@ use Modules\Sale\Entities\Sale;
 use Modules\Sale\Entities\SaleProductDetails;
 use Modules\Sale\Entities\SaleProductInvoiceDetail;
 use Modules\Bank\Entities\Bank;
+use DB;
 
 use Response;
 
@@ -178,7 +179,13 @@ class SaleController extends Controller
         $bank = Bank::all();
         $sale = SaleProductInvoiceDetail::find($id);
         $products = Product::all();
-        return view('sale::edit', compact('warehouses','customers', 'purchasestatus','ordertax', 'users','bank', 'sale','products'));
+        $sale_products_id = DB::table('sale_product_details')
+                                ->join('sale_product_invoice_details','sale_product_invoice_details.id', 'sale_product_details.sale_product_invoice_id')
+                                ->join('products','sale_product_details.product_id','products.id')
+                                ->where('sale_product_details.sale_product_invoice_id',$id)
+                                ->get();
+
+        return view('sale::edit', compact('warehouses','customers', 'purchasestatus','ordertax', 'users','bank', 'sale','products','sale_products_id'));
     }
 
     /**
@@ -189,7 +196,7 @@ class SaleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
@@ -201,4 +208,5 @@ class SaleController extends Controller
     {
         //
     }
+
 }

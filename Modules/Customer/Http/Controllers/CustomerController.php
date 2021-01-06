@@ -24,7 +24,7 @@ class CustomerController extends Controller
         $customer->customer_group = $request->customer_group;
         $customer->name = $request->name;
         $customer->company_name = $request->company_name;
-        $customer->tax_number = $request->tax_number;
+        $customer->gender = $request->gender;
         $customer->email = $request->email;
         $customer->phone = $request->phone;
         $customer->balace = $request->balace;

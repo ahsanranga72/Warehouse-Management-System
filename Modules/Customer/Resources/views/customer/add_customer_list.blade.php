@@ -43,16 +43,29 @@
                     <input type="email" name="email" class="form-control" id="email" placeholder="Enter Customer email">
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="phone">Phone</label>
-                    <input type="text" name="phone" class="form-control" id="phone" placeholder="Enter Customer Phone Number">
+                    <label for="phone">Contact Number</label>
+                    <input type="text" name="phone" class="form-control" id="phone" placeholder="Enter Customer Contact Number">
                   </div>
                   <div class="form-group col-md-6">
                     <label for="balace">Balance</label>
                     <input type="text" name="balace" class="form-control" id="balace" placeholder="Enter Customer Balance">
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="tax_number">Tax</label>
-                    <input type="text" name="tax_number" class="form-control" id="tax_number" placeholder="Enter Customer Tax">
+                    <label for="tax_number">Gender</label>
+                    <div class="d-flex mt-2">
+                      <div class="form-check mr-3">
+                        <input class="form-check-input" type="radio"  name="gender" value="Male">
+                        <label class="form-check-label">Male</label>
+                      </div>
+                      <div class="form-check mr-3">
+                        <input class="form-check-input" type="radio" name="gender" value="Female">
+                        <label class="form-check-label">Female</label>
+                      </div>
+                      <div class="form-check mr-3">
+                        <input class="form-check-input" type="radio" name="gender" value="Other">
+                        <label class="form-check-label">Other</label>
+                      </div>
+                    </div>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="address">Address</label>

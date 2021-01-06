@@ -31,11 +31,11 @@
                 <tr>
                   <th>SL</th>
                   <th>Customer Group</th>
-                  <th>Name</th>
+                  <th>Customer Name</th>
                   <th>Company Name</th>
                   <th>Email</th>
-                  <th>Phone Number</th>
-                  <th>Tax Number</th>
+                  <th>Contact Number</th>
+                  <th>Gender</th>
                   <th>Address</th>
                   <th>Balance</th>
                   <th>Action</th>
@@ -50,7 +50,7 @@
                   <td>{{$customers->company_name}}</td>
                   <td>{{$customers->email}}</td>
                   <td>{{$customers->phone}}</td>
-                  <td>{{$customers->tax_number}}</td>
+                  <td>{{$customers->gender}}</td>
                   <td>{{$customers->address}}</td>
                   <td>{{$customers->balace}}</td>
                   <td>

@@ -40,7 +40,7 @@
                     </div>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="company_name">Company Name</label>
+                    <label for="company_name">Organization Name</label>
                     <input type="text" name="company_name" class="form-control" id="company_name" placeholder="Enter Supplier Company Name">
                   </div>
                   <div class="form-group col-md-6">
@@ -52,7 +52,7 @@
                     <input type="email" name="email" class="form-control" id="email" placeholder="Enter Supplier email">
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="phone">Phone Number</label>
+                    <label for="phone">Contact Number</label>
                     <input type="text" name="phone" class="form-control" id="phone" placeholder="Enter Supplier Phone Number">
                   </div>
                   <div class="form-group col-md-6">
