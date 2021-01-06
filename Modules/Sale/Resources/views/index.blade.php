@@ -110,17 +110,13 @@
                     <div class="form-group col-lg-4">
                       <div class="form-group">
                         <label for="orderTax">Order Tax :  </label>
-                       
                         {{$salelist->order_tax_id}}
-                        
                       </div>
                     </div>
                     <div class="form-group col-lg-4">
                       <div class="form-group">
                         <label class="orderDiscount" for="orderDiscount">Discount :</label>
-                       
                         {{$salelist->order_discount}}
-                        
                       </div>
                     </div>
                     <div class="form-group col-lg-4">

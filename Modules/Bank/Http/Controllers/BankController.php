@@ -39,7 +39,6 @@ class BankController extends Controller
         $bank = new Bank;
         $bank->name = $request->bank_name;
         $bank->save();
-
         $save = $bank->save();
         if($save){
          return Response::json(array('success' => 'true', 'message' => 'Product has been added succesefully.'));

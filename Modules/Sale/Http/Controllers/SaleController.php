@@ -16,6 +16,8 @@ use Modules\Sale\Entities\Sale;
 use Modules\Sale\Entities\SaleProductDetails;
 use Modules\Sale\Entities\SaleProductInvoiceDetail;
 use Modules\Bank\Entities\Bank;
+use PDF;
+
 
 use Response;
 
@@ -133,8 +135,6 @@ class SaleController extends Controller
             $saleProductDetails->subtotal = $mydata->subtotal;
             $saleProductDetails->sale_product_invoice_id = $sale_id;
             $saleProductDetails->save();
-
-
             $product = Product::where('id', $mydata->product_id)->first();
             $product->stock_quantity = $product->stock_quantity - $mydata->quantity;
 
@@ -200,5 +200,11 @@ class SaleController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function downloadPDF(){
+        $salelists = SaleProductInvoiceDetail::all();
+        $pdf = PDF::loadView('sale::index', compact('salelists'));
+        return $pdf->download('sale::index');
     }
 }

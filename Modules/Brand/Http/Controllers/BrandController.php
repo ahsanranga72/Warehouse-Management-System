@@ -35,14 +35,17 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|unique:brands|max:50',
-        ]);
+        
         $brand = New Brand;
         $brand->name = $request->name;
         $brand->save();
 
-        return redirect()->route('brand.view')->with('message', 'Brand Save Successfully');
+        $save = $brand->save();
+        if($save){
+         return Response::json(array('success' => 'true', 'message' => 'brand has been added succesefully.'));
+        }else{
+         return Response::json(array('success' => 'false', 'message' => 'brand has not been added succesefully.'));
+        }
     }
 
     /**

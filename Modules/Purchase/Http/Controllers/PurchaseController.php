@@ -15,7 +15,7 @@ use DB;
 use Modules\Purchase\Entities\PurchaseProductInvoiceDetails;
 use Modules\Purchase\Entities\PurchaseProductDetails;
 use Response;
-
+use PDF;
 
 class PurchaseController extends Controller
 {
@@ -171,6 +171,18 @@ class PurchaseController extends Controller
 
     public function view ($id){
         $purchase = PurchaseProductInvoiceDetails::find($id);
+        $data = [
+            'foo' => 'bar'
+        ];
+        $pdf = PDF::loadView('purchase::view', $data);
+        $pdf->SetProtection(['copy', 'print'], '', 'pass');
+        return $pdf->stream('document.pdf');
         return view('purchase::view');
     }
+
+    
+
+        function generate_pdf() {
+           
+        }
 }
