@@ -30,12 +30,12 @@
                 @endif
                 <tr>
                   <th> SL</th>
-                  <th>Image</th>
-                  <th>Name</th>
-                  <th>Company Name</th>
+                  <th>Supplier Image</th>
+                  <th>Supplier Name</th>
+                  <th>Organization Name</th>
                   <th>Vat Number</th>
                   <th>Email</th>
-                  <th>Phone Number</th>
+                  <th>Contact Number</th>
                   <th>Address</th>
                   <th>Action</th>
                 </tr>

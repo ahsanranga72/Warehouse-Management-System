@@ -39,8 +39,8 @@
                     <input type="text" name="name" class="form-control" placeholder="Enter User Name">
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="company_name">Company Name</label>
-                    <input type="text" name="company_name" class="form-control" id="company_name" placeholder="Enter Company Name">
+                    <label for="company_name">Organization Name</label>
+                    <input type="text" name="company_name" class="form-control" id="company_name" placeholder="Enter Organization Name">
                   </div>
 
                   <div class="form-group col-md-6">
@@ -52,8 +52,8 @@
                     <input type="password" name="password" class="form-control" id="password" placeholder="Enter Password">
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="phone">Phone Number</label>
-                    <input type="text" name="phone" class="form-control" id="phone" placeholder="Enter Phone Number">
+                    <label for="phone">Contact Number</label>
+                    <input type="text" name="phone" class="form-control" id="phone" placeholder="Enter Contact Number">
                   </div>
                   <div class="form-group col-md-6">
                     <label for="email">Email address</label>

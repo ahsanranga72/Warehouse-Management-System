@@ -31,4 +31,8 @@ class SaleProductInvoiceDetail extends Model
     public function wareee(){
         return $this->belongsTo('Modules\Warehouse\Entities\Warehouse', 'warehouse_id', 'id' );
     }
+
+    // public function saleproduct(){
+    //     return $this->hasMany('Modules\Sale\Entities\SaleProductDetails', 'id', 'sale_product_invoice_id' );
+    // }
 }

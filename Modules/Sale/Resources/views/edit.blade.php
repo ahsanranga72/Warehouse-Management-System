@@ -46,7 +46,7 @@
             <div class="row">
               <div class="form-group col-md-4 input_customer">
                 <label for="input_customer">Customer</label>
-                <input type="text" name="input_customer" value="{{$sale->input_customer}}"  class="form-control" id="input_customer" placeholder="Enter customer name" style="width: 100%;">
+                <input type="text" name="input_customer" class="form-control" id="input_customer" placeholder="Enter customer name" style="width: 100%;">
                 <font style="color: red">
                   {{($errors->has('name'))?($errors->first('name')):''}}
                 </font>
@@ -68,7 +68,7 @@
                   <select name="warehouse" id="warehouse" class="form-control" style="width: 100%;">
                     <option value="">--Select a warehouse--</option>
                     @foreach ($warehouses as $key)
-                    <option value="{{ $key->id }}" selected>{{ $key->name }}</option>
+                    <option value="{{ $key->id }}">{{ $key->name }}</option>
                     @endforeach
                   </select>
                 </div>
@@ -87,8 +87,8 @@
             </div>
             <div class="row">
               <div class="form-group col-md-12">
-                <lebel for="">Select Product</lebel>
-                <input type="text" name="" value="{{$sale->product_id}}" class="form-control" placeholder="Type your product code here" id="">
+                <lebel for="product_code">Select Product</lebel>
+                <input type="text" name="product_code" class="form-control" placeholder="Type your product code here" id="product_code">
                 <div id="productList">
                 </div>
               </div>
@@ -114,12 +114,27 @@
                       <th>Action</th>
                     </thead>
                     <tbody class="tableBody">
+                      @foreach($sale_products_id as $product)
+                      <tr class="orderData dataRow{{$product->id}}" data-id="{{$product->id}}">
+                        <td>{{$product->product_name}}</td>
+                        <td>{{$product->product_code}}</td>
+                        <td><input type="number" class="form-control quantity" required min="0" name="quantity{{$product->id}}" value="{{$product->quantity}}" id="quantity{{$product->id}}"></td>
+                        <td class="rcvrow"><input type="number" min="0" class="form-control received " name="received{{$product->id}}" id="received{{$product->id}}"></td>
+                        <td class="unitcost" data-unitcost='{{$product->product_cost}}'>{{$product->product_cost}}</td>
+                        <td class='discount' data-discount='0'>0</td>
+                        <td><span class="tax">{{$product->product_tax}}</span></td>
+                        <td><span class="subtotal"></label></td>
+                        <td>
+                          <button type="button" class="ibtnDel btn btn-md btn-danger">Delete</button>
+                        </td>
+                      </tr>
+                      @endforeach
 
                     </tbody>
                     <tfoot>
                       <tr>
                         <td>Total</td>
-                        <td>{{$sale->product_id}}</td>
+                        <td>{{$sale['saleproduct']['quantity']}}</td>
                         <td><label class="totalQuantity">{{$sale->quantity}}</td>
                         <td class="ftrcvrow">{{$sale->product_id}}</td>
                         <td>{{$sale->product_id}}</td>
@@ -129,6 +144,7 @@
                         <td>{{$sale->product_id}}</td>
                       </tr>
                     </tfoot>
+
                   </table>
                 </div>
               </div>
@@ -140,7 +156,7 @@
                   <select name="orderTax" id="orderTax" class="form-control select2" style="width: 100%;">
                     <option value="">--Select order tax--</option>
                     @foreach ($ordertax as $key)
-                    <option value='{{ $key->id }}' selected  data-vat='{{$key->tax_number}}'>{{$key->name}}</option>
+                    <option value='{{ $key->id }}' selected data-vat='{{$key->tax_number}}'>{{$key->name}}</option>
                     @endforeach
                   </select>
                 </div>
@@ -148,8 +164,7 @@
               <div class="form-group col-lg-4">
                 <div class="form-group">
                   <label class="orderDiscount" for="orderDiscount">Other Discount</label>
-                  <input type="number"  id="orderDiscount" 
-                  name="orderDiscount" value="{{$sale->order_discount}}" class="form-control" placeholder="Enter Discount here">
+                  <input type="number" id="orderDiscount" name="orderDiscount" value="{{$sale->order_discount}}" class="form-control" placeholder="Enter Discount here">
                 </div>
               </div>
               <div class="form-group col-lg-4">
@@ -331,8 +346,10 @@
     })
 
     $('#product_code').keyup(function() {
+      
       var product_code = $(this).val();
       var warehouse = $('select[name=warehouse]').val();
+      alert(product_code)
       if (product_code != '') {
         var _token = $('input[name="_token"]').val();
         $.ajax({
@@ -518,7 +535,7 @@
     $('#shippingCost').on('change', function() {
       CalculateTotal();
     })
-    
+
     $('#receive_amount').on('change', function() {
       var rcv = $(this).val()
       $('#paid_amount').on('change', function() {

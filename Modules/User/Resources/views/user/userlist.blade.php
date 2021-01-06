@@ -30,10 +30,10 @@
                 @endif
                 <tr>
                   <th>SL</th>
-                  <th>UserName</th>
+                  <th>Username</th>
                   <th>Email</th>
-                  <th>Company Name</th>
-                  <th>Phone Number</th>
+                  <th>Organization Name</th>
+                  <th>Contact Number</th>
                   <th>Role</th>
                   <th>Status</th>
                   <th>Action</th>

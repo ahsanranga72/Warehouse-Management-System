@@ -18,4 +18,5 @@ Route::prefix('sale')->group(function() {
     Route::get('/edit/{id}', 'SaleController@edit')->name('sale.edit');
     Route::post('/update/{id}', 'SaleController@update')->name('sale.update');
     Route::get('/delete/{id}', 'SaleController@destroy')->name('sale.delete');   
+    //Route::get('/get_sale_data_by_id','PurchaseController@get_sale_data_by_id')->name('sale.data');
 });
