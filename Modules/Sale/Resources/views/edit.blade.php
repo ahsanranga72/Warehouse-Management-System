@@ -349,7 +349,7 @@
       
       var product_code = $(this).val();
       var warehouse = $('select[name=warehouse]').val();
-      alert(product_code)
+      
       if (product_code != '') {
         var _token = $('input[name="_token"]').val();
         $.ajax({
