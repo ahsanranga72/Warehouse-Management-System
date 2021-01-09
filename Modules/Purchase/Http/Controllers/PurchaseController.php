@@ -145,7 +145,12 @@ class PurchaseController extends Controller
      */
     public function edit($id)
     {
-        return view('purchase::edit');
+        $purchaselists = PurchaseProductInvoiceDetails::find($id);
+        $warehouses = Warehouse::all();
+        $suppliers = Supplier::all();
+        $purchasestatus = PurchaseStatus::all();
+        $ordertax = OrderTax::all();
+        return view('purchase::edit', compact('purchaselists','warehouses', 'suppliers', 'purchasestatus', 'ordertax'));
     }
 
     /**
@@ -177,12 +182,8 @@ class PurchaseController extends Controller
         $pdf = PDF::loadView('purchase::view', $data);
         $pdf->SetProtection(['copy', 'print'], '', 'pass');
         return $pdf->stream('document.pdf');
-        return view('purchase::view');
+       // return view('purchase::view');
     }
 
     
-
-        function generate_pdf() {
-           
-        }
 }

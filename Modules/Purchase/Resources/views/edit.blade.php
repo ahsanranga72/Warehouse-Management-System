@@ -8,7 +8,7 @@
 
   ul.dropdown-menu.select-product-list {
     padding: 10px 15px;
-    min-width: 20rem;
+    min-width: 20zrem;
   }
 
   ul.dropdown-menu.select-product-list li {
@@ -31,7 +31,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Add Sale</h1>
+          <h1>Add Purchase</h1>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -44,44 +44,49 @@
           <form name="AddPurchase" id="AddPurchase" action="javascript:void(0)" enctype="multipart/form-data">
             @csrf
             <div class="row">
-              <div class="form-group col-md-4 input_customer">
-                <label for="input_customer">Customer</label>
-                <input type="text" name="input_customer" class="form-control" value="{{$sale->input_customer}}" id="input_customer" placeholder="Enter customer name" style="width: 100%;">
-                <font style="color: red">
-                  {{($errors->has('name'))?($errors->first('name')):''}}
-                </font>
-              </div>
-              <div class="col-lg-4 slct_customer">
-                <div class="form-group">
-                  <label for="select_customer">Customer</label>
-                  <select name="select_customer" id="select_customer" class="form-control select2 select_customer" style="width: 100%;">
-                    <option value="">--Select a Customer--</option>
-                    @foreach ($customers as $key)
-                    <option value="{{ $key->id }}" {{($sale->customer_id==$key->id)?"selected":''}}>{{$key->name}}</option>
-                    @endforeach
-                  </select>
-                </div>
-              </div>
-              <div class="col-lg-4">
+              <div class="col-lg-6">
                 <div class="form-group">
                   <label for="warehouse">Warehouse <span class="required-field">*</span></label>
-                  <select name="warehouse" id="warehouse" class="form-control" style="width: 100%;">
+                  <select name="warehouse" id="warehouse" class="form-control select2" style="width: 100%;">
                     <option value="">--Select a warehouse--</option>
                     @foreach ($warehouses as $key)
-                    <option value="{{ $key->id }}" {{($sale->warehouse_id==$key->id)?"selected":''}}>{{ $key->name }}</option>
+                    <option value="{{ $key->id }}" {{($purchaselists->warehouse_id==$key->id)?"selected":''}}>{{$key->name}}</option>
                     @endforeach
                   </select>
                 </div>
               </div>
-              <div class="col-lg-4">
+              <div class="col-lg-6">
                 <div class="form-group">
-                  <label for="biller">Biller</label>
-                  <select name="biller" id="biller" class="form-control" style="width: 100%;">
-                    <option value="">--Select biller Type--</option>
-                    @foreach ($users as $key)
-                    <option value='{{ $key->id }}' {{($sale->user_id==$key->id)?"selected":''}}>{{$key->name}}</option>
+                  <label for="supplier">Supplier</label>
+                  <select name="supplier" id="supplier" class="form-control select2" style="width: 100%;">
+                    <option value="">--Select a Supplier--</option>
+                    @foreach ($suppliers as $supplier)
+                    <option value="{{ $supplier->id }}" {{($purchaselists->supplier_id==$supplier->id)?"selected":''}}>{{$supplier->name}}</option>
                     @endforeach
                   </select>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="purchaseStatus">Purchase Status</label>
+                  <select name="purchaseStatus" id="purchaseStatus" class="form-control" style="width: 100%;">
+                    <option value="">--Select Purchase status--</option>
+                    @foreach ($purchasestatus as $key)
+                    <option value='{{ $key->id }}' {{($purchaselists->purchase_status_id==$key->id)?"selected":''}}>{{$key->name}}</option>
+                    @endforeach
+
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="attachFile">Attach File</label>
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="attachFile">
+                      <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -114,37 +119,21 @@
                       <th>Action</th>
                     </thead>
                     <tbody class="tableBody">
-                      @foreach($sale_products_id as $product)
-                      <tr class="orderData dataRow{{$product->id}}" data-id="{{$product->id}}">
-                        <td>{{$product->product_name}}</td>
-                        <td>{{$product->product_code}}</td>
-                        <td><input type="number" class="form-control quantity" required min="0" name="quantity{{$product->id}}" value="{{$product->quantity}}" id="quantity{{$product->id}}"></td>
-                        <td class="rcvrow"><input type="number" min="0" class="form-control received " name="received{{$product->id}}" id="received{{$product->id}}"></td>
-                        <td class="unitcost" data-unitcost='{{$product->product_cost}}'>{{$product->product_cost}}</td>
-                        <td class='discount' data-discount='0'>0</td>
-                        <td><span class="tax">{{$product->product_tax}}</span></td>
-                        <td><span class="subtotal"></label></td>
-                        <td>
-                          <button type="button" class="ibtnDel btn btn-md btn-danger">Delete</button>
-                        </td>
-                      </tr>
-                      @endforeach
 
                     </tbody>
                     <tfoot>
                       <tr>
                         <td>Total</td>
-                        <td>{{$sale['saleproduct']['quantity']}}</td>
-                        <td><label class="totalQuantity">{{$sale->quantity}}</td>
-                        <td class="ftrcvrow">{{$sale->product_id}}</td>
-                        <td>{{$sale->product_id}}</td>
-                        <td>{{$sale->product_id}}</td>
-                        <td>{{$sale->product_id}}<label class="totaltax"></label></td>
-                        <td>{{$sale->product_id}}<label class="grandtotal" id="grandtotal"></label></td>
-                        <td>{{$sale->product_id}}</td>
+                        <td></td>
+                        <td><label class="totalQuantity"></td>
+                        <td class="ftrcvrow"></td>
+                        <td></td>
+                        <td></td>
+                        <td><label class="totaltax"></label></td>
+                        <td><label class="grandtotal" id="grandtotal"></label></td>
+                        <td></td>
                       </tr>
                     </tfoot>
-
                   </table>
                 </div>
               </div>
@@ -152,132 +141,37 @@
             <div class="row">
               <div class="form-group col-lg-4">
                 <div class="form-group">
-                  <label for="orderTax">Order Tax</label>
+                  <label for="orderTax">Order Tax <span class="required-field">*</span></label>
                   <select name="orderTax" id="orderTax" class="form-control select2" style="width: 100%;">
                     <option value="">--Select order tax--</option>
                     @foreach ($ordertax as $key)
-                    <option value='{{ $key->id }}' selected data-vat='{{$key->tax_number}}' {{($sale->order_tax_id==$key->id)?"selected":''}}>{{$key->name}}</option>
+                    <option value='{{ $key->id }}'   data-vat='{{$key->tax_number}}' {{($purchaselists->order_tax_id==$key->id)?"selected":''}} >{{$key->name}}</option>
                     @endforeach
                   </select>
                 </div>
               </div>
               <div class="form-group col-lg-4">
                 <div class="form-group">
-                  <label class="orderDiscount" for="orderDiscount">Other Discount</label>
-                  <input type="number" id="orderDiscount" name="orderDiscount" value="{{$sale->order_discount}}" class="form-control" placeholder="Enter Discount here">
+                  <label class="orderDiscount" for="orderDiscount">Discount</label>
+                  <input type="number" id="orderDiscount" name="orderDiscount" class="form-control" placeholder="Enter Discount here">
                 </div>
               </div>
               <div class="form-group col-lg-4">
                 <div class="form-group">
                   <label for="shippingCost">Shipping Cost</label>
-                  <input type="number" id="shippingCost" value="{{$sale->order_discount}}" name="shippingCost" class="form-control" placeholder="Shipping Cost">
+                  <input type="number" id="shippingCost" name="shippingCost" class="form-control" placeholder="Shipping Cost">
                 </div>
               </div>
             </div>
             <div class="row">
-              <div class="form-group col-lg-4">
-                <div class="form-group">
-                  <label class="feaa" for="saleDocument">Attach Document</label>
-                  
-                  <input type="file" id="saleDocument" name="saleDocument" class="form-control saleDocument">
-                  <img id="showImage" src="{{(!empty($sale->sale_document))?url('upload/sale_documents/'.$sale->sale_document):url('upload/no-image.png')}}" style="width: 50px; height: 60px;border: 1px solid #000">
-
-                </div>
-              </div>
-              <div class="form-group col-lg-4">
-                <div class="form-group">
-                  <label for="sale_status">Sale Status</label>
-                  <select name="sale_status"  id="sale_status" class="form-control select2" style="width: 100%;">
-                    <option value="" >--Select a Payment--</option>
-                    <option value="1"{{($sale->sale_status_id==1)?"selected":''}} >Complate</option>
-                    <option value="2"{{($sale->sale_status_id==2)?"selected":''}} >Pending</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label>Payment Status <span class="required-field">*</span></label>
-                  <select name="payment_status"  class="form-control payment_status">
-                    <option value="" >--Select payment status--</option>
-                    <option value="1" {{($sale->payment_status_id==1)?"selected":''}}>Paid</option>
-                    <option value="2" {{($sale->payment_status_id==2)?"selected":''}}>Due</option>
-                    <option value="3" {{($sale->payment_status_id==3)?"selected":''}}>Partial</option>
-                    <option value="4" {{($sale->payment_status_id==4)?"selected":''}}>Pending</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div id="payment">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>Paid By</label>
-                    <select name="paid_by_id" class="form-control paid_by">
-                      <option value="1" selected>Cash</option>
-                      <option value="2" selected>Cheque</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>Received Amount <span class="required-field">*</span></label>
-                    <input type="number" value="{{$sale->received_amount}}" name="receive_amount" class="form-control" id="receive_amount" step="any" />
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>Paying Amount <span class="required-field">*</span></label>
-                    <input type="number" value="{{$sale->paying_amount}}" name="paid_amount" class="form-control" id="paid_amount" step="any" />
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>Change</label>
-                    <p name="change" id="change"  class="ml-2 change">0.00</p>
-                  </div>
-                </div>
-              </div>
-              <div class="checkVisible">
-                <div class="row" id="cheque">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label>Cheque Number <span class="required-field">*</span></label>
-                      <input type="text" value="{{$sale->cheque_no}}" name="cheque_no" id="cheque_no" class="form-control">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <label for="bank">Bank <span class="required-field">*</span></label>
-                    <select name="bank" id="bank" class="form-control select2" style="width: 100%;">
-                      <option value="">--Select a Bank--</option>
-                      @foreach ($bank as $key)
-                      <option value="{{$key->id}}" selected>{{$key->name}}</option>
-                      @endforeach
-                    </select>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="bank_branch">Branch</label>
-                      <input type="text" value="{{$sale->bank_branch}}" name="bank_branch" id="bank_branch" class="form-control">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-lg-6">
-                <label for="sale_note">Sale Note</label>
-                <textarea name="sale_note"  id="sale_note" cols="30" rows="5" class="form-control" placeholder="Note">{{$sale->sale_note}}</textarea>
-              </div>
-              <div class="form-group col-lg-6">
-                <label for="stuff_note">Staff Note</label>
-                <textarea name="stuff_note" id="stuff_note" value="{{$sale->staff_note}}" cols="30" rows="5" class="form-control" placeholder="Note">{{$sale->staff_note}}</textarea>
+              <div class="form-group col-lg-12">
+                <label for="note">Note</label>
+                <textarea name="note" id="note" cols="30" rows="5" class="form-control" placeholder="Note"></textarea>
               </div>
             </div>
             <div class="row ">
               <div class="form-group col-md-12 text-right">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" id="submit" class="btn btn-primary">Submit</button>
               </div>
             </div>
           </form>
@@ -298,64 +192,19 @@
     </div>
   </section>
 </div>
+
+
+
+
 @endsection
 
 @push('scripts')
 <script>
   $(document).ready(function() {
 
-    $('.select2').select2({
-      theme: 'bootstrap4'
-    });
-
-    $('.select_customer').on('change', function() {
-      if ($(this).val() != '') {
-        $('#input_customer').val('')
-        $('.input_customer').hide()
-
-      }
-    })
-
-    $('#input_customer').keyup(function() {
-      if ($(this).val() != '') {
-        $('#select_customer').val('')
-        $('.slct_customer').hide()
-
-      }
-    });
-
-    $('.checkVisible').hide()
-    $('#payment').hide()
-
-    $('.paid_by').on('change', function() {
-      if ($(this).val() == 2) {
-        $('.checkVisible').show()
-      } else {
-        $('textarea[name="payment_note"]').val('')
-        $('input[name="cheque_no"]').val('')
-        $('.checkVisible').hide()
-      }
-
-    })
-
-    $( 'payment_status' ).load(function() {
-        $('.payment_status').on('change', function() {
-          if ($(this).val() == 3) {
-            $('#payment').show()
-          } else {
-            $('input[name="paid_amount"]').val('')
-            $('input[name="paying_amount"]').val('')
-            $('#payment').hide()
-          }
-        }
-  });
-  
-
     $('#product_code').keyup(function() {
-      
       var product_code = $(this).val();
       var warehouse = $('select[name=warehouse]').val();
-      
       if (product_code != '') {
         var _token = $('input[name="_token"]').val();
         $.ajax({
@@ -542,17 +391,6 @@
       CalculateTotal();
     })
 
-    $('#receive_amount').on('change', function() {
-      var rcv = $(this).val()
-      $('#paid_amount').on('change', function() {
-        var pyn = $(this).val()
-        if (rcv != '' && pyn != '') {
-          var change = rcv - pyn
-          $('.change').text(change.toFixed(2))
-        }
-      })
-    })
-
 
 
     $('.rcvcolumn').hide()
@@ -572,26 +410,14 @@
         });
         var list = $('.tableBody').find('.orderData').length
         if (list > 0) {
-          var reference_no = $("input[name='reference_no']").val()
-          var input_customer = $("input[name='input_customer']").val()
-          var select_customer = $("select[name='select_customer']").val()
           var warehouse = $('select[name="warehouse"]').val()
-          var biller = $('select[name="biller"]').val()
+          var supplier = $('select[name="supplier"]').val()
+          var purchaseStatus = $('select[name="purchaseStatus"]').val()
           var orderTax = $('select[name="orderTax"]').val()
           var orderDiscount = $('input[name="orderDiscount"]').val()
           var shippingCost = $('input[name="shippingCost"]').val()
-          var document = $('.saleDocument').prop('files')[0];
-          var sale_status = $('select[name="sale_status"]').val()
-          var payment_status = $('select[name="payment_status"]').val()
-          var paid_by_id = $('select[name="paid_by_id"]').val()
-          var receive_amount = $('input[name="receive_amount"]').val()
-          var paid_amount = $('input[name="paid_amount"]').val()
-          var cheque_no = $('input[name="cheque_no"]').val()
-          var bank_branch = $('input[name="bank_branch"]').val()
-          var bank = $('select[name="bank"]').val()
-          var sale_note = $('textarea#sale_note').val();
-          var stuff_note = $('textarea#stuff_note').val();
-
+          var note = $('textarea#note').val();
+          var document = $('.custom-file-input').prop('files')[0];
           var items = $('.totalItems').text()
           var total = $('#grandtotal').text()
           var totalOrderTax = $('.totalorderTax').text()
@@ -601,12 +427,22 @@
           products = []
           $(".tableBody").find('.orderData').each(function() {
             let quantity = $(this).find('.quantity').val()
+            let received = $(this).find('.received').val()
             let subtotal = $(this).find('.subtotal').text()
+
+            let unitcost = $(this).find('.unitcost').attr('data-unitcost')
+            let discount = $(this).find('.discount').attr('data-discount')
+            let tax = $(this).find('.tax').text()
             let product_id = $(this).attr('data-id')
             product_data = {
               "quantity": quantity,
+              "received": received,
+
               "subtotal": subtotal,
+              "unitcost": unitcost,
+              "tax": tax,
               "product_id": product_id,
+              "discount": discount,
             }
             products.push(product_data)
 
@@ -617,34 +453,22 @@
 
           var form = $('AddPurchase')[0]; // You need to use standard javascript object here
           var formData = new FormData(form);
-          formData.append('reference_no', reference_no);
-          formData.append('input_customer', input_customer);
-          formData.append('select_customer', select_customer);
           formData.append('warehouse', warehouse);
-          formData.append('biller', biller);
+          formData.append('supplier', supplier);
+          formData.append('purchaseStatus', purchaseStatus);
           formData.append('orderTax', orderTax);
           formData.append('orderDiscount', orderDiscount);
           formData.append('shippingCost', shippingCost);
+          formData.append('note', note);
           formData.append('document', document);
-          formData.append('sale_status', sale_status);
-          formData.append('payment_status', payment_status);
-          formData.append('paid_by_id', paid_by_id);
-          formData.append('receive_amount', receive_amount);
-          formData.append('paid_amount', paid_amount);
-          formData.append('cheque_no', cheque_no);
-          formData.append('bank', bank);
-          formData.append('bank_branch', bank_branch);
-          formData.append('sale_note', sale_note);
-          formData.append('stuff_note', stuff_note);
           formData.append('items', items);
           formData.append('total', total);
           formData.append('totalOrderTax', totalOrderTax);
           formData.append('grandTotal', grandTotal);
-
           formData.append('products', JSON.stringify(products));
 
           $.ajax({
-            url: "{{route('sale.store')}}",
+            url: "{{route('purchase.store')}}",
             type: 'POST',
             data: formData,
             contentType: false,
@@ -658,7 +482,7 @@
                   title: resp.message
                 })
 
-                window.location.replace('/sale/list');
+                window.location.replace('/purchase/list');
               } else {
                 Toast.fire({
                   icon: 'danger',
@@ -682,43 +506,11 @@
         warehouse: {
           required: true,
         },
-        payment_status: {
-          required: true,
-        },
-        bank: {
-          required: true,
-        },
-        receive_amount: {
-          required: true,
-        },
-        paid_amount: {
-          required: true,
-        },
-        cheque_no: {
-          required: true,
-        }
-
       },
       messages: {
         warehouse: {
           required: "Please select a warehouse",
         },
-        payment_status: {
-          required: "Please select a Payment Status",
-        },
-        bank: {
-          required: "Please select a Bank",
-        },
-        receive_amount: {
-          required: "Please Enter Receive Amount",
-        },
-        paid_amount: {
-          required: "Please Enter Paying Amount",
-        },
-        cheque_no: {
-          required: "Please Enter Cheque No",
-        }
-
       },
       errorElement: 'span',
       onfocusout: false,

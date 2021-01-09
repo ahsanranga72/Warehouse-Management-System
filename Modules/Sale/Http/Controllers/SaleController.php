@@ -60,7 +60,6 @@ class SaleController extends Controller
         foreach ($data as $mydata) {
             
             $product = Product::where('id', $mydata->product_id)->first();
-           
             if( $product->stock_quantity < $mydata->quantity){
                 $name=$product->product_name;
                 $insert=false;
@@ -196,6 +195,101 @@ class SaleController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $data = json_decode($request->products);
+        $insert=true;$name="";
+        foreach ($data as $mydata) {
+            
+            $product = Product::where('id', $mydata->product_id)->first();
+            if( $product->stock_quantity < $mydata->quantity){
+                $name=$product->product_name;
+                $insert=false;
+                break;
+            }
+          
+        }
+
+        if($insert){
+           
+
+        $sale =SaleProductInvoiceDetail::find($id);
+        $sale->referent_no = str_pad(1, 4, '0', STR_PAD_LEFT);
+        $sale->warehouse_id = $request->warehouse;
+        $sale->input_customer = $request->input_customer;
+        $sale->customer_id = $request->select_customer;
+        $sale->user_id = $request->biller;
+        $sale->order_tax_id = $request->orderTax;
+        $sale->order_discount = $request->orderDiscount;
+        $sale->order_shipping_cost = $request->shippingCost;
+        $sale->sale_status_id = $request->sale_status;
+        $sale->payment_status_id = $request->payment_status;
+        $sale->paid_by_id = $request->paid_by_id;
+        if($request->receive_amount!=''){
+            $sale->received_amount = $request->receive_amount;
+        }
+        if($request->paying_amount!=''){
+            $sale->paying_amount = $request->paid_amount;
+        }
+         
+        if($request->cheque_no!=''){
+                $sale->cheque_number = $request->cheque_no;
+        }
+        if($request->bank !=''){
+            $sale->bank_id = $request->bank;
+        }
+        if($request->bank_branch !=''){
+            $sale->bank_branch = $request->bank_branch;
+        }
+        if($request->sale_note != ''){
+            $sale->sale_note = $request->sale_note;
+        }
+        if($request->stuff_note !=''){
+            $sale->staff_note = $request->stuff_note;
+        }
+       
+        
+        $sale->items = $request->items;
+        $sale->total = $request->total;
+        $sale->order_tax = $request->totalOrderTax;
+        $sale->grand_total = $request->grandTotal;
+
+        if ($request->hasfile('document')) {
+            $file = $request->file('document');
+            $extention = $file->getClientOriginalExtension();
+            $filename = date('mdYHis') . uniqid() . '.' . $extention;
+            $file->move('upload/sale_documents/', $filename);
+            $sale->sale_document = $filename;
+        } else {
+            $sale->sale_document = "";
+        }
+
+        $save = $sale->save();
+        $sale_id = $sale->id;
+
+        $data = json_decode($request->products);
+        foreach ($data as $mydata) {
+            $saleProductDetails = new SaleProductDetails;
+            $saleProductDetails->product_id = $mydata->product_id;
+            $saleProductDetails->quantity = $mydata->quantity;
+            $saleProductDetails->subtotal = $mydata->subtotal;
+            $saleProductDetails->sale_product_invoice_id = $sale_id;
+            $saleProductDetails->save();
+
+
+            $product = Product::where('id', $mydata->product_id)->first();
+            $product->stock_quantity = $product->stock_quantity - $mydata->quantity;
+
+            
+            $product->save();
+        }
+        if ($save) {
+            return Response::json(array('success' => true, 'message' => 'Product has been added succesefully.'));
+        } else {
+            return Response::json(array('success' => false, 'message' => 'Product has not been added succesefully.'));
+        }
+
+        }else{
+            return Response::json(array('success' => false, 'message' => $name.' is out of stock'));
+        }
         
     }
 
@@ -207,6 +301,12 @@ class SaleController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function view($id){
+        
+        $salelists = SaleProductInvoiceDetail::find($id);
+        return view('sale::index', compact('salelists'));
     }
 
 

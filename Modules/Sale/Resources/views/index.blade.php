@@ -49,7 +49,7 @@
             <td>{{$salelist->grand_total}}</td>
             <td>
               <a href="{{ route('sale.edit',$salelist->id)}}" class="btn btn-sm btn-primary" title="edit"><i class="fa fa-edit"></i></a>
-              <a href="" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModalLong" title="view"><i class="fa fa-eye"></i></a>
+              <a href="{{route('list.view', $salelist->id)}}" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModalLong" title="view"><i class="fa fa-eye"></i></a>
               <a href="{{ route('product.delete',$salelist->id)}}" id="delete" class="btn btn-sm btn-danger" title="delete"><i class="fa fa-trash"></i></a>
             </td>
           </tr>

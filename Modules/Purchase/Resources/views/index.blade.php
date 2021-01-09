@@ -38,7 +38,6 @@
             <th>Warehouse</th>
             <th>Purchase Status</th>
             <th>Grand Total</th>
-
             <th>Action</th>
           </tr>
         </thead>
@@ -52,7 +51,7 @@
             <td>{{$purchaselist['purchasestatus']['name']}}</td>
             <td>{{$purchaselist->grand_total}}</td>
             <td>
-              <a href="" class="btn btn-sm btn-primary" title="edit"><i class="fa fa-edit"></i></a>
+              <a href="{{route('purchase.list.edit', $purchaselist->id)}}" class="btn btn-sm btn-primary" title="edit"><i class="fa fa-edit"></i></a>
               <a href="" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModalLong" title="edit"><i class="fa fa-eye"></i></a>
 
               <a href="{{ route('product.delete',$purchaselist->id)}}" id="delete" class="btn btn-sm btn-danger" title="delete"><i class="fa fa-trash"></i></a>
@@ -91,29 +90,23 @@
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label for="warehouse"> Warehouse Name: </label>
-
+                        <label for="warehouse">Warehouse Name:</label>
                          {{$purchaselist['wareee']['name']}}
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                       <label for="warehouse"> Supplier Name: </label>
-
                       {{$purchaselist['suplier']['name']}}
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                       <label for="warehouse"> Supplier Name: </label>
-
                       {{$purchaselist['purchasestatus']['name']}}
                       </div>
                     </div>
-                   
                   </div>
-                
-                 
                   <div class="row">
                     <div class="form-group col-lg-4">
                       <div class="form-group">

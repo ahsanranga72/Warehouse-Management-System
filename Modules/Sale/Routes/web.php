@@ -17,6 +17,7 @@ Route::prefix('sale')->group(function() {
     Route::post('/store', 'SaleController@store')->name('sale.store');
     Route::get('/edit/{id}', 'SaleController@edit')->name('sale.edit');
     Route::post('/update/{id}', 'SaleController@update')->name('sale.update');
-    Route::get('/delete/{id}', 'SaleController@destroy')->name('sale.delete');   
+    Route::get('/delete/{id}', 'SaleController@destroy')->name('sale.delete'); 
+    Route::get('/list-view/{id}', 'SaleController@view')->name('list.view');  
     //Route::get('/get_sale_data_by_id','PurchaseController@get_sale_data_by_id')->name('sale.data');
 });
