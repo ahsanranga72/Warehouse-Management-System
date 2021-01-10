@@ -19,7 +19,7 @@
               <!-- /.card-header -->
               <!-- form start -->
               
-              <form id="addBrand" class="addBrand" name="addBrand" method="POST" action="javascript:void(0)">
+              <form id="" class="" name="" method="POST" action="{{Route('brand.store')}}">
                   @csrf
                 <div class="card-body">
                     <div class="row">
@@ -76,7 +76,7 @@
 				formData.append('name', name);
 
 				$.ajax({
-					url: "{{route('bank.store')}}",
+					url: "{{route('brand.store')}}",
 					type: 'POST',
 					data: formData,
 					contentType: false,

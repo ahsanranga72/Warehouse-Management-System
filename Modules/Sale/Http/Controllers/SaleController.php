@@ -105,8 +105,6 @@ class SaleController extends Controller
         if($request->stuff_note !=''){
             $sale->staff_note = $request->stuff_note;
         }
-       
-        
         $sale->items = $request->items;
         $sale->total = $request->total;
         $sale->order_tax = $request->totalOrderTax;

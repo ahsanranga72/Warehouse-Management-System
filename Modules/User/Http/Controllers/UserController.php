@@ -9,95 +9,50 @@ use Modules\User\Entities\User;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
-    public function index()
-    {
-        $users = User::orderBy('id', 'DESC')->get();
-        return view('user::user.userlist', compact('users'));
-    }
+    public function view(){
+        $data['alldata'] = User::all();
+        return view('user::user.user-view', $data);
+}
+        public function add(){
+        return view('user::user.add-view');
+        }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function AddUserList()
-    {
-        return view('user::user.add_user_list');
-    }
+        public function store(Request $request){
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function UserStore(Request $request)
-    {
-        $user = New User;
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->name = $request->name;
-        $user->company_name = $request->company_name;
-        $user->usertype = $request->usertype;
-        $user->phone = $request->phone;
-        $user->email = $request->email;
-        $user->password = bcrypt('password');
-        $user->save();
-        return redirect()->route('user.list')->with('message', 'User Create Successfully');
-    }
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|unique:users,email'
+        ]);
+        $data = new User();
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('user::show');
-    }
+        $data->usertype = $request->usertype;
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->password =bcrypt($request->password);
+        $data->save();
+        return redirect()->route('users.view')->with('success', 'Data add success');
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function UserEdit($id)
-    {
-        $user = User::where('id', $id)->first();
-        return view('user::user.edit_user', compact('user'));
-    }
+        public function edit($id){
+        $editData = User::find($id);
+        return view ('user::user.edit-data', compact('editData'));
+        }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function UpdateUser(Request $request, $id)
-    {
-        $user = User::find($id);
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->name = $request->name;
-        $user->company_name = $request->company_name;
-        $user->usertype = $request->usertype;
-        $user->phone = $request->phone;
-        $user->email = $request->email;
-        $user->save();
-        return redirect()->route('user.list')->with('message', 'User Updated Successfully');
-    }
+        public function update(Request $request, $id){
+        $data = User::find($id);
+        $data->usertype = $request->usertype;
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->save();
+        return redirect()->route('users.view')->with('success', 'Data update success');
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function UserDelete($id)
-    {
-        $user = User::find($id);
-        $user->delete();
-        return redirect()->route('user.list')->with('message', 'User Deleled Successfully');
-    }
+        public function delete($id){
+            $data = User::find($id);
+            /*if (file_exists('public/upload/user_images/' .$user->image) AND ! empty($user->image)) {
+                    unlink('public/upload/user_images/' . $user->image);
+                }*/
+            $data->delete();
+            return redirect()->route('users.view')->with('success', 'Data deleted success');
+        }
 }

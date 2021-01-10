@@ -106,7 +106,7 @@
                       <th>Name</th>
                       <th>Code</th>
                       <th>Quantity</th>
-                      <th class="rcvcolumn">Received</th>
+                   
                       <th>Net Unit Cost</th>
                       <th>Discount</th>
                       <th>Tax</th>

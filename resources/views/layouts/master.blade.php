@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tijarah24 | Dashboard</title>
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('/assets/plugins/fontawesome-free/css/all.min.css')}}">
   <!-- Ionicons -->
@@ -47,7 +47,8 @@
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="{{ URL('/')}}" role="button"><i class="fas fa-bars"></i></a>
+        <a class="nav-link" data-widget="pushmenu" href="{{ URL('/')}}" role="button">
+        <i class="fas fa-bars"></i></a>
       </li>
      
     </ul>
@@ -68,14 +69,30 @@
           <div class="dropdown-divider"></div>
           
           
-          <div class="dropdown-divider"></div>
+          <div class="dropdown-divider">
+          </div>
+          <a href="{{ route('profile.view') }}"
+                      
+                      class="dropdown-item dropdown-footer">Sething</a>
+                <form id="" action="{{ route('profile.view') }}" method="POST" style="display: none;">
+                                        @csrf
+                </form>  
+
+                <a href="{{ route('password.view') }}"
+                      
+                      class="dropdown-item dropdown-footer">Password Change</a>
+                <form id="" action="{{ route('password.view') }}" method="POST" style="display: none;">
+                                        @csrf
+                </form>  
+                
           <a href="{{ route('logout') }}"
                       onclick="event.preventDefault();
                       document.getElementById('logout-form').submit();" class="dropdown-item dropdown-footer">Logout</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
-                                    </form>                                     
+                </form>                                     
         </div>
+
       </li>
       
     </ul>

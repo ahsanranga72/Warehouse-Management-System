@@ -15,15 +15,16 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name')->nullable();
-            $table->string('last_name')->nullable();
+            $table->string('usertype')->nullable();
             $table->string('name')->nullable();
-            $table->string('company_name')->nullable();
-            $table->string('usertype')->default('User')->comment('Admin for admin User for normal user');
-            $table->string('phone')->unique()->nullable();
-            $table->string('email')->unique()->nullable();
+            $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->nullable();
+            $table->string('password');
+            $table->string('mobile')->nullable();
+            $table->string('address')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('image')->nullable();
+            $table->tinyinteger('status')->default();
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();

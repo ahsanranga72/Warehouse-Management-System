@@ -39,13 +39,9 @@ class BrandController extends Controller
         $brand = New Brand;
         $brand->name = $request->name;
         $brand->save();
-
-        $save = $brand->save();
-        if($save){
-         return Response::json(array('success' => 'true', 'message' => 'brand has been added succesefully.'));
-        }else{
-         return Response::json(array('success' => 'false', 'message' => 'brand has not been added succesefully.'));
-        }
+        return redirect()->route('brand.view')->with('message', 'Band Added  Successfully');
+        
+        
     }
 
     /**
