@@ -201,7 +201,7 @@
 @push('scripts')
 <script>
   $(document).ready(function() {
-
+    //Search Product
     $('#product_code').keyup(function() {
       var product_code = $(this).val();
       var warehouse = $('select[name=warehouse]').val();
@@ -223,6 +223,7 @@
       }
     });
 
+    //Add Product to Order List
     $(document).on('click', 'li', function() {
       var productId = $(this).attr('data-product')
       $('#product_code').val('');
@@ -261,6 +262,7 @@
 
     });
 
+    //Delete
     $('#orderTable').on('click', '.ibtnDel', function() {
       $(this).closest('tr').remove();
       CalculateTotal();

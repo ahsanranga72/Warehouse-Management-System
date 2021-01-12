@@ -247,14 +247,12 @@
         var productUnit = $('select[name="productUnit"]').val()
         var saleUnit = $('select[name="saleUnit"]').val()
         var purchaseUnit = $('select[name="purchaseUnit"]').val()
-        var purchaseUnit = $('select[name="purchaseUnit"]').val()
         var productCost = $('input[name="productCost"]').val()
         var productPrice = $('input[name="productPrice"]').val()
         var alertQuantity = $('input[name="alertQuantity"]').val()
         var productTax = $('input[name="productTax"]').val()
         var taxMethod = $('select[name="taxMethod"]').val()
         var warehouse = $('select[name="warehouse"]').val()
-        var images = $('input[name="images"]').val()
         var summernote = $('#summernote').summernote('code');
         var file_data = $('input[type="file"]').prop('files')[0];
         // alert(productCost)
