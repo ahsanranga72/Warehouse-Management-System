@@ -134,7 +134,7 @@
                     <tfoot>
                       <tr>
                         <td>Total</td>
-                        <td>{{$sale['saleproduct']['quantity']}}</td>
+                        <td></td>
                         <td><label class="totalQuantity">{{$sale->quantity}}</td>
                         <td class="ftrcvrow">{{$sale->product_id}}</td>
                         <td>{{$sale->product_id}}</td>
@@ -411,7 +411,7 @@
       }
 
     });
-
+    
     $('#orderTable').on('click', '.ibtnDel', function() {
       $(this).closest('tr').remove();
       CalculateTotal();
@@ -429,7 +429,7 @@
       $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
       CalculateTotal();
     })
-
+    $( 'orderTable' ).load(function() {
     $('#orderTable').on('change', '.received', function() {
       var received = $(this).val()
       var quantity = $(this).parent().parent().find('.quantity').val()
@@ -473,6 +473,7 @@
 
 
       });
+   
       var grandTotal = parseFloat(grandTotal).toFixed(2)
 
       $('.totaltax').text(parseFloat(totalTax).toFixed(2));
@@ -510,7 +511,7 @@
       // grossTotal
 
     }
-
+  });
     $('#AddPurchase').on('change', '#purchaseStatus', function() {
       var status = $(this).val()
       //alert(status)
@@ -613,7 +614,7 @@
 
           });
 
-          //console.log(products)
+          console.log(products)
 
           var form = $('AddPurchase')[0]; // You need to use standard javascript object here
           var formData = new FormData(form);
@@ -650,7 +651,7 @@
             contentType: false,
             processData: false,
             success: function(resp) {
-              //console.log(resp)
+              console.log(resp)
               if (resp.success) {
 
                 Toast.fire({

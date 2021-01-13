@@ -54,10 +54,10 @@
               <a href="{{route('purchase.list.edit', $purchaselist->id)}}" class="btn btn-sm btn-primary" title="edit"><i class="fa fa-edit"></i></a>
               <a href="" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModalLong" title="edit"><i class="fa fa-eye"></i></a>
 
-              <a href="{{ route('product.delete',$purchaselist->id)}}" id="delete" class="btn btn-sm btn-danger" title="delete"><i class="fa fa-trash"></i></a>
+              <a href="{{ route('purchase.delete',$purchaselist->id)}}" id="delete" class="btn btn-sm btn-danger" title="delete"><i class="fa fa-trash"></i></a>
             </td>
           </tr>
-          @endforeach
+         
           </tfoot>
       </table>
     </div>
@@ -162,6 +162,7 @@
                               <td><label class="grandtotal" id="grandtotal"></label>{{$purchaselist->grand_total}}</td>
                             </tr>
                           </tfoot>
+                          @endforeach
                         </table>
                       </div>
                 <div class="table">

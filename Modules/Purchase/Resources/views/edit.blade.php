@@ -119,22 +119,34 @@
                       <th>Action</th>
                     </thead>
                     <tbody class="tableBody">
-                   
-                    </tbody>
-                    <tfoot>
-                    @foreach($purchaselists as $purchaselist)
-                      <tr>
-                        <td>Total</td>
+                    @foreach($purchase_products_id as $product)
+                    <tr class="orderData dataRow{{$product->id}}" data-id="{{$product->id}}">
                         <td>{{$product->product_name}}</td>
-                        <td><label class="totalQuantity"></td>
-                        <td class="ftrcvrow"></td>
-                        <td></td>
-                        <td></td>
-                        <td><label class="totaltax"></label></td>
-                        <td><label class="grandtotal" id="grandtotal"></label></td>
-                        <td></td>
+                        <td>{{$product->product_code}}</td>
+                        <td><input type="number" class="form-control quantity" required min="0" name="quantity{{$product->id}}" value="{{$product->quantity}}" id="quantity{{$product->id}}"></td>
+                        <td class="rcvrow"><input type="number" min="0" class="form-control received " name="received{{$product->id}}" id="received{{$product->id}}"></td>
+                        <td class="unitcost" data-unitcost='{{$product->product_cost}}'>{{$product->product_cost}}</td>
+                        <td class='discount' data-discount='0'>0</td>
+                        <td><span class="tax">{{$product->product_tax}}</span></td>
+                        <td><span class="subtotal"></label>{{$product->subtotal}}</td>
+                        <td>
+                          <button type="button" class="ibtnDel btn btn-md btn-danger">Delete</button>
+                        </td>
                       </tr>
                       @endforeach
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td>Total</td>
+                        <td></td>
+                        <td><label class="totalQuantity">{{$purchaselists->quantity}}</td>
+                        <td class="ftrcvrow">{{$purchaselists->product_id}}</td>
+                        <td>{{$purchaselists->product_id}}</td>
+                        <td>{{$purchaselists->product_id}}</td>
+                        <td>{{$purchaselists->product_id}}<label class="totaltax"></label></td>
+                        <td>{{$purchaselists->product_id}}<label class="grandtotal" id="grandtotal"></label></td>
+                        <td>{{$purchaselists->product_id}}</td>
+                      </tr>
                     </tfoot>
                   </table>
                 </div>
@@ -204,6 +216,8 @@
 <script>
   $(document).ready(function() {
 
+    CalculateTotal();
+    
     $('#product_code').keyup(function() {
       var product_code = $(this).val();
       var warehouse = $('select[name=warehouse]').val();
@@ -470,7 +484,7 @@
           formData.append('products', JSON.stringify(products));
 
           $.ajax({
-            url: "{{route('purchase.store')}}",
+            url: "{{route('purchase.update',  $purchaselists->id)}}",
             type: 'POST',
             data: formData,
             contentType: false,
@@ -484,7 +498,7 @@
                   title: resp.message
                 })
 
-                window.location.replace('/purchase/list');
+                window.location.replace( "{{route('purchase.view')}}");
               } else {
                 Toast.fire({
                   icon: 'danger',

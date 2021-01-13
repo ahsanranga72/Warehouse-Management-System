@@ -131,12 +131,8 @@ class SaleController extends Controller
             $saleProductDetails->subtotal = $mydata->subtotal;
             $saleProductDetails->sale_product_invoice_id = $sale_id;
             $saleProductDetails->save();
-
-
             $product = Product::where('id', $mydata->product_id)->first();
             $product->stock_quantity = $product->stock_quantity - $mydata->quantity;
-
-            
             $product->save();
         }
         if ($save) {
