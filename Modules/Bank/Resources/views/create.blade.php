@@ -70,7 +70,8 @@
 								title: resp.message
 							})
 
-							window.location.replace('/bank/');
+						window.location.replace("{{route('bank.view')}}");
+							
 						} else {
 							Toast.fire({
 								icon: 'danger',

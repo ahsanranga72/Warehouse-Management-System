@@ -27,7 +27,7 @@
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-              <h3>ProductType List
+              <h3>Product Type List
                  <a class="btn btn-success float-right btn-sm" href="{{route('producttype.view')}}"><i class="fa fa-list"></i>Product Type List</a>
                 </h3>
               </div>
