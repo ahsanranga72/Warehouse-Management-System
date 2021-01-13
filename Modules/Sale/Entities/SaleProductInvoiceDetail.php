@@ -29,7 +29,7 @@ class SaleProductInvoiceDetail extends Model
     }
 
     public function wareee(){
-        return $this->belongsTo('Modules\Warehouse\Entities\Warehouse', 'warehouse_id', 'id' );
+        return $this->belongsTo('Modules\Warehouse\Entities\WareHouse', 'warehouse_id', 'id' );
     }
 
     // public function saleproduct(){

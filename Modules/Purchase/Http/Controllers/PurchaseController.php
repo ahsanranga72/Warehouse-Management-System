@@ -5,7 +5,7 @@ namespace Modules\Purchase\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Modules\Warehouse\Entities\Warehouse;
+use Modules\Warehouse\Entities\WareHouse;
 use Modules\Product\Entities\Product;
 use SebastianBergmann\Environment\Console;
 use Modules\Supplier\Entities\Supplier;
@@ -25,7 +25,7 @@ class PurchaseController extends Controller
     public function index()
     {
         $purchaselists = PurchaseProductInvoiceDetails::orderBy('warehouse_id', 'ASC')->get();
-        $warehouses = Warehouse::all();
+        $warehouses = WareHouse::all();
         $suppliers = Supplier::all();
         $purchasestatus = PurchaseStatus::all();
         $ordertax = OrderTax::all();
@@ -35,7 +35,7 @@ class PurchaseController extends Controller
   
     public function create()
     {
-        $warehouses = Warehouse::orderBy('id', 'DESC')->get();
+        $warehouses = WareHouse::orderBy('id', 'DESC')->get();
         $suppliers = Supplier::all();
         $purchasestatus = PurchaseStatus::all();
         $ordertax = OrderTax::all();
@@ -146,7 +146,7 @@ class PurchaseController extends Controller
     public function edit($id)
     {
         $purchaselists = PurchaseProductInvoiceDetails::find($id);
-        $warehouses = Warehouse::all();
+        $warehouses = WareHouse::all();
         $suppliers = Supplier::all();
         $purchasestatus = PurchaseStatus::all();
         $ordertax = OrderTax::all();

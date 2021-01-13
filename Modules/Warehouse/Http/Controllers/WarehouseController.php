@@ -5,7 +5,7 @@ namespace Modules\Warehouse\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Modules\Warehouse\Entities\Warehouse;
+use Modules\Warehouse\Entities\WareHouse;
 
 
 
@@ -17,7 +17,7 @@ class WarehouseController extends Controller
      */
     public function index()
     {
-        $warehouses = Warehouse::orderBy('id', 'DESC')->get();
+        $warehouses = WareHouse::orderBy('id', 'DESC')->get();
         return view('warehouse::index', compact('warehouses'));
     }
 
@@ -40,7 +40,7 @@ class WarehouseController extends Controller
         $validated = $request->validate([
             'name' => 'required|unique:ware_houses|max:50',
         ]);
-        $warehouse = New Warehouse;
+        $warehouse = New WareHouse;
         $warehouse->name = $request->name;
         $warehouse->save();
 
@@ -64,7 +64,7 @@ class WarehouseController extends Controller
      */
     public function edit($id)
     {
-        $warehouse = Warehouse::find($id);
+        $warehouse = WareHouse::find($id);
         return view('warehouse::edit', compact('warehouse'));
     }
 
@@ -79,7 +79,7 @@ class WarehouseController extends Controller
         $validated = $request->validate([
             'name' => 'required|unique:ware_houses|max:50',
         ]);
-        $warehouse = Warehouse::find($id);
+        $warehouse = WareHouse::find($id);
         $warehouse->name = $request->name;
         $warehouse->save();
 
@@ -93,7 +93,7 @@ class WarehouseController extends Controller
      */
     public function destroy($id)
     {
-        $warehouse = Warehouse::find($id);
+        $warehouse = WareHouse::find($id);
       
         $warehouse->delete();
 
