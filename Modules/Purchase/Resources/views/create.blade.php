@@ -484,7 +484,7 @@
                   title: resp.message
                 })
 
-                window.location.replace('/purchase/list');
+                window.location.replace("{{route('purchase.view')}}");
               } else {
                 Toast.fire({
                   icon: 'danger',

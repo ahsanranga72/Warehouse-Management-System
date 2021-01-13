@@ -634,7 +634,7 @@
                   title: resp.message
                 })
 
-                window.location.replace('/sale/list');
+                window.location.replace("{{route('sale.view')}}");
               } else {
                 Toast.fire({
                   icon: 'danger',

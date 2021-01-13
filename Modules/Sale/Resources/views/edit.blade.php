@@ -613,7 +613,7 @@
 
           });
 
-          console.log(products)
+          //console.log(products)
 
           var form = $('AddPurchase')[0]; // You need to use standard javascript object here
           var formData = new FormData(form);
@@ -650,7 +650,7 @@
             contentType: false,
             processData: false,
             success: function(resp) {
-              console.log(resp)
+              //console.log(resp)
               if (resp.success) {
 
                 Toast.fire({
