@@ -123,7 +123,7 @@
                         <td class="unitcost" data-unitcost='{{$product->product_cost}}'>{{$product->product_cost}}</td>
                         <td class='discount' data-discount='0'>0</td>
                         <td><span class="tax">{{$product->product_tax}}</span></td>
-                        <td><span class="subtotal"></label></td>
+                        <td><span class="subtotal">{{$product->subtotal}}</label></td>
                         <td>
                           <button type="button" class="ibtnDel btn btn-md btn-danger">Delete</button>
                         </td>
@@ -303,7 +303,7 @@
 @push('scripts')
 <script>
   $(document).ready(function() {
-
+    CalculateTotal();
     $('.select2').select2({
       theme: 'bootstrap4'
     });
@@ -337,25 +337,20 @@
       }
 
     })
+    $('.payment_status').on('change', function() {
 
-    $( 'payment_status' ).load(function() {
-        $('.payment_status').on('change', function() {
-          if ($(this).val() == 3) {
-            $('#payment').show()
-          } else {
-            $('input[name="paid_amount"]').val('')
-            $('input[name="paying_amount"]').val('')
-            $('#payment').hide()
-          }
-        }
-  });
-  
+      if ($(this).val() == 3) {
+        $('#payment').show()
+      } else {
+        $('input[name="paid_amount"]').val('')
+        $('input[name="paying_amount"]').val('')
+        $('#payment').hide()
+      }
+    })
 
     $('#product_code').keyup(function() {
-      
       var product_code = $(this).val();
       var warehouse = $('select[name=warehouse]').val();
-      
       if (product_code != '') {
         var _token = $('input[name="_token"]').val();
         $.ajax({
@@ -417,8 +412,10 @@
       CalculateTotal();
     })
 
-    $('#orderTable').on('change', '.quantity', function() {
+    
 
+    $('#orderTable').on('change', '.quantity', function() {
+     
       var unitcost = parseFloat($(this).closest('tr').find('.unitcost').attr('data-unitcost'))
       var discount = parseFloat($(this).closest('tr').find('.discount').attr('data-discount'))
       var tax = parseFloat($(this).closest('tr').find('.tax').text())
@@ -429,7 +426,12 @@
       $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
       CalculateTotal();
     })
+<<<<<<< HEAD
     $( 'orderTable' ).load(function() {
+=======
+
+
+>>>>>>> 12fd7bf15e32a9a614d1184ff6459bebdc78883f
     $('#orderTable').on('change', '.received', function() {
       var received = $(this).val()
       var quantity = $(this).parent().parent().find('.quantity').val()
@@ -542,7 +544,7 @@
     $('#shippingCost').on('change', function() {
       CalculateTotal();
     })
-
+    
     $('#receive_amount').on('change', function() {
       var rcv = $(this).val()
       $('#paid_amount').on('change', function() {
@@ -645,7 +647,7 @@
           formData.append('products', JSON.stringify(products));
 
           $.ajax({
-            url: "{{route('sale.store')}}",
+            url: "{{route('sale.update', $sale->id)}}",
             type: 'POST',
             data: formData,
             contentType: false,
@@ -659,7 +661,7 @@
                   title: resp.message
                 })
 
-                window.location.replace('/sale/list');
+                window.location.replace("{{route('sale.view')}}");
               } else {
                 Toast.fire({
                   icon: 'danger',

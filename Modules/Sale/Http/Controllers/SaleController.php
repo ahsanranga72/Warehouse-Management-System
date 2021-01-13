@@ -203,9 +203,22 @@ class SaleController extends Controller
         }
 
         if($insert){
-        $sale =SaleProductInvoiceDetail::find($id);
 
+        $sale_products = SaleProductDetails::where('sale_product_invoice_id', $id)->get();
+        foreach($sale_products as $sale_product){
+        $product = Product::where('id', $sale_product->product_id)->first();
+             
         
+        $product->save();
+
+        }
+
+        $delete_products = SaleProductDetails::where('sale_product_invoice_id', $id)->delete();
+        $delete_products_invoice = SaleProductInvoiceDetail::where('id', $id)->delete();
+
+    
+
+        $sale = new SaleProductInvoiceDetail;
         $sale->referent_no = str_pad(1, 4, '0', STR_PAD_LEFT);
         $sale->warehouse_id = $request->warehouse;
         $sale->input_customer = $request->input_customer;
@@ -239,8 +252,6 @@ class SaleController extends Controller
         if($request->stuff_note !=''){
             $sale->staff_note = $request->stuff_note;
         }
-       
-        
         $sale->items = $request->items;
         $sale->total = $request->total;
         $sale->order_tax = $request->totalOrderTax;
@@ -276,9 +287,9 @@ class SaleController extends Controller
             $product->save();
         }
         if ($save) {
-            return Response::json(array('success' => true, 'message' => 'Product has been added succesefully.'));
+            return Response::json(array('success' => true, 'message' => 'Sale has been updated succesefully.'));
         } else {
-            return Response::json(array('success' => false, 'message' => 'Product has not been added succesefully.'));
+            return Response::json(array('success' => false, 'message' => 'Sale has not been updated. There is something wrong'));
         }
 
         }else{
@@ -294,7 +305,24 @@ class SaleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $sale_products = SaleProductDetails::where('sale_product_invoice_id', $id)->get();
+        foreach($sale_products as $sale_product){
+
+            $product = Product::where('id', $sale_product->product_id)->first();
+            $product->stock_quantity = $product->stock_quantity + $sale_product->quantity;
+
+            
+            $product->save();
+        }
+        $delete_products = SaleProductDetails::where('sale_product_invoice_id', $id)->delete();
+        $delete_products_invoice = SaleProductInvoiceDetail::where('id', $id)->delete();
+
+        if ($delete_products && $delete_products_invoice) {
+            return back()->with('message','Sale has been deleted succesefully.');
+        } else {
+            return back()->with('message','Sale has not been delete. There is something wrong.');
+        }
+
     }
 
     public function view($id){
