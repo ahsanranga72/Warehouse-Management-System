@@ -119,12 +119,13 @@
                       <th>Action</th>
                     </thead>
                     <tbody class="tableBody">
-
+                   
                     </tbody>
                     <tfoot>
+                    @foreach($purchaselists as $purchaselist)
                       <tr>
                         <td>Total</td>
-                        <td></td>
+                        <td>{{$product->product_name}}</td>
                         <td><label class="totalQuantity"></td>
                         <td class="ftrcvrow"></td>
                         <td></td>
@@ -133,6 +134,7 @@
                         <td><label class="grandtotal" id="grandtotal"></label></td>
                         <td></td>
                       </tr>
+                      @endforeach
                     </tfoot>
                   </table>
                 </div>
@@ -153,20 +155,20 @@
               <div class="form-group col-lg-4">
                 <div class="form-group">
                   <label class="orderDiscount" for="orderDiscount">Discount</label>
-                  <input type="number" id="orderDiscount" name="orderDiscount" class="form-control" placeholder="Enter Discount here">
+                  <input type="number" id="orderDiscount" value="{{$purchaselists->order_discount}}" name="orderDiscount" class="form-control" placeholder="Enter Discount here">
                 </div>
               </div>
               <div class="form-group col-lg-4">
                 <div class="form-group">
                   <label for="shippingCost">Shipping Cost</label>
-                  <input type="number" id="shippingCost" name="shippingCost" class="form-control" placeholder="Shipping Cost">
+                  <input type="number" value="{{$purchaselists->order_shipping_cost}}" id="shippingCost" name="shippingCost" class="form-control" placeholder="Shipping Cost">
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="form-group col-lg-12">
                 <label for="note">Note</label>
-                <textarea name="note" id="note" cols="30" rows="5" class="form-control" placeholder="Note"></textarea>
+                <textarea name="note" id="note" cols="30" rows="5" class="form-control" placeholder="Note">{{$purchaselists->note}}</textarea>
               </div>
             </div>
             <div class="row ">
