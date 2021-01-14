@@ -53,7 +53,7 @@
               <a href="{{ route('sale.delete',$salelist->id)}}" id="delete" class="btn btn-sm btn-danger" title="delete"><i class="fa fa-trash"></i></a>
             </td>
           </tr>
-         
+          @endforeach
           </tfoot>
       </table>
     </div>
@@ -164,7 +164,7 @@
                               <td><label class="grandtotal" id="grandtotal"></label>{{$salelist->grand_total}}</td>
                             </tr>
                           </tfoot>
-                          @endforeach
+                          
                         </table>
                       </div>
                 <div class="table">
