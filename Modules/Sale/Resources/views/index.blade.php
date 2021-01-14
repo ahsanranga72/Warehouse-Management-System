@@ -154,10 +154,8 @@
 
                           </tbody>
                           <tfoot>
-                            <tr>
-                           
-                              <td>{{$salelist->product_id}}</td>
-                            
+                            <tr> 
+                              <td>{{$salelist->product_id}}</td> 
                               <td><label class="totalQuantity">{{$salelist->items}}</td>
                               <td class="ftrcvrow">{{$salelist->received_quantity}}</td>
                               <td>{{$salelist->order_shipping_cost}}</td>
