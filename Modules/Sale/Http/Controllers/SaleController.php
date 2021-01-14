@@ -261,7 +261,7 @@ class SaleController extends Controller
             $file = $request->file('document');
             $extention = $file->getClientOriginalExtension();
             $filename = date('mdYHis') . uniqid() . '.' . $extention;
-            $file->move('upload/sale_documents/', $filename);
+            $file->move('/upload/sale_documents/', $filename);
             $sale->sale_document = $filename;
         } else {
             $sale->sale_document = "";

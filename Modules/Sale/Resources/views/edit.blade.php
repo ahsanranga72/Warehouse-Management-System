@@ -177,10 +177,9 @@
             <div class="row">
               <div class="form-group col-lg-4">
                 <div class="form-group">
-                  <label class="feaa" for="saleDocument">Attach Document</label>
-                  
-                  <input type="file" id="saleDocument" name="saleDocument" class="form-control saleDocument">
-                  <img id="showImage" src="{{(!empty($sale->sale_document))?url('upload/sale_documents/'.$sale->sale_document):url('upload/no-image.png')}}" style="width: 50px; height: 60px;border: 1px solid #000">
+                  <label class="feaa" for="">Attach Document</label>
+                  <input type="file" id="" name="saleDocument" class="form-control saleDocument">
+                  <img id="showImage" src="{{(!empty($sale->sale_document))?url('/upload/sale_documents/'.$sale->sale_document):url('upload/no-image.png')}}" style="width: 50px; height: 60px;border: 1px solid #000">
 
                 </div>
               </div>
