@@ -31,7 +31,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Add Sale</h1>
+          <h1>Edit Sale</h1>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -303,7 +303,9 @@
 @push('scripts')
 <script>
   $(document).ready(function() {
+
     CalculateTotal();
+
     $('.select2').select2({
       theme: 'bootstrap4'
     });
@@ -406,16 +408,14 @@
       }
 
     });
-    
+
     $('#orderTable').on('click', '.ibtnDel', function() {
       $(this).closest('tr').remove();
       CalculateTotal();
     })
 
-    
-
     $('#orderTable').on('change', '.quantity', function() {
-     
+
       var unitcost = parseFloat($(this).closest('tr').find('.unitcost').attr('data-unitcost'))
       var discount = parseFloat($(this).closest('tr').find('.discount').attr('data-discount'))
       var tax = parseFloat($(this).closest('tr').find('.tax').text())
@@ -426,12 +426,7 @@
       $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
       CalculateTotal();
     })
-<<<<<<< HEAD
-    $( 'orderTable' ).load(function() {
-=======
 
-
->>>>>>> 12fd7bf15e32a9a614d1184ff6459bebdc78883f
     $('#orderTable').on('change', '.received', function() {
       var received = $(this).val()
       var quantity = $(this).parent().parent().find('.quantity').val()
@@ -475,7 +470,6 @@
 
 
       });
-   
       var grandTotal = parseFloat(grandTotal).toFixed(2)
 
       $('.totaltax').text(parseFloat(totalTax).toFixed(2));
@@ -513,7 +507,7 @@
       // grossTotal
 
     }
-  });
+
     $('#AddPurchase').on('change', '#purchaseStatus', function() {
       var status = $(this).val()
       //alert(status)
