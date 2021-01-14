@@ -393,9 +393,23 @@
       CalculateTotal();
     })
 
+    $('#orderTable').on('change', '.net-unit-cost', function() {
+
+      var unitcost = parseFloat($(this).closest('tr').find('.net-unit-cost').val())
+      var discount = parseFloat($(this).closest('tr').find('.discount').attr('data-discount'))
+      var tax = parseFloat($(this).closest('tr').find('.tax').text())
+      var quantity = parseInt($(this).val())
+
+      subtotal = (unitcost * quantity) + tax - discount
+
+      $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
+      CalculateTotal();
+      })
+
+
     $('#orderTable').on('change', '.quantity', function() {
 
-      var unitcost = parseFloat($(this).closest('tr').find('.unitcost').attr('data-unitcost'))
+      var unitcost = parseFloat($(this).closest('tr').find('.net-unit-cost').val())
       var discount = parseFloat($(this).closest('tr').find('.discount').attr('data-discount'))
       var tax = parseFloat($(this).closest('tr').find('.tax').text())
       var quantity = parseInt($(this).val())
@@ -589,7 +603,7 @@
 
           });
 
-          console.log(products)
+          //console.log(products)
 
           var form = $('AddPurchase')[0]; // You need to use standard javascript object here
           var formData = new FormData(form);

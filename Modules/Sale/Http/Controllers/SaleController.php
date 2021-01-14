@@ -136,9 +136,9 @@ class SaleController extends Controller
             $product->save();
         }
         if ($save) {
-            return Response::json(array('success' => true, 'message' => 'Product has been added succesefully.'));
+            return Response::json(array('success' => true, 'message' => 'Sale has been added succesefully.'));
         } else {
-            return Response::json(array('success' => false, 'message' => 'Product has not been added succesefully.'));
+            return Response::json(array('success' => false, 'message' => 'Sale has not been added. There is something wrong.'));
         }
 
         }else{
