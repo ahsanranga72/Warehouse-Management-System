@@ -76,6 +76,7 @@
             <div class="card card-default">
               <div class="card-body">
                 <form name="AddPurchase" id="AddPurchase" action="javascript:void(0)" enctype="multipart/form-data">
+                 @foreach($salelists as $key => $salelist)
                   @csrf
                   <div class="row">
                     <div class="col-lg-6">
@@ -164,7 +165,7 @@
                               <td><label class="grandtotal" id="grandtotal"></label>{{$salelist->grand_total}}</td>
                             </tr>
                           </tfoot>
-                          
+                          @endforeach
                         </table>
                       </div>
                 <div class="table">
