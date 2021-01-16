@@ -22,8 +22,8 @@
     <div class="container-fluid">
       <div class="card card-default">
         <div class="card-body">
-            <form id="quickForm" method="POST" action="{{route('products.update', $productlists->id)}}">
-                  @csrf
+          <form id="quickForm" method="POST" action="{{route('products.update', $productlists->id)}}">
+            @csrf
             <div class="row">
               <div class="col-lg-4">
                 <div class="form-group">
@@ -39,17 +39,13 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="productName">Product Name <span class="required-field">*</span></label>
-                  <input placeholder="Enter product name" 
-                  name="product_name" value="{{$productlists->product_name}}" type="text" 
-                   class="form-control" id="productName" style="width: 100%;">
+                  <input placeholder="Enter product name" name="product_name" value="{{$productlists->product_name}}" type="text" class="form-control" id="productName" style="width: 100%;">
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="productCode">Product Code <span class="required-field">*</span></label>
-                  <input placeholder="Enter product code" name="product_code" 
-                  value="{{$productlists->product_code}}" type="text" 
-                   class="form-control" id="productCode" style="width: 100%;">
+                  <input placeholder="Enter product code" name="product_code" value="{{$productlists->product_code}}" type="text" class="form-control" id="productCode" style="width: 100%;">
                 </div>
               </div>
             </div>
@@ -57,8 +53,7 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="barcodeSymbology">Barcode Symbology <span class="required-field">*</span></label>
-                  <select name="barcode_symbology" id="barcodeSymbology" class="form-control select2" 
-                  style="width: 100%;">
+                  <select name="barcode_symbology" id="barcodeSymbology" class="form-control select2" style="width: 100%;">
                     <option value="">--Select Barcode Symbology--</option>
                     @foreach ($bar as $key)
                     <option value="{{ $key->id }}" selected>{{ $key->name }}</option>
@@ -93,8 +88,7 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="productUnit">Product Unit <span class="required-field">*</span></label>
-                  <select name="product_unit" id="productUnit" class="form-control select2" 
-                  style="width: 100%;">
+                  <select name="product_unit" id="productUnit" class="form-control select2" style="width: 100%;">
                     <option value="">--Select a Product Unit--</option>
                     @foreach ($prounit as $key)
                     <option value="{{ $key->id }}" selected>{{ $key->name }}</option>
@@ -116,8 +110,7 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="purchaseUnit">Purchase Unit</label>
-                  <select name="purchase_unit" id="purchaseUnit" class="form-control select2" 
-                  style="width: 100%;">
+                  <select name="purchase_unit" id="purchaseUnit" class="form-control select2" style="width: 100%;">
                     <option value="">--Select Purchase Unit--</option>
                     @foreach ($purunit as $key)
                     <option value="{{ $key->id }}" selected>{{ $key->name }}</option>
@@ -130,8 +123,7 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="productCost">Product Cost <span class="required-field">*</span></label>
-                  <input placeholder="Enter product cost" name="product_cost" 
-                  value="{{$productlists->product_cost}}" type="number"  class="form-control" id="productCost" style="width: 100%;">
+                  <input placeholder="Enter product cost" name="product_cost" value="{{$productlists->product_cost}}" type="number" class="form-control" id="productCost" style="width: 100%;">
                 </div>
               </div>
               <div class="col-lg-4">
@@ -143,17 +135,13 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="alertQuantity">Notify Quantity</label>
-                  <input placeholder="Enter Alert Quantity" name="alert_quantity" 
-                  value="{{$productlists->alert_quantity}}" type="number" name="alertQuantity" 
-                  class="form-control" id="alertQuantity" style="width: 100%;">
+                  <input placeholder="Enter Alert Quantity" name="alert_quantity" value="{{$productlists->alert_quantity}}" type="number" name="alertQuantity" class="form-control" id="alertQuantity" style="width: 100%;">
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="productTax">Product Tax</label>
-                  <input placeholder="Enter product tax" name="product_tax" type="number" 
-                  value="{{$productlists->product_tax}}"  class="form-control" id="productTax" 
-                  style="width: 100%;">
+                  <input placeholder="Enter product tax" name="product_tax" type="number" value="{{$productlists->product_tax}}" class="form-control" id="productTax" style="width: 100%;">
                 </div>
               </div>
               <div class="col-lg-4">
@@ -199,7 +187,7 @@
                   <label for="productDetails">Product Details</label>
                 </div>
                 <div class="card-body">
-                  <textarea class="summernote" name="product_details"  id="summernote">{{$productlists->product_details}}
+                  <textarea class="summernote" name="product_details" id="summernote">{{$productlists->product_details}}
 
                   </textarea>
                 </div>
@@ -228,7 +216,15 @@
 <script type="text/javascript">
   $(document).ready(function() {
 
-    // alert("dwe")
+    $('#image').change(function(e) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        $('#showImage').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(e.target.files['0']);
+    });
+
+
     $('.input-images').imageUploader({
       imagesInputName: 'images',
       preloadedInputName: 'preloaded',
@@ -349,15 +345,4 @@
   })
 </script>
 
-<script type="text/javascript">
-   $(document).ready(function(){
-    $('#image').change(function(e){
-      var reader = new FileReader();
-    reader.onload = function(e){
-      $('#showImage').attr('src', e.target.result);
-    }
-    reader.readAsDataURL(e.target.files['0']);
-   });
-    });
-    </script>
 @endpush

@@ -16,6 +16,7 @@ class CreatePurchaseUnitsTable extends Migration
         Schema::create('purchase_units', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('parent_id');
             $table->timestamps();
         });
     }

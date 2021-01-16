@@ -17,6 +17,7 @@ use Modules\Sale\Entities\SaleProductDetails;
 use Modules\Sale\Entities\SaleProductInvoiceDetail;
 use Modules\Bank\Entities\Bank;
 use DB;
+use app\Helpers\Helper;
 
 use Response;
 
@@ -55,6 +56,9 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
+       
+
+
         $data = json_decode($request->products);
         $insert=true;$name="";
         foreach ($data as $mydata) {
@@ -69,10 +73,11 @@ class SaleController extends Controller
         }
 
         if($insert){
-           
-
+        
+        $sale_referent_no = Helper::Idgeneratore(new SaleProductInvoiceDetail, 'referent_no', 5, 'T24');
+        
         $sale = new SaleProductInvoiceDetail;
-        $sale->referent_no = str_pad(1, 4, '0', STR_PAD_LEFT);
+        $sale->referent_no = $sale_referent_no;
         $sale->warehouse_id = $request->warehouse;
         $sale->input_customer = $request->input_customer;
         $sale->customer_id = $request->select_customer;

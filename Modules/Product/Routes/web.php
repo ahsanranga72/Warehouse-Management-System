@@ -20,5 +20,9 @@ Route::prefix('product')->group(function() {
     Route::post('update-product/{id}', 'ProductController@updateproduct')->name('products.update');
     Route::get('/product-delete/{id}', 'ProductController@delete')->name('product.delete');
     Route::get('/product-duplicatecheck', 'ProductController@check_product_with_warehouse')->name('product.duplicatecheck');
+    Route::get('/get_product_unit_for_sale/{id}', 'ProductController@get_product_unit_for_sale');
+    Route::get('/get_product_unit_for_purchase/{id}', 'ProductController@get_product_unit_for_purchase');
+    
+
     
 });

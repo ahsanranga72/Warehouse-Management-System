@@ -15,4 +15,9 @@ class PurchaseUnit extends Model
     {
         return \Modules\PurchaseUnit\Database\factories\PurchaseUnitFactory::new();
     }
+    
+    public function productunit()
+    {
+        return $this->belongsTo('Modules\ProductUint\Entities\ProductUnit', 'parent_id' , 'id');
+    }
 }
