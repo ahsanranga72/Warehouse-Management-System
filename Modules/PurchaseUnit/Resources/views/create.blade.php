@@ -1,57 +1,64 @@
 @extends('layouts.master')
 @section('content')
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- left column -->
-          <div class="col-md-12">
-            <!-- jquery validation -->
-            <div class="card card-primary">
-              <div class="card-header">
+  <!-- Content Header (Page header) -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- jquery validation -->
+          <div class="card card-primary">
+            <div class="card-header">
               <h3>Add Purchase Unit
-                 <a class="btn btn-success float-right btn-sm" href="{{route('purchaseunit.view')}}">
-                 <i class="fa fa-list"></i>Purchase Unit List</a>
-                </h3>
-              </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              
-              <form id="quickForm" method="POST" action="{{route('purchaseunit.store')}}">
-                  @csrf
-                <div class="card-body">
-                    <div class="row">
-                    <div class="form-group col-md-6">
+                <a class="btn btn-success float-right btn-sm" href="{{route('purchaseunit.view')}}">
+                  <i class="fa fa-list"></i>Purchase Unit List</a>
+              </h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+
+            <form id="quickForm" method="POST" action="{{route('purchaseunit.store')}}">
+              @csrf
+              <div class="card-body">
+                <div class="row">
+                  <div class="form-group col-md-6">
                     <label for="name">Purchase Unit Name</label>
                     <input type="text" name="name" class="form-control" id="name" placeholder="Enter name">
                     <font style="color: red">
-              		  {{($errors->has('name'))?($errors->first('name')):''}}
-              		</font>
+                      {{($errors->has('name'))?($errors->first('name')):''}}
+                    </font>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="parent_id">Product Unit <span class="required-field">*</span></label>
+                    <select name="parent_id" id="parent_id" class="form-control select2" style="width: 100%;">
+                      <option value="">--Select a Product Unit--</option>
+                      @foreach ($productunits as $key => $productunit)
+                      <option value="{{ $productunit->id }}">{{ $productunit->name }}</option>
+                      @endforeach
+                    </select>
                   </div>
                 </div>
-                    </div>
-                
-                <!-- /.card-body -->
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-              </form>
-            </div>
-            <!-- /.card -->
-            </div>
-          <!--/.col (left) -->
-          <!-- right column -->
-          <div class="col-md-6">
-
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
           </div>
-          <!--/.col (right) -->
+          <!-- /.card -->
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
+        <!--/.col (left) -->
+        <!-- right column -->
+        <div class="col-md-6">
+
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
 @endsection

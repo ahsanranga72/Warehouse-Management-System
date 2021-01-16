@@ -36,8 +36,9 @@ class ComposerStaticInit7ec1ef20a9d4e43bc1d04aeb37e805b5
         '9cdd7b9056abc3081735233ba9dd9c7f' => __DIR__ . '/..' . '/facade/flare-client-php/src/helpers.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
-        '9f394da3192a168c4633675768d80428' => __DIR__ . '/..' . '/nwidart/laravel-modules/src/helpers.php',
         '40275907c8566c390185147049ef6e5d' => __DIR__ . '/..' . '/livewire/livewire/src/helpers.php',
+        '9f394da3192a168c4633675768d80428' => __DIR__ . '/..' . '/nwidart/laravel-modules/src/helpers.php',
+        '8fde5feda9697fe0ee53a3938c839fb0' => __DIR__ . '/../..' . '/app/Helpers/Helper.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -3515,7 +3516,10 @@ class ComposerStaticInit7ec1ef20a9d4e43bc1d04aeb37e805b5
         'Modules\\TaxMethod\\Providers\\TaxMethodServiceProvider' => __DIR__ . '/../..' . '/Modules/TaxMethod/Providers/TaxMethodServiceProvider.php',
         'Modules\\User\\Database\\Seeders\\UserDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/User/Database/Seeders/UserDatabaseSeeder.php',
         'Modules\\User\\Entities\\User' => __DIR__ . '/../..' . '/Modules/User/Entities/User.php',
+        'Modules\\User\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/Modules/User/Http/Controllers/HomeController.php',
+        'Modules\\User\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/Modules/User/Http/Controllers/ProfileController.php',
         'Modules\\User\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/Modules/User/Http/Controllers/UserController.php',
+        'Modules\\User\\Http\\Controllers\\UserHomeController' => __DIR__ . '/../..' . '/Modules/User/Http/Controllers/UserHomeController.php',
         'Modules\\User\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/Modules/User/Providers/RouteServiceProvider.php',
         'Modules\\User\\Providers\\UserServiceProvider' => __DIR__ . '/../..' . '/Modules/User/Providers/UserServiceProvider.php',
         'Modules\\Warehouse\\Database\\Seeders\\WarehouseDatabaseSeeder' => __DIR__ . '/../..' . '/Modules/Warehouse/Database/Seeders/WarehouseDatabaseSeeder.php',

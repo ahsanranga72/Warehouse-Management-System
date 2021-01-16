@@ -88,7 +88,7 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="productUnit">Product Unit <span class="required-field">*</span></label>
-                  <select name="productUnit" id="productUnit" class="form-control select2" style="width: 100%;">
+                  <select name="productUnit" id="productUnit" class="form-control select" style="width: 100%;">
                     <option value="">--Select a Product Unit--</option>
                     @foreach ($prounit as $key)
                     <option value="{{ $key->id }}">{{ $key->name }}</option>
@@ -99,22 +99,16 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="saleUnit">Sale Unit</label>
-                  <select name="saleUnit" id="saleUnit" class="form-control select2" style="width: 100%;">
-                    <option value="">--Selct Sale Unit--</option>
-                    @foreach ($salunit as $key)
-                    <option value="{{ $key->id }}">{{ $key->name }}</option>
-                    @endforeach
+                  <select name="saleUnit" id="saleUnit" class="form-control select" style="width: 100%;">
+
                   </select>
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="purchaseUnit">Purchase Unit</label>
-                  <select name="purchaseUnit" id="purchaseUnit" class="form-control select2" style="width: 100%;">
-                    <option value="">--Select Purchase Unit--</option>
-                    @foreach ($purunit as $key)
-                    <option value="{{ $key->id }}">{{ $key->name }}</option>
-                    @endforeach
+                  <select name="purchaseUnit" id="purchaseUnit" class="form-control select" style="width: 100%;">
+
                   </select>
                 </div>
               </div>
@@ -147,7 +141,7 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="taxMethod">Tax Method</label>
-                  <select name="taxMethod" id="taxMethod" class="form-control select2" style="width: 100%;">
+                  <select name="taxMethod" id="taxMethod" class="form-control select" style="width: 100%;">
                     <option value="">--Select Tax Method--</option>
                     @foreach ($tax as $key)
                     <option value="{{ $key->id }}">{{ $key->name }}</option>
@@ -188,14 +182,12 @@
                   </textarea>
                 </div>
               </div>
-
             </div>
             <div class="row ">
               <div class="col-md-12 text-right">
                 <button type="submit" class="btn btn-primary ">Submit</button>
               </div>
             </div>
-
           </form>
         </div>
       </div>
@@ -212,14 +204,45 @@
 <script type="text/javascript">
   $(document).ready(function() {
 
-    // alert("dwe")
+
+
+    $('#saleUnit').empty()
+    $('#purchaseUnit').empty()
+    $('#productUnit').on('change', function() {
+      var product_unit = $(this).val()
+
+      $.ajax({
+        type: 'GET',
+        url: 'get_product_unit_for_sale/' + product_unit,
+        success: function(responce) {
+          var responce = JSON.parse(responce)
+          console.log(responce)
+          responce.forEach(element => {
+            $('#saleUnit').append(`<option value="${element['id']}">${element['name']}</option>`);
+          })
+        }
+
+      })
+
+      $.ajax({
+        type: 'GET',
+        url: 'get_product_unit_for_purchase/' + product_unit,
+        success: function(responce) {
+          var responce = JSON.parse(responce)
+          console.log(responce)
+          responce.forEach(element => {
+            $('#purchaseUnit').append(`<option value="${element['id']}">${element['name']}</option>`);
+          })
+        }
+
+      })
+    })
+
+
     $('.input-images').imageUploader({
       imagesInputName: 'images',
       preloadedInputName: 'preloaded',
-      //acceptedFiles: null,
       label: 'Drag & Drop files here or click to browse',
-      //extensions: ['.png'],
-      //mimes: ['image/jpeg','image/png','image/gif','image/svg+xml'],
     });
 
     $('#summernote').summernote({
@@ -298,6 +321,7 @@
               })
               $('#AddProduct')[0].reset();
               $('.select2').val(null).trigger('change');
+              $('.select').val(null).trigger('change');
               $('#summernote').summernote('reset');
               $('#AddProduct').find('.uploaded').remove()
               $('#AddProduct').find('.image-uploader').append('<div class="uploaded"></div>');
