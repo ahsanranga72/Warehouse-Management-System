@@ -35,7 +35,7 @@
           <tr>
             <td>{{$key+1}}</td>
             <td>
-              <img src="{{(!empty($productlist->product_image))?url('/upload/product_images/'.$productlist->product_image):url('/upload/no-image.png')}}" height="100px" width="120px"></td>
+            <img src="{{(!empty($productlist->product_image))?url('upload/product_images/'.$productlist->product_image):url('upload/no-image.png')}}" height="100px" width="120px"></td>
             <td>{{$productlist->product_name}}</td>
             <td>{{$productlist->product_code}}</td>
             <td>{{$productlist['brands']['name']}}</td>

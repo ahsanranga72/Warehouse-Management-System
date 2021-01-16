@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Supplier\Entities\Supplier;
+use Auth;
 
 class SupplierController extends Controller
 {
@@ -20,6 +21,7 @@ class SupplierController extends Controller
 
     public function store(Request $request){
         $supplier = New Supplier;
+        $supplier->created_by = Auth::user()->id;
         $supplier->name = $request->name;
         $supplier->company_name = $request->company_name;
         $supplier->vat_number = $request->vat_number;
@@ -30,9 +32,9 @@ class SupplierController extends Controller
         $supplier->state = $request->state;
         $supplier->postal_code = $request->postal_code;
         $supplier->country = $request->country;
+
         if ($request->file('image')) {
             $file = $request->file('image');
-            @unlink(public_path('upload/supplier_images/'.$supplier->image));
             $filename =date('YmdHi').$file->getClientORiginalName();
             $file->move(public_path('upload/supplier_images'), $filename);
             $supplier['image'] = $filename;
@@ -48,20 +50,35 @@ class SupplierController extends Controller
 
     public function update(Request $request , $id){
         $supplier = Supplier::find($id);
-        $supplier->customer_group = $request->customer_group;
+        $supplier->updated_by = Auth::user()->id;
         $supplier->name = $request->name;
         $supplier->company_name = $request->company_name;
-        $supplier->tax_number = $request->tax_number;
+        $supplier->vat_number = $request->vat_number;
         $supplier->email = $request->email;
         $supplier->phone = $request->phone;
-        $supplier->balace = $request->balace;
         $supplier->address = $request->address;
-        $supplier->save();
-        return redirect()->route('customer.list')->with('message' , 'Supplier Updated Successfully');
-    }
+        $supplier->city = $request->city;
+        $supplier->state = $request->state;
+        $supplier->country = $request->country;
+        $supplier->postal_code = $request->postal_code;
 
+        if ($request->file('image')) {
+            $file = $request->file('image');
+            @unlink(public_path('upload/supplier_images/'.$supplier->image));
+            $filename =date('YmdHi').$file->getClientORiginalName();
+            $file->move(public_path('upload/supplier_images'), $filename);
+            $supplier['image'] = $filename;
+        }
+
+        $supplier->save();
+        return redirect()->route('supplier.list')->with('message' , 'Supplier Updated Successfully');
+    }
+    
     public function destroy($id){
         $supplier = Supplier::find($id);
+        if (file_exists('upload/supplier_images/' .$supplier->image) AND ! empty($supplier->image)) {
+            unlink('upload/supplier_images/' . $supplier->image);
+        }
         $supplier->delete();
         return back()->with('message' , 'Supplier Updated Successfully');
     }

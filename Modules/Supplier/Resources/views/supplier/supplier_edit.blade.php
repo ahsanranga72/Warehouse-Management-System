@@ -32,7 +32,7 @@
               <!-- /.card-header -->
               <!-- form start -->
               
-              <form id="quickForm" method="POST" action="{{route('supplier.store')}}">
+              <form id="quickForm" method="POST" action="{{route('supplier.update', $supplier->id)}}">
                   @csrf
                 <div class="card-body">
                     <div class="row">
@@ -47,7 +47,7 @@
               				<input type="file" name="image" class="form-control" id="image">
               			</div>
               			<div class="form-group col-md-2">
-              				<img id="showImage" src="{{ url('upload/no-image.png')}}" style="width: 150px; height: 160px;border: 1px solid #000">
+                    <img id="showImage" src="{{(!empty($supplier->image))?url('upload/supplier_images/'.$supplier->image):url('upload/no-image.png')}}" style="width: 150px; height: 160px;border: 1px solid #000">
               			</div>
 
                   <div class="form-group col-md-6">
@@ -113,4 +113,16 @@
     </section>
     <!-- /.content -->
   </div>
+  <script type="text/javascript">
+   $(document).ready(function(){
+    $('#image').change(function(e){
+      var reader = new FileReader();
+    reader.onload = function(e){
+      $('#showImage').attr('src', e.target.result);
+    }
+    reader.readAsDataURL(e.target.files['0']);
+   });
+    });
+    
+ </script>
 @endsection

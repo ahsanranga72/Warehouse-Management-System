@@ -179,7 +179,7 @@
                 <div class="form-group">
                   <label class="feaa" for="">Attach Document</label>
                   <input type="file" id="" name="saleDocument" class="form-control saleDocument">
-                  <img id="showImage" src="{{(!empty($sale->sale_document))?url('/upload/sale_documents/'.$sale->sale_document):url('upload/no-image.png')}}" style="width: 50px; height: 60px;border: 1px solid #000">
+                  <img id="showImage" src="{{(!empty($sale->sale_document))?url('upload/sale_documents/'.$sale->sale_documentt):url('upload/no-image.png')}}" style="width: 50px; height: 60px;border: 1px solid #000">
 
                 </div>
               </div>
@@ -576,7 +576,7 @@
           var orderTax = $('select[name="orderTax"]').val()
           var orderDiscount = $('input[name="orderDiscount"]').val()
           var shippingCost = $('input[name="shippingCost"]').val()
-          var document = $('.saleDocument').prop('files')[0];
+          var sale_document = $('.saleDocument').prop('files')[0];
           var sale_status = $('select[name="sale_status"]').val()
           var payment_status = $('select[name="payment_status"]').val()
           var paid_by_id = $('select[name="paid_by_id"]').val()
@@ -621,7 +621,7 @@
           formData.append('orderTax', orderTax);
           formData.append('orderDiscount', orderDiscount);
           formData.append('shippingCost', shippingCost);
-          formData.append('document', document);
+          formData.append('sale_document', sale_document);
           formData.append('sale_status', sale_status);
           formData.append('payment_status', payment_status);
           formData.append('paid_by_id', paid_by_id);
@@ -740,4 +740,16 @@
 
   });
 </script>
+
+<script type="text/javascript">
+   $(document).ready(function(){
+    $('#image').change(function(e){
+      var reader = new FileReader();
+    reader.onload = function(e){
+      $('#showImage').attr('src', e.target.result);
+    }
+    reader.readAsDataURL(e.target.files['0']);
+   });
+    });
+ </script>
 @endpush

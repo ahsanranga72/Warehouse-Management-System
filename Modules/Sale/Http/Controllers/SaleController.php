@@ -192,7 +192,6 @@ class SaleController extends Controller
         $data = json_decode($request->products);
         $insert=true;$name="";
         foreach ($data as $mydata) {
-            
             $product = Product::where('id', $mydata->product_id)->first();
             if( $product->stock_quantity < $mydata->quantity){
                 $name=$product->product_name;
@@ -257,11 +256,12 @@ class SaleController extends Controller
         $sale->order_tax = $request->totalOrderTax;
         $sale->grand_total = $request->grandTotal;
 
-        if ($request->hasfile('document')) {
-            $file = $request->file('document');
-            $extention = $file->getClientOriginalExtension();
-            $filename = date('mdYHis') . uniqid() . '.' . $extention;
-            $file->move('/upload/sale_documents/', $filename);
+
+        if($request->file('sale_document')){
+            $file = $request->file('sale_document');
+            @unlink(public_path('upload/sale_documents/'.$sale->sale_document));
+            $filename =date('YmdHi').$file->getClientORiginalName();
+            $file->move(public_path('upload/sale_documents'), $filename);
             $sale->sale_document = $filename;
         } else {
             $sale->sale_document = "";

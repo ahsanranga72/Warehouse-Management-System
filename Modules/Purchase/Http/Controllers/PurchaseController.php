@@ -84,12 +84,11 @@ class PurchaseController extends Controller
         $purchase->order_shipping_cost = $request->shippingCost;
         $purchase->grand_total = $request->grandTotal;
 
-
-        if ($request->hasfile('document')) {
+        if($request->file('document')){
             $file = $request->file('document');
-            $extention = $file->getClientOriginalExtension();
-            $filename = date('mdYHis') . uniqid() . '.' . $extention;
-            $file->move('upload/purchase_documents/', $filename);
+            @unlink(public_path('upload/purchase_documents/'.$purchase->purchase_document));
+            $filename =date('YmdHi').$file->getClientORiginalName();
+            $file->move(public_path('upload/purchase_documents'), $filename);
             $purchase->purchase_document = $filename;
         } else {
             $purchase->purchase_document = "";

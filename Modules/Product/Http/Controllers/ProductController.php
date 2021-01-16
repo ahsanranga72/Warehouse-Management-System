@@ -55,12 +55,13 @@ class ProductController extends Controller
         $product->warehouse_id = $request->warehouse;
         $product->product_details = $request->product_details;
         
-        if($request->hasfile('product_image')){
+        if($request->file('product_image')){
             $file = $request->file('product_image');
-            $extention = $file->getClientOriginalExtension();
-            $filename =date('mdYHis') . uniqid() .'.'.$extention;
-            $file->move('upload/product_images/',$filename);
+            @unlink(public_path('upload/product_images/'.$product->product_image));
+            $filename =date('YmdHi').$file->getClientORiginalName();
+            $file->move(public_path('upload/product_images'), $filename);
             $product->product_image = $filename;
+
         } else {
             //return $request;
             $product->product_image = "";

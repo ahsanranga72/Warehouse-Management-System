@@ -184,7 +184,10 @@
                 <div class="card card-default">
                   <div class="card-header" style="width: 100%;">
                     <label for="productImage">Product Image</label>
-                    <div class="input-images" name="product_image"></div>
+                    <div class="input-images" name="product_image" >
+                    <img id="showImage" src="{{(!empty($productlists->product_image))?url('upload/product_images/'.$productlists->product_image):url('upload/no-image.png')}}" style="width: 50px; height: 60px;border: 1px solid #000">
+                    </div>
+
                   </div>
                 </div>
               </div>
