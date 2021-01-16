@@ -268,18 +268,33 @@
       CalculateTotal();
     })
 
-    $('#orderTable').on('change', '.quantity', function() {
+    $('#orderTable').on('change', '.net-unit-cost', function() {
 
-      var unitcost = parseFloat($(this).closest('tr').find('.unitcost').attr('data-unitcost'))
-      var discount = parseFloat($(this).closest('tr').find('.discount').attr('data-discount'))
-      var tax = parseFloat($(this).closest('tr').find('.tax').text())
-      var quantity = parseInt($(this).val())
+          var unitcost = parseFloat($(this).closest('tr').find('.net-unit-cost').val())
+          var discount = parseFloat($(this).closest('tr').find('.discount').attr('data-discount'))
+          var tax = parseFloat($(this).closest('tr').find('.tax').text())
+          var quantity = parseInt($(this).val())
 
-      subtotal = (unitcost * quantity) + tax - discount
+          subtotal = (unitcost * quantity) + tax - discount
 
-      $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
-      CalculateTotal();
-    })
+          $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
+          CalculateTotal();
+          })
+
+
+          $('#orderTable').on('change', '.quantity', function() {
+
+          var unitcost = parseFloat($(this).closest('tr').find('.net-unit-cost').val())
+          var discount = parseFloat($(this).closest('tr').find('.discount').attr('data-discount'))
+          var tax = parseFloat($(this).closest('tr').find('.tax').text())
+          var quantity = parseInt($(this).val())
+
+          subtotal = (unitcost * quantity) + tax - discount
+
+          $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
+          CalculateTotal();
+})
+
 
     $('#orderTable').on('change', '.received', function() {
       var received = $(this).val()
