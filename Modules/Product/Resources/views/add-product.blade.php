@@ -210,7 +210,8 @@
     $('#purchaseUnit').empty()
     $('#productUnit').on('change', function() {
       var product_unit = $(this).val()
-
+      $('#saleUnit').empty()
+      $('#purchaseUnit').empty()
       $.ajax({
         type: 'GET',
         url: 'get_product_unit_for_sale/' + product_unit,

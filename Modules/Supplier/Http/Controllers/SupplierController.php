@@ -49,8 +49,7 @@ class SupplierController extends Controller
     }
 
     public function update(Request $request , $id){
-        $supplier = Supplier::find($id);
-        $supplier->updated_by = Auth::user()->id;
+        $supplier = Supplier::find(Auth::user()->id);
         $supplier->name = $request->name;
         $supplier->company_name = $request->company_name;
         $supplier->vat_number = $request->vat_number;
