@@ -18,6 +18,7 @@ use Modules\Sale\Entities\SaleProductInvoiceDetail;
 use Modules\Bank\Entities\Bank;
 use DB;
 use app\Helpers\Helper;
+use PDF;
 
 use Response;
 
@@ -335,6 +336,13 @@ class SaleController extends Controller
         $salelists = SaleProductInvoiceDetail::find($id);
         return view('sale::index', compact('salelists'));
     }
+
+    
+       public function salepdf($id) {
+        $salelists = SaleProductInvoiceDetail::find($id);
+        $pdf = PDF::loadView('sale::pdf', compact('salelists'));
+        return $pdf->download('sale::index');
+}
 
 
 }
