@@ -360,7 +360,7 @@
         var _token = $('input[name="_token"]').val();
         if ($('.tableBody').find('.dataRow' + productId).length < 1) {
           $.ajax({
-            url: "{{ route('order.product') }}",
+            url: "{{ route('sale_order.product') }}",
             method: "get",
             data: {
               product_id: productId,
@@ -404,7 +404,7 @@
 
       $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
       CalculateTotal();
-      })
+    })
 
 
     $('#orderTable').on('change', '.quantity', function() {
@@ -531,7 +531,7 @@
     $('#shippingCost').on('change', function() {
       CalculateTotal();
     })
-    
+
     $('#receive_amount').on('change', function() {
       var rcv = $(this).val()
       $('#paid_amount').on('change', function() {

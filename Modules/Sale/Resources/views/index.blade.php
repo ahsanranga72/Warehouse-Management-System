@@ -6,7 +6,31 @@
       max-width: 750px;
     }
   }
+
+  @media only print, print {
+  body.non-print .close,
+  body.non-print .content-wrapper,
+  body.non-print .modal-footer,
+  .modal-backdrop.toPrint {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  .modal.toPrint {
+    position: relative;
+    overflow: hidden;
+    visibility:visible;
+    width: 100%;
+    font-size: 80%;
+  }
+  .modal.toPrint .nav .li {
+    visibility: hidden;
+  }
+  .modal.toPrint .nav .li.active {
+    visibility: visible;
+  }
+}
 </style>
+
 <div class="content-wrapper">
   <div class="card">
     <div class="card-header">
@@ -49,7 +73,6 @@
             <td>{{$salelist->grand_total}}</td>
             <td>
               <a href="{{ route('sale.edit',$salelist->id)}}" class="btn btn-sm btn-primary" title="edit"><i class="fa fa-edit"></i></a>
-              <a href="{{ route('sale.salepdf',$salelist->id)}}" class="btn btn-sm btn-primary" title="pdf"><i class="fa fa-print"></i></a>
               <a href="{{route('list.view', $salelist->id)}}" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModalLong" title="view"><i class="fa fa-eye"></i></a>
               <a href="{{ route('sale.delete',$salelist->id)}}" id="delete" class="btn btn-sm btn-danger" title="delete"><i class="fa fa-trash"></i></a>
             </td>
@@ -179,9 +202,26 @@
       </div>
       <div class="modal-footer">
         <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" href="{{ url('/list') }}" class="btnprn btn">Save changes</button>
+        <button type="button" class="btn btn-default print" onClick="window.print();return false">Print</button>
       </div>
     </div>
   </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+  $(document).ready(function(){
+    // Add Print Classes for Modal
+    $('.modal').on('shown.bs.modal',function() {
+        $('.modal,.modal-backdrop').addClass('toPrint');
+        $('body').addClass('non-print');
+    });
+    // Remove classes
+    $('.modal').on('hidden.bs.modal',function() {
+        $('.modal,.modal-backdrop').removeClass('toPrint');
+        $('body').removeClass('non-print');
+    });
+  });
+</script>
+@endpush

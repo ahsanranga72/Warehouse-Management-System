@@ -20,6 +20,7 @@ Route::prefix('sale')->group(function() {
     Route::get('/delete/{id}', 'SaleController@destroy')->name('sale.delete'); 
     Route::get('/list-view/{id}', 'SaleController@view')->name('list.view'); 
     Route::get('/salepdf/{id}','SaleController@salepdf')->name('sale.salepdf');
- 
+    Route::get('/get_product_by_id','SaleController@get_product_by_id')->name('sale_order.product');
+
     //Route::get('/get_sale_data_by_id','PurchaseController@get_sale_data_by_id')->name('sale.data');
 });
