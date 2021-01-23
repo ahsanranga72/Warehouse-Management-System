@@ -57,7 +57,7 @@
               <a href="{{ route('purchase.delete',$purchaselist->id)}}" id="delete" class="btn btn-sm btn-danger" title="delete"><i class="fa fa-trash"></i></a>
             </td>
           </tr>
-         
+          @endforeach
           </tfoot>
       </table>
     </div>
@@ -87,6 +87,7 @@
               <div class="card-body">
                 <form name="AddPurchase" id="AddPurchase" action="javascript:void(0)" enctype="multipart/form-data">
                   @csrf
+                  @foreach($purchaselists as $key => $purchaselist)
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
