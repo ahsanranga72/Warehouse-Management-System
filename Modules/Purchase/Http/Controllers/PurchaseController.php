@@ -263,7 +263,6 @@ class PurchaseController extends Controller
         return $pdf->stream('document.pdf');
         // return view('purchase::view');
     }
-<<<<<<< HEAD
 
 
     public function singleview($id)
@@ -282,6 +281,4 @@ class PurchaseController extends Controller
     }
 
     
-=======
->>>>>>> e69d6ac70f0a1d475a839630e45feeb9dd2f3f79
 }

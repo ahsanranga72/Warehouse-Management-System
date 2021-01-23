@@ -74,11 +74,7 @@
             <td>{{$purchaselist->grand_total}}</td>
             <td>
               <a href="{{route('purchase.list.edit', $purchaselist->id)}}" class="btn btn-sm btn-primary" title="edit"><i class="fa fa-edit"></i></a>
-<<<<<<< HEAD
               <a href="{{route('purchase.list.view', $purchaselist->id)}}" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModalLong" title="edit"><i class="fa fa-eye"></i></a>
-=======
-              <a href="" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModalLong" title="edit"><i class="fa fa-eye"></i></a>
->>>>>>> e69d6ac70f0a1d475a839630e45feeb9dd2f3f79
               <a href="{{ route('purchase.delete',$purchaselist->id)}}" id="delete" class="btn btn-sm btn-danger" title="delete"><i class="fa fa-trash"></i></a>
             </td>
           </tr>
@@ -168,23 +164,6 @@
                       <th>Tax</th>
                       <th>Sub Total</th>
 
-<<<<<<< HEAD
-                          </tbody>
-                          <tfoot>
-                            <tr>
-                              <td>{{$purchaselist->product_id}}</td>
-                            
-                              <td><label class="totalQuantity">{{$purchaselist->items}}</td>
-                              <td class="ftrcvrow">{{$purchaselist->received_quantity}}</td>
-                              <td>{{$purchaselist->order_shipping_cost}}</td>
-                              <td>{{$purchaselist->order_discount}}</td>
-                              <td><label class="totaltax"></label>{{$purchaselist->order_tax}}</td>
-                              <td><label class="grandtotal" id="grandtotal"></label>{{$purchaselist->grand_total}}</td>
-                            </tr>
-                          </tfoot>
-                        </table>
-                      </div>
-=======
                     </thead>
                     <tbody class="tableBody">
 
@@ -201,10 +180,8 @@
                         <td><label class="grandtotal" id="grandtotal"></label>{{$purchaselist->grand_total}}</td>
                       </tr>
                     </tfoot>
-                    @endforeach
                   </table>
                 </div>
->>>>>>> e69d6ac70f0a1d475a839630e45feeb9dd2f3f79
                 <div class="table">
                 </div>
               </div>
