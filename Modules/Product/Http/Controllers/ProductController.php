@@ -14,7 +14,7 @@ use Modules\ProductUint\Entities\ProductUnit;
 use Modules\PurchaseUnit\Entities\PurchaseUnit;
 use Modules\SaleUnit\Entities\SaleUnit;
 use Modules\TaxMethod\Entities\TaxMethod;
-use Modules\Warehouse\Entities\Warehouse;
+use Modules\Warehouse\Entities\WareHouse;
 use Response;
 use DB;
 
@@ -32,7 +32,7 @@ class ProductController extends Controller
         $purunit = PurchaseUnit::all();
         $salunit = SaleUnit::all();
         $tax = TaxMethod::all();
-        $warehouse = Warehouse::all();
+        $warehouse = WareHouse::all();
         return view('product::add-product', compact('data', 'bar', 'brand', 'category', 'prounit', 'purunit', 'salunit', 'tax', 'warehouse'));
         //return view('product.add-product',['bar'=>$bar]);
     }
