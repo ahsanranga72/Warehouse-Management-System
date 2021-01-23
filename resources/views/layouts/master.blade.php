@@ -73,7 +73,7 @@
           </div>
           <a href="{{ route('profile.view') }}"
                       
-                      class="dropdown-item dropdown-footer">Sething</a>
+                      class="dropdown-item dropdown-footer">View Profile</a>
                 <form id="" action="{{ route('profile.view') }}" method="POST" style="display: none;">
                                         @csrf
                 </form>  

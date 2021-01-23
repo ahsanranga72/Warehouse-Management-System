@@ -13,9 +13,9 @@
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-              <h3>Edit Order Tax
+              <h3>Edit Order Vat
                  <a class="btn btn-success float-right btn-sm" href="{{route('ordertax.view')}}">
-                 <i class="fa fa-list"></i>Order Tax List</a>
+                 <i class="fa fa-list"></i>Order Vat List</a>
                 </h3>
               </div>
               </div>
@@ -27,14 +27,14 @@
                 <div class="card-body">
                     <div class="row">
                     <div class="form-group col-md-6">
-                    <label for="name">Edit Order Tax</label>
-                    <input type="text" name="name" value="{{$ordertax->name}}" class="form-control" id="name" placeholder="Enter name">
+                    <label for="name">Edit Order Vat</label>
+                    <input type="text" name="name" value="{{$ordertax->name}}" class="form-control" id="name" placeholder="Enter vat name">
                     <font style="color: red">
               		  {{($errors->has('name'))?($errors->first('name')):''}}
               		</font>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="tax_number">Edit Order Tax Number</label>
+                    <label for="tax_number">Edit Order Vat Number %</label>
                     <input type="text" name="tax_number" value="{{$ordertax->tax_number}}" class="form-control" id="name" placeholder="Enter name">
                     <font style="color: red">
               		  {{($errors->has('tax_number'))?($errors->first('tax_number')):''}}

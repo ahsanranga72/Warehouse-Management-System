@@ -77,7 +77,7 @@
                 <div class="form-group">
                   <label for="biller">Biller</label>
                   <select name="biller" id="biller" class="form-control" style="width: 100%;">
-                    <option value="">--Select biller Type--</option>
+                    <option value="">--Select a Biller --</option>
                     @foreach ($users as $key)
                     <option value='{{ $key->id }}' {{($sale->user_id==$key->id)?"selected":''}}>{{$key->name}}</option>
                     @endforeach
@@ -103,13 +103,13 @@
                 <div class="table">
                   <table id="orderTable" class="table table-bordered table-striped">
                     <thead>
-                      <th>Name</th>
-                      <th>Code</th>
-                      <th>Quantity</th>
+                      <th>Product Name</th>
+                      <th>Product Code</th>
+                      <th>Product Quantity</th>
                    
-                      <th>Net Unit Cost</th>
-                      <th>Discount</th>
-                      <th>Tax</th>
+                      <th>Sale Price</th>
+                      <th>Product Discount</th>
+                      <th>Product Vat</th>
                       <th>Sub Total</th>
                       <th>Action</th>
                     </thead>
@@ -152,9 +152,9 @@
             <div class="row">
               <div class="form-group col-lg-4">
                 <div class="form-group">
-                  <label for="orderTax">Order Tax</label>
+                  <label for="orderTax">Order Vat</label>
                   <select name="orderTax" id="orderTax" class="form-control select2" style="width: 100%;">
-                    <option value="">--Select order tax--</option>
+                    <option value="">--Select order vat--</option>
                     @foreach ($ordertax as $key)
                     <option value='{{ $key->id }}' selected data-vat='{{$key->tax_number}}' {{($sale->order_tax_id==$key->id)?"selected":''}}>{{$key->name}}</option>
                     @endforeach
@@ -164,13 +164,13 @@
               <div class="form-group col-lg-4">
                 <div class="form-group">
                   <label class="orderDiscount" for="orderDiscount">Other Discount</label>
-                  <input type="number" id="orderDiscount" name="orderDiscount" value="{{$sale->order_discount}}" class="form-control" placeholder="Enter Discount here">
+                  <input type="number" id="orderDiscount" name="orderDiscount" value="{{$sale->order_discount}}" class="form-control" placeholder="Enter Order Discount">
                 </div>
               </div>
               <div class="form-group col-lg-4">
                 <div class="form-group">
                   <label for="shippingCost">Shipping Cost</label>
-                  <input type="number" id="shippingCost" value="{{$sale->order_discount}}" name="shippingCost" class="form-control" placeholder="Shipping Cost">
+                  <input type="number" id="shippingCost" value="{{$sale->order_discount}}" name="shippingCost" class="form-control" placeholder="Enter Shipping Cost">
                 </div>
               </div>
             </div>
@@ -285,7 +285,7 @@
               <thead>
                 <th>Items <span class="totalItems"></span>&nbsp(<span class="noRows">0</span>) </th>
                 <th>Total <span class="grandtotal text-right">0.00</span></th>
-                <th>Order Tax <span class="totalorderTax">0.00</span></th>
+                <th>Order Vat <span class="totalorderTax">0.00</span></th>
                 <th>Order Discount <span class="showOrderDiscount">0.00</span></th>
                 <th>Shipping Cost <span class="shippingCost">0.00</span></th>
                 <th>Grand Total <span class="grossTotal">0.00</span></th>

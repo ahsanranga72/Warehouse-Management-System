@@ -116,33 +116,33 @@
             <div class="row">
               <div class="col-lg-4">
                 <div class="form-group">
-                  <label for="productCost">Product Cost <span class="required-field">*</span></label>
-                  <input placeholder="Enter product cost" type="number" name="productCost" class="form-control" id="productCost" style="width: 100%;">
+                  <label for="productCost">Buy Price <span class="required-field">*</span></label>
+                  <input placeholder="Enter buy proice" type="number" name="productCost" class="form-control" id="productCost" style="width: 100%;">
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
-                  <label for="productPrice">Product Price <span class="required-field">*</span></label>
+                  <label for="productPrice">Sale Price <span class="required-field">*</span></label>
                   <input placeholder="Enter product price" type="number" name="productPrice" class="form-control" id="productPrice" style="width: 100%;">
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="alertQuantity">Notify Quantity</label>
-                  <input placeholder="Enter Alert Quantity" type="number" name="alertQuantity" class="form-control" id="alertQuantity" style="width: 100%;">
+                  <input placeholder="Enter Notify Quantity" type="number" name="alertQuantity" class="form-control" id="alertQuantity" style="width: 100%;">
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
-                  <label for="productTax">Product Tax</label>
-                  <input placeholder="Enter product tax" type="number" name="productTax" class="form-control" id="productTax" style="width: 100%;">
+                  <label for="productTax">Product Vat</label>
+                  <input placeholder="Enter product vat" type="number" name="productTax" class="form-control" id="productTax" style="width: 100%;">
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
-                  <label for="taxMethod">Tax Method</label>
+                  <label for="taxMethod">Vat Method</label>
                   <select name="taxMethod" id="taxMethod" class="form-control select" style="width: 100%;">
-                    <option value="">--Select Tax Method--</option>
+                    <option value="">--Select Vat Method--</option>
                     @foreach ($tax as $key)
                     <option value="{{ $key->id }}">{{ $key->name }}</option>
                     @endforeach

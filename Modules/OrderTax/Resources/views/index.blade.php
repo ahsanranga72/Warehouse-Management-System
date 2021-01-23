@@ -5,9 +5,9 @@
     
 <div class="card">
               <div class="card-header">
-              <h3>Order Tax list
+              <h3>Order Vat list
               <a class="btn btn-success float-right btn-sm" href="{{route('add.ordertax')}}">
-              <i class="fa fa-plus-circle"></i>Add OrderTax</a>
+              <i class="fa fa-plus-circle"></i>Add Order Vat</a>
                 </h3>
               </div>
               <!-- /.card-header -->
@@ -22,8 +22,8 @@
               @endif
                   <tr>
                   <th>SL</th>
-                    <th>Tax Name</th>
-                    <th>Tax Number</th>
+                    <th>Vat Name</th>
+                    <th>Vat Number %</th>
                     <th>Action</th>
                   </tr>
                   </thead>
