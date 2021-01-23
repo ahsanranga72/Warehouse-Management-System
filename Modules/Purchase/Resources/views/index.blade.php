@@ -1,14 +1,41 @@
 @extends('layouts.master')
 @section('content')
-
-
-
 <style>
   @media (min-width: 576px) {
     .modal-dialog.order-table-custom-css {
       max-width: 750px;
     }
   }
+
+  @media (min-width: 576px) {
+    .modal-dialog.order-table-custom-css {
+      max-width: 750px;
+    }
+  }
+
+  @media only print, print {
+  body.non-print .close,
+  body.non-print .content-wrapper,
+  body.non-print .modal-footer,
+  .modal-backdrop.toPrint {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  .modal.toPrint {
+    position: relative;
+    overflow: hidden;
+    visibility:visible;
+    width: 100%;
+    font-size: 80%;
+  }
+  .modal.toPrint .nav .li {
+    visibility: hidden;
+  }
+  .modal.toPrint .nav .li.active {
+    visibility: visible;
+  }
+}
+
 </style>
 <div class="content-wrapper">
 
@@ -176,7 +203,7 @@
       </div>
       <div class="modal-footer">
         <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" href="{{ url('/list') }}" class="btnprn btn">Save changes</button>
+        <button type="button" class="btn btn-default print" onClick="window.print();return false">Print</button>
       </div>
     </div>
   </div>
@@ -189,9 +216,18 @@ $('.btnprn').printPage();
 
 
 <script>
-  $('#myModal').on('shown.bs.modal', function() {
-    $('#myInput').trigger('focus')
-  })
+  $(document).ready(function(){
+    // Add Print Classes for Modal
+    $('.modal').on('shown.bs.modal',function() {
+        $('.modal,.modal-backdrop').addClass('toPrint');
+        $('body').addClass('non-print');
+    });
+    // Remove classes
+    $('.modal').on('hidden.bs.modal',function() {
+        $('.modal,.modal-backdrop').removeClass('toPrint');
+        $('body').removeClass('non-print');
+    });
+  });
 </script>
 
 @endsection
