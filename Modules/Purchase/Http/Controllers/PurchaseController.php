@@ -267,5 +267,21 @@ class PurchaseController extends Controller
        // return view('purchase::view');
     }
 
+
+    public function singleview($id)
+    {
+        $purchaselists = PurchaseProductInvoiceDetails::find($id);
+        $warehouses = WareHouse::all();
+        $suppliers = Supplier::all();
+        $purchasestatus = PurchaseStatus::all();
+        $ordertax = OrderTax::all();
+        $purchase_products_id = DB::table('purchase_product_details')
+                                ->join('purchase_product_invoice_details','purchase_product_invoice_details.id', 'purchase_product_details.purchase_product_invoice_id')
+                                ->join('products','purchase_product_details.product_id','products.id')
+                                ->where('purchase_product_details.purchase_product_invoice_id',$id)
+                                ->get();
+        return view('purchase::index', compact('purchaselists','warehouses', 'suppliers', 'purchasestatus', 'ordertax', 'purchase_products_id'));
+    }
+
     
 }

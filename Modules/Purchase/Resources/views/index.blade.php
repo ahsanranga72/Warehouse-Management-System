@@ -79,8 +79,7 @@
             <td>{{$purchaselist->grand_total}}</td>
             <td>
               <a href="{{route('purchase.list.edit', $purchaselist->id)}}" class="btn btn-sm btn-primary" title="edit"><i class="fa fa-edit"></i></a>
-              <a href="" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModalLong" title="edit"><i class="fa fa-eye"></i></a>
-
+              <a href="{{route('purchase.list.view', $purchaselist->id)}}" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModalLong" title="edit"><i class="fa fa-eye"></i></a>
               <a href="{{ route('purchase.delete',$purchaselist->id)}}" id="delete" class="btn btn-sm btn-danger" title="delete"><i class="fa fa-trash"></i></a>
             </td>
           </tr>
@@ -114,7 +113,7 @@
               <div class="card-body">
                 <form name="AddPurchase" id="AddPurchase" action="javascript:void(0)" enctype="multipart/form-data">
                   @csrf
-                  @foreach($purchaselists as $key => $purchaselist)
+                  
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
@@ -190,7 +189,6 @@
                               <td><label class="grandtotal" id="grandtotal"></label>{{$purchaselist->grand_total}}</td>
                             </tr>
                           </tfoot>
-                          @endforeach
                         </table>
                       </div>
                 <div class="table">
