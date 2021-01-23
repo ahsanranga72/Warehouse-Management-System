@@ -19,9 +19,6 @@ use PDF;
 
 class PurchaseController extends Controller
 {
-
-
-  
     public function index()
     {
         $purchaselists = PurchaseProductInvoiceDetails::orderBy('warehouse_id', 'ASC')->get();
@@ -29,10 +26,10 @@ class PurchaseController extends Controller
         $suppliers = Supplier::all();
         $purchasestatus = PurchaseStatus::all();
         $ordertax = OrderTax::all();
-        return view('purchase::index', compact('purchaselists','warehouses', 'suppliers', 'purchasestatus', 'ordertax'));
+        return view('purchase::index', compact('purchaselists', 'warehouses', 'suppliers', 'purchasestatus', 'ordertax'));
     }
 
-  
+
     public function create()
     {
         $warehouses = WareHouse::orderBy('id', 'DESC')->get();
@@ -68,7 +65,7 @@ class PurchaseController extends Controller
             exit(0);
         }
     }
-   
+
     public function storePurchase(Request $request)
     {
         $purchase = new PurchaseProductInvoiceDetails;
@@ -84,10 +81,10 @@ class PurchaseController extends Controller
         $purchase->order_shipping_cost = $request->shippingCost;
         $purchase->grand_total = $request->grandTotal;
 
-        if($request->file('document')){
+        if ($request->file('document')) {
             $file = $request->file('document');
-            @unlink(public_path('upload/purchase_documents/'.$purchase->purchase_document));
-            $filename =date('YmdHi').$file->getClientORiginalName();
+            @unlink(public_path('upload/purchase_documents/' . $purchase->purchase_document));
+            $filename = date('YmdHi') . $file->getClientORiginalName();
             $file->move(public_path('upload/purchase_documents'), $filename);
             $purchase->purchase_document = $filename;
         } else {
@@ -112,12 +109,12 @@ class PurchaseController extends Controller
 
 
             $product = Product::where('id', $mydata->product_id)->first();
-            if ($mydata->received != '' && $mydata->received > 0){
+            if ($mydata->received != '' && $mydata->received > 0) {
                 $product->stock_quantity = $product->stock_quantity + $mydata->received;
             } else {
                 $product->stock_quantity = $product->stock_quantity + $mydata->quantity;
             }
-            
+
             $product->save();
         }
         if ($save) {
@@ -151,11 +148,11 @@ class PurchaseController extends Controller
         $purchasestatus = PurchaseStatus::all();
         $ordertax = OrderTax::all();
         $purchase_products_id = DB::table('purchase_product_details')
-                                ->join('purchase_product_invoice_details','purchase_product_invoice_details.id', 'purchase_product_details.purchase_product_invoice_id')
-                                ->join('products','purchase_product_details.product_id','products.id')
-                                ->where('purchase_product_details.purchase_product_invoice_id',$id)
-                                ->get();
-        return view('purchase::edit', compact('purchaselists','warehouses', 'suppliers', 'purchasestatus', 'ordertax', 'purchase_products_id'));
+            ->join('purchase_product_invoice_details', 'purchase_product_invoice_details.id', 'purchase_product_details.purchase_product_invoice_id')
+            ->join('products', 'purchase_product_details.product_id', 'products.id')
+            ->where('purchase_product_details.purchase_product_invoice_id', $id)
+            ->get();
+        return view('purchase::edit', compact('purchaselists', 'warehouses', 'suppliers', 'purchasestatus', 'ordertax', 'purchase_products_id'));
     }
 
     /**
@@ -166,15 +163,15 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $purchase_products = PurchaseProductDetails::where('purchase_product_invoice_id',$id)->get();
-        foreach($purchase_products as $purchase_product){
-            $product = Product::where('id',$purchase_product->product_id)->first();
+        $purchase_products = PurchaseProductDetails::where('purchase_product_invoice_id', $id)->get();
+        foreach ($purchase_products as $purchase_product) {
+            $product = Product::where('id', $purchase_product->product_id)->first();
             $product->stock_quantity = $product->stock_quantity - $purchase_product->quantity;
 
             $product->save();
         }
-        $delete_products_details = PurchaseProductDetails::where('purchase_product_invoice_id',$id)->delete();
-        $delete_products_invoice_details = PurchaseProductInvoiceDetails::where('id',$id)->delete();
+        $delete_products_details = PurchaseProductDetails::where('purchase_product_invoice_id', $id)->delete();
+        $delete_products_invoice_details = PurchaseProductInvoiceDetails::where('id', $id)->delete();
 
         $purchase = new PurchaseProductInvoiceDetails;
         $purchase->warehouse_id = $request->warehouse;
@@ -218,12 +215,12 @@ class PurchaseController extends Controller
 
 
             $product = Product::where('id', $mydata->product_id)->first();
-            if ($mydata->received != '' && $mydata->received > 0){
+            if ($mydata->received != '' && $mydata->received > 0) {
                 $product->stock_quantity = $product->stock_quantity + $mydata->received;
             } else {
                 $product->stock_quantity = $product->stock_quantity + $mydata->quantity;
             }
-            
+
             $product->save();
         }
         if ($save) {
@@ -231,7 +228,6 @@ class PurchaseController extends Controller
         } else {
             return Response::json(array('success' => 'false', 'message' => 'Purchase has not been updated. Something went wrong!'));
         }
-        
     }
 
     /**
@@ -241,22 +237,23 @@ class PurchaseController extends Controller
      */
     public function destroy($id)
     {
-        $purchase_products = PurchaseProductDetails::where('purchase_product_invoice_id',$id)->get();
-        foreach($purchase_products as $purchase_product){
-            $product = Product::where('id',$purchase_product->product_id)->first();
+        $purchase_products = PurchaseProductDetails::where('purchase_product_invoice_id', $id)->get();
+        foreach ($purchase_products as $purchase_product) {
+            $product = Product::where('id', $purchase_product->product_id)->first();
             $product->stock_quantity = $product->stock_quantity - $purchase_product->quantity;
 
             $product->save();
         }
-        $delete_products_details = PurchaseProductDetails::where('purchase_product_invoice_id',$id)->delete();
-        $delete_products_invoice_details = PurchaseProductInvoiceDetails::where('id',$id)->delete();
+        $delete_products_details = PurchaseProductDetails::where('purchase_product_invoice_id', $id)->delete();
+        $delete_products_invoice_details = PurchaseProductInvoiceDetails::where('id', $id)->delete();
 
-        if($delete_products_details && $delete_products_invoice_details){
+        if ($delete_products_details && $delete_products_invoice_details) {
             return back()->with('message', 'Purchase has been successfully deleted.');
         }
     }
 
-    public function view ($id){
+    public function view($id)
+    {
         $purchase = PurchaseProductInvoiceDetails::find($id);
         $data = [
             'foo' => 'bar'
@@ -264,8 +261,6 @@ class PurchaseController extends Controller
         $pdf = PDF::loadView('purchase::view', $data);
         $pdf->SetProtection(['copy', 'print'], '', 'pass');
         return $pdf->stream('document.pdf');
-       // return view('purchase::view');
+        // return view('purchase::view');
     }
-
-    
 }

@@ -7,46 +7,41 @@
     }
   }
 
-  @media (min-width: 576px) {
-    .modal-dialog.order-table-custom-css {
-      max-width: 750px;
+  @media only print,
+  print {
+    body.non-print .close,
+    body.non-print .content-wrapper,
+    body.non-print .modal-footer,
+    .modal-backdrop.toPrint {
+      display: none !important;
+      visibility: hidden !important;
+    }
+
+    .modal.toPrint {
+      position: relative;
+      overflow: hidden;
+      visibility: visible;
+      width: 100%;
+      font-size: 80%;
+    }
+
+    .modal.toPrint .nav .li {
+      visibility: hidden;
+    }
+
+    .modal.toPrint .nav .li.active {
+      visibility: visible;
     }
   }
-
-  @media only print, print {
-  body.non-print .close,
-  body.non-print .content-wrapper,
-  body.non-print .modal-footer,
-  .modal-backdrop.toPrint {
-    display: none !important;
-    visibility: hidden !important;
-  }
-  .modal.toPrint {
-    position: relative;
-    overflow: hidden;
-    visibility:visible;
-    width: 100%;
-    font-size: 80%;
-  }
-  .modal.toPrint .nav .li {
-    visibility: hidden;
-  }
-  .modal.toPrint .nav .li.active {
-    visibility: visible;
-  }
-}
-
 </style>
+
+
 <div class="content-wrapper">
-
-
-
   <div class="card">
     <div class="card-header">
       <h3> Purchase List
         <a class="btn btn-success float-right btn-sm" href="{{route('purchase.add')}}"><i class="fa fa-plus-circle">
-          </i>Add Purchase</a> 
-          
+          </i>Add Purchase</a>
       </h3>
     </div>
     <!-- /.card-header -->
@@ -80,7 +75,6 @@
             <td>
               <a href="{{route('purchase.list.edit', $purchaselist->id)}}" class="btn btn-sm btn-primary" title="edit"><i class="fa fa-edit"></i></a>
               <a href="" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModalLong" title="edit"><i class="fa fa-eye"></i></a>
-
               <a href="{{ route('purchase.delete',$purchaselist->id)}}" id="delete" class="btn btn-sm btn-danger" title="delete"><i class="fa fa-trash"></i></a>
             </td>
           </tr>
@@ -92,11 +86,7 @@
   </div>
 </div>
 </div>
-
-
 <!-- Button trigger modal -->
-
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog order-table-custom-css" role="document">
@@ -119,26 +109,26 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label for="warehouse">Warehouse Name:</label>
-                         {{$purchaselist['wareee']['name']}}
+                        {{$purchaselist['wareee']['name']}}
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                      <label for="warehouse"> Supplier Name: </label>
-                      {{$purchaselist['suplier']['name']}}
+                        <label for="warehouse"> Supplier Name: </label>
+                        {{$purchaselist['suplier']['name']}}
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                      <label for="warehouse"> Supplier Name: </label>
-                      {{$purchaselist['purchasestatus']['name']}}
+                        <label for="warehouse"> Supplier Name: </label>
+                        {{$purchaselist['purchasestatus']['name']}}
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="form-group col-lg-4">
                       <div class="form-group">
-                        <label for="orderTax">Order Tax :  </label>
+                        <label for="orderTax">Order Tax : </label>
                         {{$purchaselist->order_tax_id}}
                       </div>
                     </div>
@@ -161,40 +151,39 @@
                       {{$purchaselist->note}}
                     </div>
                   </div>
-                  
+
                 </form>
                 <div class="table">
-                        <table id="orderTable" class="table table-bordered table-striped">
-                          <thead>
-                            <th>Product Name</th>
-                            <th>Quantity </th>
-                            <th class="rcvcolumn">Received</th>
-                            <th>Net Unit Cost</th>
-                            <th>Discount</th>
-                            <th>Tax</th>
-                            <th>Sub Total</th>
-                          
-                          </thead>
-                          <tbody class="tableBody">
+                  <table id="orderTable" class="table table-bordered table-striped">
+                    <thead>
+                      <th>Product Name</th>
+                      <th>Quantity </th>
+                      <th class="rcvcolumn">Received</th>
+                      <th>Net Unit Cost</th>
+                      <th>Discount</th>
+                      <th>Tax</th>
+                      <th>Sub Total</th>
 
-                          </tbody>
-                          <tfoot>
-                            <tr>
-                              <td>{{$purchaselist->product_id}}</td>
-                            
-                              <td><label class="totalQuantity">{{$purchaselist->items}}</td>
-                              <td class="ftrcvrow">{{$purchaselist->received_quantity}}</td>
-                              <td>{{$purchaselist->order_shipping_cost}}</td>
-                              <td>{{$purchaselist->order_discount}}</td>
-                              <td><label class="totaltax"></label>{{$purchaselist->order_tax}}</td>
-                              <td><label class="grandtotal" id="grandtotal"></label>{{$purchaselist->grand_total}}</td>
-                            </tr>
-                          </tfoot>
-                          @endforeach
-                        </table>
-                      </div>
+                    </thead>
+                    <tbody class="tableBody">
+
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td>{{$purchaselist->product_id}}</td>
+
+                        <td><label class="totalQuantity">{{$purchaselist->items}}</td>
+                        <td class="ftrcvrow">{{$purchaselist->received_quantity}}</td>
+                        <td>{{$purchaselist->order_shipping_cost}}</td>
+                        <td>{{$purchaselist->order_discount}}</td>
+                        <td><label class="totaltax"></label>{{$purchaselist->order_tax}}</td>
+                        <td><label class="grandtotal" id="grandtotal"></label>{{$purchaselist->grand_total}}</td>
+                      </tr>
+                    </tfoot>
+                    @endforeach
+                  </table>
+                </div>
                 <div class="table">
-                  
                 </div>
               </div>
             </div>
@@ -202,30 +191,30 @@
         </section>
       </div>
       <div class="modal-footer">
-        <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-default print" onClick="window.print();return false">Print</button>
       </div>
     </div>
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){
-$('.btnprn').printPage();
-});
+  $(document).ready(function() {
+    $('.btnprn').printPage();
+  });
 </script>
 
 
 <script>
-  $(document).ready(function(){
+  $(document).ready(function() {
     // Add Print Classes for Modal
-    $('.modal').on('shown.bs.modal',function() {
-        $('.modal,.modal-backdrop').addClass('toPrint');
-        $('body').addClass('non-print');
+    $('.modal').on('shown.bs.modal', function() {
+      $('.modal,.modal-backdrop').addClass('toPrint');
+      $('body').addClass('non-print');
     });
     // Remove classes
-    $('.modal').on('hidden.bs.modal',function() {
-        $('.modal,.modal-backdrop').removeClass('toPrint');
-        $('body').removeClass('non-print');
+    $('.modal').on('hidden.bs.modal', function() {
+      $('.modal,.modal-backdrop').removeClass('toPrint');
+      $('body').removeClass('non-print');
     });
   });
 </script>

@@ -109,7 +109,7 @@
              <li class="nav-item">
                <a href="{{route('taxmethod.view')}}" class="nav-link">
                  <i class="far fa-circle nav-icon"></i>
-                 <p>Tax Method List</p>
+                 <p>Vat Method List</p>
                </a>
              </li>
              <li class="nav-item">
@@ -127,7 +127,7 @@
              <li class="nav-item">
                <a href="{{route('ordertax.view')}}" class="nav-link">
                  <i class="far fa-circle nav-icon"></i>
-                 <p>Order Tax List</p>
+                 <p>Order Vat List</p>
                </a>
              </li>
              <li class="nav-item">

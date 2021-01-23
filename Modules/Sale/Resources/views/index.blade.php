@@ -7,28 +7,33 @@
     }
   }
 
-  @media only print, print {
-  body.non-print .close,
-  body.non-print .content-wrapper,
-  body.non-print .modal-footer,
-  .modal-backdrop.toPrint {
-    display: none !important;
-    visibility: hidden !important;
+  @media only print,
+  print {
+
+    body.non-print .close,
+    body.non-print .content-wrapper,
+    body.non-print .modal-footer,
+    .modal-backdrop.toPrint {
+      display: none !important;
+      visibility: hidden !important;
+    }
+
+    .modal.toPrint {
+      position: relative;
+      overflow: hidden;
+      visibility: visible;
+      width: 100%;
+      font-size: 80%;
+    }
+
+    .modal.toPrint .nav .li {
+      visibility: hidden;
+    }
+
+    .modal.toPrint .nav .li.active {
+      visibility: visible;
+    }
   }
-  .modal.toPrint {
-    position: relative;
-    overflow: hidden;
-    visibility:visible;
-    width: 100%;
-    font-size: 80%;
-  }
-  .modal.toPrint .nav .li {
-    visibility: hidden;
-  }
-  .modal.toPrint .nav .li.active {
-    visibility: visible;
-  }
-}
 </style>
 
 <div class="content-wrapper">
@@ -100,41 +105,41 @@
             <div class="card card-default">
               <div class="card-body">
                 <form name="AddPurchase" id="AddPurchase" action="javascript:void(0)" enctype="multipart/form-data">
-                 @foreach($salelists as $key => $salelist)
+                  @foreach($salelists as $key => $salelist)
                   @csrf
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label for="warehouse">Warehouse Name: </label>
-                        
-                         {{$salelist['wareee']['name']}}
-                        
+
+                        {{$salelist['wareee']['name']}}
+
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                      <label for="warehouse"> Customer Name: </label>
-                     
-                      {{$salelist['customer']['name']}}
-                    
+                        <label for="warehouse"> Customer Name: </label>
+
+                        {{$salelist['customer']['name']}}
+
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                      <label for="warehouse"> Supplier Name: </label>
-                      
-                      {{$salelist['purchasestatus']['name']}}
-                      
+                        <label for="warehouse"> Supplier Name: </label>
+
+                        {{$salelist['purchasestatus']['name']}}
+
                       </div>
                     </div>
-                   
+
                   </div>
-                
-                 
+
+
                   <div class="row">
                     <div class="form-group col-lg-4">
                       <div class="form-group">
-                        <label for="orderTax">Order Tax :  </label>
+                        <label for="orderTax">Order Tax : </label>
                         {{$salelist->order_tax_id}}
                       </div>
                     </div>
@@ -147,53 +152,53 @@
                     <div class="form-group col-lg-4">
                       <div class="form-group">
                         <label for="shippingCost">Shipping Cost</label>
-                       
+
                         {{$salelist->order_shipping_cost}}
-                        
+
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="form-group col-lg-12">
                       <label for="note">Note</label>
-                     
+
                       {{$salelist->note}}
-                     
+
                     </div>
                   </div>
-                  
+
                 </form>
                 <div class="table">
-                        <table id="orderTable" class="table table-bordered table-striped">
-                          <thead>
-                            <th>Product Name</th>
-                            <th>Quantity </th>
-                            <th class="rcvcolumn">Received</th>
-                            <th>Net Unit Cost</th>
-                            <th>Discount</th>
-                            <th>Tax</th>
-                            <th>Sub Total</th>
-                          
-                          </thead>
-                          <tbody class="tableBody">
+                  <table id="orderTable" class="table table-bordered table-striped">
+                    <thead>
+                      <th>Product Name</th>
+                      <th>Quantity </th>
+                      <th class="rcvcolumn">Received</th>
+                      <th>Net Unit Cost</th>
+                      <th>Discount</th>
+                      <th>Tax</th>
+                      <th>Sub Total</th>
 
-                          </tbody>
-                          <tfoot>
-                            <tr> 
-                              <td>{{$salelist->product_id}}</td> 
-                              <td><label class="totalQuantity">{{$salelist->items}}</td>
-                              <td class="ftrcvrow">{{$salelist->received_quantity}}</td>
-                              <td>{{$salelist->order_shipping_cost}}</td>
-                              <td>{{$salelist->order_discount}}</td>
-                              <td><label class="totaltax"></label>{{$salelist->order_tax}}</td>
-                              <td><label class="grandtotal" id="grandtotal"></label>{{$salelist->grand_total}}</td>
-                            </tr>
-                          </tfoot>
-                          @endforeach
-                        </table>
-                      </div>
+                    </thead>
+                    <tbody class="tableBody">
+
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td>{{$salelist->product_id}}</td>
+                        <td><label class="totalQuantity">{{$salelist->items}}</td>
+                        <td class="ftrcvrow">{{$salelist->received_quantity}}</td>
+                        <td>{{$salelist->order_shipping_cost}}</td>
+                        <td>{{$salelist->order_discount}}</td>
+                        <td><label class="totaltax"></label>{{$salelist->order_tax}}</td>
+                        <td><label class="grandtotal" id="grandtotal"></label>{{$salelist->grand_total}}</td>
+                      </tr>
+                    </tfoot>
+                    @endforeach
+                  </table>
+                </div>
                 <div class="table">
-                  
+
                 </div>
               </div>
             </div>
@@ -201,7 +206,7 @@
         </section>
       </div>
       <div class="modal-footer">
-        <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-default print" onClick="window.print();return false">Print</button>
       </div>
     </div>
@@ -211,16 +216,16 @@
 
 @push('scripts')
 <script>
-  $(document).ready(function(){
+  $(document).ready(function() {
     // Add Print Classes for Modal
-    $('.modal').on('shown.bs.modal',function() {
-        $('.modal,.modal-backdrop').addClass('toPrint');
-        $('body').addClass('non-print');
+    $('.modal').on('shown.bs.modal', function() {
+      $('.modal,.modal-backdrop').addClass('toPrint');
+      $('body').addClass('non-print');
     });
     // Remove classes
-    $('.modal').on('hidden.bs.modal',function() {
-        $('.modal,.modal-backdrop').removeClass('toPrint');
-        $('body').removeClass('non-print');
+    $('.modal').on('hidden.bs.modal', function() {
+      $('.modal,.modal-backdrop').removeClass('toPrint');
+      $('body').removeClass('non-print');
     });
   });
 </script>

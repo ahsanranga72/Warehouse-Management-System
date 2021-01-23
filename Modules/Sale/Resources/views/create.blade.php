@@ -103,13 +103,13 @@
                 <div class="table">
                   <table id="orderTable" class="table table-bordered table-striped">
                     <thead>
-                      <th>Name</th>
-                      <th>Code</th>
+                      <th>Product Name</th>
+                      <th>Product Code</th>
                       <th>Quantity</th>
                       <th class="rcvcolumn">Received</th>
-                      <th>Net Product Price</th>
-                      <th>Discount</th>
-                      <th>Tax</th>
+                      <th>Sale Price</th>
+                      <th>Product Discount</th>
+                      <th>Product Vat</th>
                       <th>Sub Total</th>
                       <th>Action</th>
                     </thead>
@@ -136,9 +136,9 @@
             <div class="row">
               <div class="form-group col-lg-4">
                 <div class="form-group">
-                  <label for="orderTax">Order Tax</label>
+                  <label for="orderTax">Order Vat</label>
                   <select name="orderTax" id="orderTax" class="form-control select2" style="width: 100%;">
-                    <option value="">--Select order tax--</option>
+                    <option value="">--Select order vat--</option>
                     @foreach ($ordertax as $key)
                     <option value='{{ $key->id }}' data-vat='{{$key->tax_number}}'>{{$key->name}}</option>
                     @endforeach
@@ -148,13 +148,13 @@
               <div class="form-group col-lg-4">
                 <div class="form-group">
                   <label class="orderDiscount" for="orderDiscount">Other Discount</label>
-                  <input type="number" id="orderDiscount" name="orderDiscount" class="form-control" placeholder="Enter Discount here">
+                  <input type="number" id="orderDiscount" name="orderDiscount" class="form-control" placeholder="Enter Order Discount">
                 </div>
               </div>
               <div class="form-group col-lg-4">
                 <div class="form-group">
                   <label for="shippingCost">Shipping Cost</label>
-                  <input type="number" id="shippingCost" name="shippingCost" class="form-control" placeholder="Shipping Cost">
+                  <input type="number" id="shippingCost" name="shippingCost" class="form-control" placeholder="Enter Shipping Cost">
                 </div>
               </div>
             </div>
@@ -170,7 +170,7 @@
                   <label for="sale_status">Sale Status</label>
                   <select name="sale_status" id="sale_status" class="form-control select2" style="width: 100%;">
                     <option value="">--Select a Payment--</option>
-                    <option value="1">Complate</option>
+                    <option value="1">Complete</option>
                     <option value="2">Pending</option>
                   </select>
                 </div>
@@ -267,7 +267,7 @@
               <thead>
                 <th>Items <span class="totalItems"></span>&nbsp(<span class="noRows">0</span>) </th>
                 <th>Total <span class="grandtotal text-right">0.00</span></th>
-                <th>Order Tax <span class="totalorderTax">0.00</span></th>
+                <th>Order Vat <span class="totalorderTax">0.00</span></th>
                 <th>Order Discount <span class="showOrderDiscount">0.00</span></th>
                 <th>Shipping Cost <span class="shippingCost">0.00</span></th>
                 <th>Grand Total <span class="grossTotal">0.00</span></th>

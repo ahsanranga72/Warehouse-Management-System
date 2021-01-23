@@ -13,9 +13,9 @@
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-              <h3>Edit Tax Method
+              <h3>Edit Vat Method
                  <a class="btn btn-success float-right btn-sm" href="{{route('taxmethod.view')}}">
-                 <i class="fa fa-list"></i>Tax Method List</a>
+                 <i class="fa fa-list"></i>Vat Method List</a>
                 </h3>
               </div>
               </div>
@@ -27,7 +27,7 @@
                 <div class="card-body">
                     <div class="row">
                     <div class="form-group col-md-6">
-                    <label for="name">Edit Purchase Unit</label>
+                    <label for="name">Edit Vat Method</label>
                     <input type="text" name="name" value="{{$taxmethod->name}}" class="form-control" id="name" 
                     placeholder="Enter name">
                     <font style="color: red">

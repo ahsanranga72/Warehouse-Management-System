@@ -122,33 +122,33 @@
             <div class="row">
               <div class="col-lg-4">
                 <div class="form-group">
-                  <label for="productCost">Product Cost <span class="required-field">*</span></label>
-                  <input placeholder="Enter product cost" name="product_cost" value="{{$productlists->product_cost}}" type="number" class="form-control" id="productCost" style="width: 100%;">
+                  <label for="productCost">Buy Price <span class="required-field">*</span></label>
+                  <input placeholder="Enter buy price" name="product_cost" value="{{$productlists->product_cost}}" type="number" class="form-control" id="productCost" style="width: 100%;">
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
-                  <label for="productPrice">Product Price <span class="required-field">*</span></label>
-                  <input placeholder="Enter product price" name="product_price" value="{{$productlists->product_price}}" type="number" name="productPrice" class="form-control" id="productPrice" style="width: 100%;">
+                  <label for="productPrice">Sale Price <span class="required-field">*</span></label>
+                  <input placeholder="Enter Sale price" name="product_price" value="{{$productlists->product_price}}" type="number" name="productPrice" class="form-control" id="productPrice" style="width: 100%;">
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="alertQuantity">Notify Quantity</label>
-                  <input placeholder="Enter Alert Quantity" name="alert_quantity" value="{{$productlists->alert_quantity}}" type="number" name="alertQuantity" class="form-control" id="alertQuantity" style="width: 100%;">
+                  <input placeholder="Enter Notify Quantity" name="alert_quantity" value="{{$productlists->alert_quantity}}" type="number" name="alertQuantity" class="form-control" id="alertQuantity" style="width: 100%;">
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
-                  <label for="productTax">Product Tax</label>
+                  <label for="productTax">Product Vat</label>
                   <input placeholder="Enter product tax" name="product_tax" type="number" value="{{$productlists->product_tax}}" class="form-control" id="productTax" style="width: 100%;">
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
-                  <label for="taxMethod">Tax Method</label>
+                  <label for="taxMethod">Vat Method</label>
                   <select name="tax_method" id="taxMethod" class="form-control select2" style="width: 100%;">
-                    <option value="">--Select Tax Method--</option>
+                    <option value="">--Select Vat Method--</option>
                     @foreach ($tax as $key)
                     <option value="{{ $key->id }}" selected>{{ $key->name }}</option>
                     @endforeach
