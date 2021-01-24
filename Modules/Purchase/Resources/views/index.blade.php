@@ -196,13 +196,6 @@
     </div>
   </div>
 </div>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('.btnprn').printPage();
-  });
-</script>
-
-
 <script>
   $(document).ready(function() {
     // Add Print Classes for Modal
