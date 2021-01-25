@@ -367,6 +367,7 @@
               _token: _token
             },
             success: function(data) {
+              console.log("Data",data)
               $('.tableBody').append(data).fadeIn()
 
               if ($('#purchaseStatus').val() == 2) {

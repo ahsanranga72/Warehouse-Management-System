@@ -205,7 +205,7 @@
   $(document).ready(function() {
 
 
-
+    //Saleunit+purchaseunit auto change with productunit
     $('#saleUnit').empty()
     $('#purchaseUnit').empty()
     $('#productUnit').on('change', function() {
@@ -225,18 +225,18 @@
 
       })
 
-      $.ajax({
-        type: 'GET',
-        url: 'get_product_unit_for_purchase/' + product_unit,
-        success: function(responce) {
-          var responce = JSON.parse(responce)
-          console.log(responce)
-          responce.forEach(element => {
-            $('#purchaseUnit').append(`<option value="${element['id']}">${element['name']}</option>`);
-          })
-        }
+      // $.ajax({
+      //   type: 'GET',
+      //   url: 'get_product_unit_for_purchase/' + product_unit,
+      //   success: function(responce) {
+      //     var responce = JSON.parse(responce)
+      //     console.log(responce)
+      //     responce.forEach(element => {
+      //       $('#purchaseUnit').append(`<option value="${element['id']}">${element['name']}</option>`);
+      //     })
+      //   }
 
-      })
+      // })
     })
 
 
@@ -270,7 +270,7 @@
         var category = $('select[name="category"]').val()
         var productUnit = $('select[name="productUnit"]').val()
         var saleUnit = $('select[name="saleUnit"]').val()
-        var purchaseUnit = $('select[name="purchaseUnit"]').val()
+        //var purchaseUnit = $('select[name="purchaseUnit"]').val()
         var productCost = $('input[name="productCost"]').val()
         var productPrice = $('input[name="productPrice"]').val()
         var alertQuantity = $('input[name="alertQuantity"]').val()
@@ -292,7 +292,7 @@
         formData.append('brand', brand);
         formData.append('category', category);
         formData.append('sale_unit', saleUnit);
-        formData.append('purchase_unit', purchaseUnit);
+        //formData.append('purchase_unit', purchaseUnit);
         formData.append('product_cost', productCost);
         formData.append('product_price', productPrice);
         formData.append('alert_quantity', alertQuantity);

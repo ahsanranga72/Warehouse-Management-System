@@ -16,6 +16,7 @@ use Modules\Sale\Entities\Sale;
 use Modules\Sale\Entities\SaleProductDetails;
 use Modules\Sale\Entities\SaleProductInvoiceDetail;
 use Modules\Bank\Entities\Bank;
+use Modules\SaleUnit\Entities\SaleUnit;
 use DB;
 use app\Helpers\Helper;
 use PDF;
@@ -325,11 +326,15 @@ class SaleController extends Controller
         }
     }
 
-    public function view($id)
+    public function view(Request $request)
     {
 
-        $salelists = SaleProductInvoiceDetail::find($id);
-        return view('sale::index', compact('salelists'));
+        if ($request->get('product_id')) {
+            $product_id = $request->get('product_id');
+            $saleviewdata = SaleProductInvoiceDetail::find($product_id);
+            return $saleviewdata;
+            exit(0);
+        }
     }
 
 
@@ -345,7 +350,9 @@ class SaleController extends Controller
         if ($request->get('product_id')) {
             $product_id = $request->get('product_id');
             $data['product'] = Product::where('id', $product_id)->get()->first();
-            return view('sale::sale_orderlist', $data);
+            $data['sale_unit'] = SaleUnit::where('parent_id',$data['product']->product_unit)->get();
+            //print_r($data['sale_unit']);die();
+            return view('sale::sale_orderlist',$data);
             exit(0);
         }
     }

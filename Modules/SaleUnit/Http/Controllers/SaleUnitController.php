@@ -40,9 +40,12 @@ class SaleUnitController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|unique:sale_units|max:50',
+            'value' => 'required',
+            'parent_id' => 'required',
         ]);
         $saleunit = New SaleUnit;
         $saleunit->name = $request->name;
+        $saleunit->value = $request->value;
         $saleunit->parent_id = $request->parent_id;
         $saleunit->save();
         return redirect()->route('saleunit.view')->with('message', 'Sale Unit Save Successfully');
@@ -80,9 +83,12 @@ class SaleUnitController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|unique:sale_units|max:50',
+            'value' => 'required',
+            'parent_id' => 'required',
         ]);
         $saleunit =SaleUnit::find($id);
         $saleunit->name = $request->name;
+        $saleunit->value = $request->value;
         $saleunit->parent_id = $request->parent_id;
         $saleunit->save();
         return redirect()->route('saleunit.view')->with('message', 'Sale Unit Updated Successfully');

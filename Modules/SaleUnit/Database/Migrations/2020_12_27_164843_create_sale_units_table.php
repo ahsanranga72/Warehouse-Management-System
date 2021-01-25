@@ -16,6 +16,7 @@ class CreateSaleUnitsTable extends Migration
         Schema::create('sale_units', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->float('value');
             $table->integer('parent_id');
             $table->timestamps();
         });

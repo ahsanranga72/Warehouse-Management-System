@@ -22,6 +22,7 @@
                   <tr>
                   <th>SL</th>
                     <th>Sale Unit Name</th>
+                    <th>Sale Unit Value</th>
                     <th>Product Unit Name</th>
                     <th>Action</th>
                   </tr>
@@ -31,6 +32,7 @@
                   <tr>
                     <td>{{$key+1}}</td>
                     <td>{{$saleunit->name}}</td>
+                    <td>{{$saleunit->value}}</td>
                     <td>{{$saleunit['productunit']['name']}}</td>
                     <td>
                     <a href="{{ route('saleunit.edit',$saleunit->id)}}" class="btn btn-sm btn-primary" title="edit">

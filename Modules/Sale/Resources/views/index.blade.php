@@ -78,7 +78,7 @@
             <td>{{$salelist->grand_total}}</td>
             <td>
               <a href="{{ route('sale.edit',$salelist->id)}}" class="btn btn-sm btn-primary" title="edit"><i class="fa fa-edit"></i></a>
-              <a href="{{route('list.view', $salelist->id)}}" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModalLong" title="view"><i class="fa fa-eye"></i></a>
+              <button id="sale-view" data-val='{{$salelist->id}}'  class="btn btn-sm btn-primary"  title="view"><i class="fa fa-eye"></i></button>
               <a href="{{ route('sale.delete',$salelist->id)}}" id="delete" class="btn btn-sm btn-danger" title="delete"><i class="fa fa-trash"></i></a>
             </td>
           </tr>
@@ -105,14 +105,13 @@
             <div class="card card-default">
               <div class="card-body">
                 <form name="AddPurchase" id="AddPurchase" action="javascript:void(0)" enctype="multipart/form-data">
-                  @foreach($salelists as $key => $salelist)
-                  @csrf
+@foreach($saleviewdata as $data)
+                
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label for="warehouse">Warehouse Name: </label>
-
-                        {{$salelist['wareee']['name']}}
+                   {{$data->warehouse_id}}
 
                       </div>
                     </div>
@@ -120,7 +119,7 @@
                       <div class="form-group">
                         <label for="warehouse"> Customer Name: </label>
 
-                        {{$salelist['customer']['name']}}
+                     
 
                       </div>
                     </div>
@@ -128,7 +127,7 @@
                       <div class="form-group">
                         <label for="warehouse"> Supplier Name: </label>
 
-                        {{$salelist['purchasestatus']['name']}}
+                      
 
                       </div>
                     </div>
@@ -140,20 +139,20 @@
                     <div class="form-group col-lg-4">
                       <div class="form-group">
                         <label for="orderTax">Order Tax : </label>
-                        {{$salelist->order_tax_id}}
+                     
                       </div>
                     </div>
                     <div class="form-group col-lg-4">
                       <div class="form-group">
                         <label class="orderDiscount" for="orderDiscount">Discount :</label>
-                        {{$salelist->order_discount}}
+                      
                       </div>
                     </div>
                     <div class="form-group col-lg-4">
                       <div class="form-group">
                         <label for="shippingCost">Shipping Cost</label>
 
-                        {{$salelist->order_shipping_cost}}
+                        
 
                       </div>
                     </div>
@@ -162,11 +161,11 @@
                     <div class="form-group col-lg-12">
                       <label for="note">Note</label>
 
-                      {{$salelist->note}}
+                     
 
                     </div>
                   </div>
-
+@endforeach
                 </form>
                 <div class="table">
                   <table id="orderTable" class="table table-bordered table-striped">
@@ -185,16 +184,16 @@
                     </tbody>
                     <tfoot>
                       <tr>
-                        <td>{{$salelist->product_id}}</td>
-                        <td><label class="totalQuantity">{{$salelist->items}}</td>
-                        <td class="ftrcvrow">{{$salelist->received_quantity}}</td>
-                        <td>{{$salelist->order_shipping_cost}}</td>
-                        <td>{{$salelist->order_discount}}</td>
-                        <td><label class="totaltax"></label>{{$salelist->order_tax}}</td>
-                        <td><label class="grandtotal" id="grandtotal"></label>{{$salelist->grand_total}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     </tfoot>
-                    @endforeach
+                    
                   </table>
                 </div>
                 <div class="table">
@@ -226,6 +225,28 @@
     $('.modal').on('hidden.bs.modal', function() {
       $('.modal,.modal-backdrop').removeClass('toPrint');
       $('body').removeClass('non-print');
+    });
+
+
+    //view sale
+    $(document).on('click', '#sale-view', function() {
+      var productId = $(this).attr('data-val')
+
+        var _token = $('input[name="_token"]').val();
+       
+          $.ajax({
+            url: "{{route('list.view', $salelist->id)}}",
+            method: "get",
+            data: {
+              product_id: productId,
+            },
+            success: function(data) {
+              console.log("Data",data)
+              //$('#exampleModalLong').modal();
+              $('#exampleModalLong').modal(data);
+            }
+          });
+
     });
   });
 </script>
