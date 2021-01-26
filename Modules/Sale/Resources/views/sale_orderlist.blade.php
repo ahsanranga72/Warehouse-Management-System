@@ -3,9 +3,9 @@
     <td>{{$product->product_code}}</td>
     <td class="d-flex">
         <input type="number" class="form-control quantity" required min="0" name="quantity{{$product->id}}" id="quantity{{$product->id}}">
-        <select name="" id="" class="form-control w-50">
+        <select name="select-sale-unit{{$product->id}}" id="select-sale-unit{{$product->id}}" class="form-control w-50 select-sale-unit">
             @foreach($sale_unit as $key)
-            <option value="{{ $key->value }}" {{($product->sale_unit==$key->id)?"selected":''}}>{{$key->name}}</option>
+            <option data-id="{{ $key->id }}" value="{{ $key->value }}" {{ ($product->sale_unit==$key->id)?"selected":'' }}>{{ $key->name }}</option>
             @endforeach
     </td>
     <td class="rcvrow"><input type="number" min="0" class="form-control received " name="received{{$product->id}}" id="received{{$product->id}}"></td>

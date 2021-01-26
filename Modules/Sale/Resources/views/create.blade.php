@@ -285,10 +285,12 @@
 <script>
   $(document).ready(function() {
 
+    //select2
     $('.select2').select2({
       theme: 'bootstrap4'
     });
 
+    //Hide input customer
     $('.select_customer').on('change', function() {
       if ($(this).val() != '') {
         $('#input_customer').val('')
@@ -297,6 +299,7 @@
       }
     })
 
+    //Hide select Customer
     $('#input_customer').keyup(function() {
       if ($(this).val() != '') {
         $('#select_customer').val('')
@@ -305,9 +308,11 @@
       }
     });
 
+
     $('.checkVisible').hide()
     $('#payment').hide()
 
+    //check show
     $('.paid_by').on('change', function() {
       if ($(this).val() == 2) {
         $('.checkVisible').show()
@@ -316,8 +321,9 @@
         $('input[name="cheque_no"]').val('')
         $('.checkVisible').hide()
       }
-
     })
+
+    //payment show
     $('.payment_status').on('change', function() {
 
       if ($(this).val() == 3) {
@@ -329,6 +335,7 @@
       }
     })
 
+    //show product list on search
     $('#product_code').keyup(function() {
       var product_code = $(this).val();
       var warehouse = $('select[name=warehouse]').val();
@@ -350,6 +357,7 @@
       }
     });
 
+    //add product to the order list
     $(document).on('click', 'li', function() {
       var productId = $(this).attr('data-product')
       $('#product_code').val('');
@@ -367,7 +375,7 @@
               _token: _token
             },
             success: function(data) {
-              console.log("Data",data)
+              console.log("Data", data)
               $('.tableBody').append(data).fadeIn()
 
               if ($('#purchaseStatus').val() == 2) {
@@ -375,7 +383,6 @@
               } else {
                 $('#orderTable').find('.showRow').removeClass('showRow').addClass('rcvrow');
               }
-
             }
           });
         } else {
@@ -389,43 +396,124 @@
 
     });
 
+    //Product delete from order list
     $('#orderTable').on('click', '.ibtnDel', function() {
       $(this).closest('tr').remove();
       CalculateTotal();
-    })
+    });
 
-    $('#orderTable').on('change', '.net-unit-cost', function() {
 
-      var unitcost = parseFloat($(this).val())
+    //in order list on change sale unit calculation
+    $(document).on('change', '.select-sale-unit', function() {
+      var saleprice = parseFloat($(this).closest('tr').find('.unitcost').attr('data-unitcost'))
+      var value = parseFloat($(this).val())
+
+      price = parseFloat(saleprice / value)
+
+      $(this).closest('tr').find('.net-unit-cost').val(price)
+
+      var unitcost = $(this).closest('tr').find('.net-unit-cost').val()
       var discount = parseFloat($(this).closest('tr').find('.discount').attr('data-discount'))
       var tax = parseFloat($(this).closest('tr').find('.tax').text())
-      var quantity = parseInt($(this).closest('tr').find('.quantity').val())
+      var quantity = $(this).closest('tr').find('.quantity').val()
 
-      subtotal = (unitcost * quantity) + tax - discount
+      if (unitcost != undefined && unitcost != '' && quantity != undefined && quantity != '') {
+        unitcost = parseFloat(unitcost)
+        quantity = parseFloat(quantity)
 
-      $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
-      CalculateTotal();
+        subtotal = (unitcost * quantity) + tax - discount
+
+        $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
+        CalculateTotal();
+      } else {
+        unitcost = 0
+        quantity = 0
+
+        unitcost = parseFloat(unitcost)
+        $(this).closest('tr').find('.net-unit-cost').text(unitcost)
+        quantity = parseFloat(quantity)
+        $(this).text(quantity)
+
+        subtotal = (unitcost * quantity) + tax - discount
+
+        $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
+        CalculateTotal();
+      }
     })
 
+    //subtotal calculation for change sale price
+    $('#orderTable').on('keyup', '.net-unit-cost', function() {
 
-    $('#orderTable').on('change', '.quantity', function() {
-
-      var unitcost = parseFloat($(this).closest('tr').find('.net-unit-cost').val())
+      var unitcost = $(this).val()
       var discount = parseFloat($(this).closest('tr').find('.discount').attr('data-discount'))
       var tax = parseFloat($(this).closest('tr').find('.tax').text())
-      var quantity = parseInt($(this).val())
+      var quantity = $(this).closest('tr').find('.quantity').val()
 
-      subtotal = (unitcost * quantity) + tax - discount
+      if (unitcost != undefined && unitcost != '' && quantity != undefined && quantity != '') {
+        unitcost = parseFloat(unitcost)
+        quantity = parseFloat(quantity)
 
-      $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
-      CalculateTotal();
+        subtotal = (unitcost * quantity) + tax - discount
+
+        $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
+        CalculateTotal();
+      } else {
+        unitcost = 0
+        quantity = 0
+
+        unitcost = parseFloat(unitcost)
+        $(this).text(unitcost)
+        quantity = parseFloat(quantity)
+        $(this).closest('tr').find('.quantity').text(quantity)
+
+        subtotal = (unitcost * quantity) + tax - discount
+
+        $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
+        CalculateTotal();
+      }
     })
 
+
+    //subtotal calculation for change quantity price
+    $('#orderTable').on('keyup', '.quantity', function() {
+
+      var unitcost = $(this).closest('tr').find('.net-unit-cost').val()
+      var discount = parseFloat($(this).closest('tr').find('.discount').attr('data-discount'))
+      var tax = parseFloat($(this).closest('tr').find('.tax').text())
+      var quantity = $(this).val()
+
+      if (unitcost != undefined && unitcost != '' && quantity != undefined && quantity != '') {
+        unitcost = parseFloat(unitcost)
+        quantity = parseFloat(quantity)
+
+        subtotal = (unitcost * quantity) + tax - discount
+
+        $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
+        CalculateTotal();
+      } else {
+        unitcost = 0
+        quantity = 0
+
+        unitcost = parseFloat(unitcost)
+        $(this).closest('tr').find('.net-unit-cost').text(unitcost)
+        quantity = parseFloat(quantity)
+        $(this).text(quantity)
+
+        subtotal = (unitcost * quantity) + tax - discount
+
+        $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
+        CalculateTotal();
+      }
+
+    })
+
+
+    //Received can't be greater than  quantity!
     $('#orderTable').on('change', '.received', function() {
       var received = $(this).val()
       var quantity = $(this).parent().parent().find('.quantity').val()
 
-      if (parseInt(quantity) <= parseInt(received)) {
+      if (parseFloat(quantity) <= parseFloat(received)) {
 
         Toast.fire({
           icon: 'warning',
@@ -459,7 +547,7 @@
 
         }
         if ($(quantityTotal[i]).val() != '') {
-          totalQuantity += parseInt($(quantityTotal[i]).val());
+          totalQuantity += parseFloat($(quantityTotal[i]).val());
         }
 
 
@@ -468,7 +556,7 @@
 
       $('.totaltax').text(parseFloat(totalTax).toFixed(2));
       $('.grandtotal').text(parseFloat(grandTotal).toFixed(2));
-      $('.totalItems').text(parseInt(totalQuantity));
+      $('.totalItems').text(parseFloat(totalQuantity));
       $('.noRows').text($('#orderTable').find('.orderData').length);
 
       var orderTax = $('#orderTax option:selected').attr('data-vat');
@@ -502,37 +590,24 @@
 
     }
 
-    $('#AddPurchase').on('change', '#purchaseStatus', function() {
-      var status = $(this).val()
-      //alert(status)
-      if (status == 2) {
-        $('#orderTable').find('.received').val('')
-        $('#orderTable').find('.rcvrow').removeClass('rcvrow').addClass('showRow');
-        $('.ftrcvrow').show()
-        $('.rcvcolumn').show()
-      } else {
-        $('#orderTable').find('.showRow').removeClass('showRow').addClass('rcvrow');
-        $('.ftrcvrow').hide()
-        $('.rcvcolumn').hide()
-        $('#orderTable').find('.received').val('')
-      }
 
-
-
-    });
+    //calcualtion for change order vat
     $('#orderTax').on('change', function() {
-
       CalculateTotal();
-
     })
+
+    //calcualtion for change order discount
     $('#orderDiscount').on('change', function() {
       CalculateTotal();
-
     })
+
+    //calcualtion for change shippingcost
     $('#shippingCost').on('change', function() {
       CalculateTotal();
     })
 
+
+    // received amount - paying amount = change
     $('#receive_amount').on('change', function() {
       var rcv = $(this).val()
       $('#paid_amount').on('change', function() {
@@ -545,7 +620,7 @@
     })
 
 
-
+    //hide received row from view
     $('.rcvcolumn').hide()
     $('.tableBody').find('.rcvrow').hide()
     $('.ftrcvrow').hide()
@@ -553,7 +628,7 @@
 
 
 
-
+    //store sale product details
     $.validator.setDefaults({
       submitHandler: function() {
         $.ajaxSetup({
@@ -563,6 +638,7 @@
         });
         var list = $('.tableBody').find('.orderData').length
         if (list > 0) {
+          //this data will go into sale product invoice details table
           var reference_no = $("input[name='reference_no']").val()
           var input_customer = $("input[name='input_customer']").val()
           var select_customer = $("select[name='select_customer']").val()
@@ -589,6 +665,8 @@
           var grandTotal = $('.grossTotal').text()
 
 
+          //from order table
+          //this data will go into sale product deatails table
           products = []
           $(".tableBody").find('.orderData').each(function() {
             let quantity = $(this).find('.quantity').val()
@@ -668,6 +746,7 @@
       }
     })
 
+    //data validation
     $('#AddPurchase').validate({
       rules: {
         warehouse: {
