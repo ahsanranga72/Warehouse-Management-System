@@ -74,7 +74,7 @@
             <td>{{$purchaselist->grand_total}}</td>
             <td>
               <a href="{{route('purchase.list.edit', $purchaselist->id)}}" class="btn btn-sm btn-primary" title="edit"><i class="fa fa-edit"></i></a>
-              <a href="{{route('purchase.list.view', $purchaselist->id)}}" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModalLong" title="edit"><i class="fa fa-eye"></i></a>
+              <button id="purchese-view" data-val='{{$purchaselist->id}}'  class="btn btn-sm btn-primary"  title="view"><i class="fa fa-eye"></i></button>
               <a href="{{ route('purchase.delete',$purchaselist->id)}}" id="delete" class="btn btn-sm btn-danger" title="delete"><i class="fa fa-trash"></i></a>
             </td>
           </tr>
@@ -98,95 +98,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <section class="content">
-          <div class="container-fluid">
-            <div class="card card-default">
-              <div class="card-body">
-                <form name="AddPurchase" id="AddPurchase" action="javascript:void(0)" enctype="multipart/form-data">
-                  @csrf
-                  
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label for="warehouse">Warehouse Name:</label>
-                        {{$purchaselist['wareee']['name']}}
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label for="warehouse"> Supplier Name: </label>
-                        {{$purchaselist['suplier']['name']}}
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label for="warehouse"> Supplier Name: </label>
-                        {{$purchaselist['purchasestatus']['name']}}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="form-group col-lg-4">
-                      <div class="form-group">
-                        <label for="orderTax">Order Tax : </label>
-                        {{$purchaselist->order_tax_id}}
-                      </div>
-                    </div>
-                    <div class="form-group col-lg-4">
-                      <div class="form-group">
-                        <label class="orderDiscount" for="orderDiscount">Discount :</label>
-                        {{$purchaselist->order_discount}}
-                      </div>
-                    </div>
-                    <div class="form-group col-lg-4">
-                      <div class="form-group">
-                        <label for="shippingCost">Shipping Cost</label>
-                        {{$purchaselist->order_shipping_cost}}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="form-group col-lg-12">
-                      <label for="note">Note</label>
-                      {{$purchaselist->note}}
-                    </div>
-                  </div>
-
-                </form>
-                <div class="table">
-                  <table id="orderTable" class="table table-bordered table-striped">
-                    <thead>
-                      <th>Product Name</th>
-                      <th>Quantity </th>
-                      <th class="rcvcolumn">Received</th>
-                      <th>Net Unit Cost</th>
-                      <th>Discount</th>
-                      <th>Tax</th>
-                      <th>Sub Total</th>
-
-                    </thead>
-                    <tbody class="tableBody">
-
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <td>{{$purchaselist->product_id}}</td>
-
-                        <td><label class="totalQuantity">{{$purchaselist->items}}</td>
-                        <td class="ftrcvrow">{{$purchaselist->received_quantity}}</td>
-                        <td>{{$purchaselist->order_shipping_cost}}</td>
-                        <td>{{$purchaselist->order_discount}}</td>
-                        <td><label class="totaltax"></label>{{$purchaselist->order_tax}}</td>
-                        <td><label class="grandtotal" id="grandtotal"></label>{{$purchaselist->grand_total}}</td>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div>
-                <div class="table">
-                </div>
-              </div>
-            </div>
-          </div>
+        <section class="content purchase-view-modal">
+          
         </section>
       </div>
       <div class="modal-footer">
@@ -209,6 +122,28 @@
       $('body').removeClass('non-print');
     });
   });
+
+  //purchase view
+  $(document).on('click', '#purchese-view', function() {
+      var productId = $(this).attr('data-val')
+        var _token = $('input[name="_token"]').val();
+        $('#exampleModalLong').modal();
+          $.ajax({
+            url: "{{route('purchase.list.view', $purchaselist->id)}}",
+            method: "get",
+            data: {
+              product_id: productId,
+            },
+            success: function(data) {
+              console.log("Data",data)
+              $('.purchase-view-modal').html(data)
+              //$('#exampleModalLong').modal();
+              
+            }
+          });
+
+    });
+  
 </script>
 
 @endsection

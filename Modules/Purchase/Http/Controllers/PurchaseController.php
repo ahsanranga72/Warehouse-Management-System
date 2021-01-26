@@ -251,17 +251,21 @@ class PurchaseController extends Controller
             return back()->with('message', 'Purchase has been successfully deleted.');
         }
     }
-
-    public function view($id)
+    
+    public function view(Request $request)
     {
-        $purchase = PurchaseProductInvoiceDetails::find($id);
-        $data = [
-            'foo' => 'bar'
-        ];
-        $pdf = PDF::loadView('purchase::view', $data);
-        $pdf->SetProtection(['copy', 'print'], '', 'pass');
-        return $pdf->stream('document.pdf');
-        // return view('purchase::view');
+
+        if ($request->get('product_id')) {
+            $product_id = $request->get('product_id');
+            $parchaseviewdata = PurchaseProductInvoiceDetails::find($product_id);
+            $purchase_products_id = DB::table('purchase_product_details')
+            ->join('purchase_product_invoice_details', 'purchase_product_invoice_details.id', 'purchase_product_details.purchase_product_invoice_id')
+            ->join('products', 'purchase_product_details.product_id', 'products.id')
+            ->where('purchase_product_details.purchase_product_invoice_id', $product_id)
+            ->get();
+            return view('purchase::purchase-data-view', compact('parchaseviewdata','purchase_products_id'));
+            exit(0);
+        }
     }
 
 

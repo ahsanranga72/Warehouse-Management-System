@@ -23,5 +23,6 @@ Route::prefix('purchase')->group(function() {
     Route::get('/download-pdf', 'PurchaseController@downloadPDF');
     Route::get('/purchase-edit/{id}','PurchaseController@edit')->name('purchase.list.edit');
     Route::get('/purchase-view/{id}','PurchaseController@singleview')->name('purchase.list.view');
+    Route::get('/list-view/{id}', 'PurchaseController@view')->name('purchase.list.view'); 
     
 });

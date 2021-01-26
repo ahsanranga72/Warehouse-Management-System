@@ -1,45 +1,53 @@
-
-
 <div class="container-fluid">
             <div class="card card-default">
               <div class="card-body">
                 <form name="AddPurchase" id="AddPurchase" action="javascript:void(0)" enctype="multipart/form-data">
-
-                
+                  @csrf
+                  
                   <div class="row">
-                  <div class="col-lg-4">
+                    <div class="col-lg-6">
                       <div class="form-group">
-                        <label for="warehouse">Reference No: </label>
-                        {{$saleviewdata->referent_no}}
-                      </div>
-                    </div>
-                    <div class="col-lg-8">
-                      <div class="form-group">
-                        <label for="warehouse">Warehouse Name: </label>
-                        {{$saleviewdata['wareee']['name']}}
+                        <label for="warehouse">Warehouse Name:</label>
+                        {{$parchaseviewdata['wareee']['name']}}
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label for="warehouse"> Customer Name: </label>
-                        {{$saleviewdata['customer']['name']}}
+                        <label for="warehouse"> Supplier Name: </label>
+                        {{$parchaseviewdata['suplier']['name']}}
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label for="warehouse"> Billar Name: </label>
-                        {{$saleviewdata['user']['name']}}
+                        <label for="warehouse"> Supplier Name: </label>
+                        {{$parchaseviewdata['purchasestatus']['name']}}
                       </div>
                     </div>
                   </div>
-                  
+                  <div class="row">
+                    <div class="form-group col-lg-4">
+                      <div class="form-group">
+                        <label for="orderTax">Order Tax : </label>
+                        {{$parchaseviewdata->order_tax_id}}
+                      </div>
+                    </div>
+                    <div class="form-group col-lg-4">
+                      <div class="form-group">
+                        <label class="orderDiscount" for="orderDiscount">Discount :</label>
+                        {{$parchaseviewdata->order_discount}}
+                      </div>
+                    </div>
+                    <div class="form-group col-lg-4">
+                      <div class="form-group">
+                        <label for="shippingCost">Shipping Cost</label>
+                        {{$parchaseviewdata->order_shipping_cost}}
+                      </div>
+                    </div>
                   </div>
                   <div class="row">
                     <div class="form-group col-lg-12">
                       <label for="note">Note</label>
-                      {{$saleviewdata->staff_note}}
-                     
-
+                      {{$parchaseviewdata->note}}
                     </div>
                   </div>
 
@@ -55,14 +63,13 @@
                       <th>Product Discount</th>
                       <th>Product Vat</th>
                       <th> Total</th>
-                     
 
                     </thead>
                     <tbody class="tableBody">
 
                     </tbody>
                     <tfoot>
-                    @foreach($sale_products_id as $product)
+                    @foreach($purchase_products_id as $product)
                       <tr>
                       <td>{{$product->product_name}}</td>
                         <td>{{$product->product_code}}</td>
@@ -75,7 +82,6 @@
                       </tr>
                       @endforeach
                     </tfoot>
-                    
                   </table>
                 </div>
                 <div class="table">

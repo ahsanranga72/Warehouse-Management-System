@@ -135,6 +135,7 @@ class SaleController extends Controller
                 $saleProductDetails = new SaleProductDetails;
                 $saleProductDetails->product_id = $mydata->product_id;
                 $saleProductDetails->quantity = $mydata->quantity;
+                $saleProductDetails->sale_price = $mydata->sale_price;
                 $saleProductDetails->subtotal = $mydata->subtotal;
                 $saleProductDetails->sale_product_invoice_id = $sale_id;
                 $saleProductDetails->save();
@@ -332,7 +333,12 @@ class SaleController extends Controller
         if ($request->get('product_id')) {
             $product_id = $request->get('product_id');
             $saleviewdata = SaleProductInvoiceDetail::find($product_id);
-            return view('sale::sale-data-view', compact('saleviewdata'));
+            $sale_products_id = DB::table('sale_product_details')
+            ->join('sale_product_invoice_details', 'sale_product_invoice_details.id', 'sale_product_details.sale_product_invoice_id')
+            ->join('products', 'sale_product_details.product_id', 'products.id')
+            ->where('sale_product_details.sale_product_invoice_id', $product_id)
+            ->get();
+            return view('sale::sale-data-view', compact('saleviewdata','sale_products_id'));
             exit(0);
         }
     }
