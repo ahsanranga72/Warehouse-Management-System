@@ -332,7 +332,7 @@ class SaleController extends Controller
         if ($request->get('product_id')) {
             $product_id = $request->get('product_id');
             $saleviewdata = SaleProductInvoiceDetail::find($product_id);
-            return $saleviewdata;
+            return view('sale::sale-data-view', compact('saleviewdata'));
             exit(0);
         }
     }

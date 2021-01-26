@@ -100,108 +100,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <section class="content">
-          <div class="container-fluid">
-            <div class="card card-default">
-              <div class="card-body">
-                <form name="AddPurchase" id="AddPurchase" action="javascript:void(0)" enctype="multipart/form-data">
-@foreach($saleviewdata as $data)
-                
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label for="warehouse">Warehouse Name: </label>
-                   {{$data->warehouse_id}}
-
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label for="warehouse"> Customer Name: </label>
-
-                     
-
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label for="warehouse"> Supplier Name: </label>
-
-                      
-
-                      </div>
-                    </div>
-
-                  </div>
-
-
-                  <div class="row">
-                    <div class="form-group col-lg-4">
-                      <div class="form-group">
-                        <label for="orderTax">Order Tax : </label>
-                     
-                      </div>
-                    </div>
-                    <div class="form-group col-lg-4">
-                      <div class="form-group">
-                        <label class="orderDiscount" for="orderDiscount">Discount :</label>
-                      
-                      </div>
-                    </div>
-                    <div class="form-group col-lg-4">
-                      <div class="form-group">
-                        <label for="shippingCost">Shipping Cost</label>
-
-                        
-
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="form-group col-lg-12">
-                      <label for="note">Note</label>
-
-                     
-
-                    </div>
-                  </div>
-@endforeach
-                </form>
-                <div class="table">
-                  <table id="orderTable" class="table table-bordered table-striped">
-                    <thead>
-                      <th>Product Name</th>
-                      <th>Quantity </th>
-                      <th class="rcvcolumn">Received</th>
-                      <th>Net Unit Cost</th>
-                      <th>Discount</th>
-                      <th>Tax</th>
-                      <th>Sub Total</th>
-
-                    </thead>
-                    <tbody class="tableBody">
-
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                    </tfoot>
-                    
-                  </table>
-                </div>
-                <div class="table">
-
-                </div>
-              </div>
-            </div>
-          </div>
+        <section class="content sale-view-modal">
+         
         </section>
       </div>
       <div class="modal-footer">
@@ -233,7 +133,7 @@
       var productId = $(this).attr('data-val')
 
         var _token = $('input[name="_token"]').val();
-       
+        $('#exampleModalLong').modal();
           $.ajax({
             url: "{{route('list.view', $salelist->id)}}",
             method: "get",
@@ -242,8 +142,9 @@
             },
             success: function(data) {
               console.log("Data",data)
+              $('.sale-view-modal').html(data)
               //$('#exampleModalLong').modal();
-              $('#exampleModalLong').modal(data);
+              
             }
           });
 
