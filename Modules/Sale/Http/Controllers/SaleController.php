@@ -135,13 +135,17 @@ class SaleController extends Controller
                 $saleProductDetails = new SaleProductDetails;
                 $saleProductDetails->product_id = $mydata->product_id;
                 $saleProductDetails->quantity = $mydata->quantity;
+                $saleProductDetails->sale_unit_id = $mydata->sale_unit_id;
+                $saleProductQuantity = $mydata->quantity;               //taking sale product quantity
+                $saleProductUnitValue = $mydata->sale_unit_value;      //taking sale product unit value
                 $saleProductDetails->sale_price = $mydata->sale_price;
                 $saleProductDetails->subtotal = $mydata->subtotal;
                 $saleProductDetails->sale_product_invoice_id = $sale_id;
                 $saleProductDetails->save();
                 $product = Product::where('id', $mydata->product_id)->first();
-                $product->stock_quantity = $product->stock_quantity - $mydata->quantity;
+                $product->stock_quantity = $product->stock_quantity - ($saleProductQuantity / $saleProductUnitValue); //Stock management based on sale product unit
                 $product->save();
+
             }
             if ($save) {
                 return Response::json(array('success' => true, 'message' => 'Sale has been added succesefully.'));
@@ -149,7 +153,7 @@ class SaleController extends Controller
                 return Response::json(array('success' => false, 'message' => 'Sale has not been added. There is something wrong.'));
             }
         } else {
-            return Response::json(array('success' => false, 'message' => $name . ' is out of stock'));
+            return Response::json(array('success' => false, 'message' => ucfirst($name) . ' is out of stock!!'));
         }
     }
 

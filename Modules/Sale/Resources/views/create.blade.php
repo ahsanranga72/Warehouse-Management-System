@@ -670,19 +670,26 @@
           products = []
           $(".tableBody").find('.orderData').each(function() {
             let quantity = $(this).find('.quantity').val()
+            let sale_unit_id = $(this).find('.select-sale-unit option:selected').attr('data-unit-id')
+            let sale_unit_value = $(this).find('.select-sale-unit option:selected').val() //For Stock management
+            let sale_price = $(this).find('.net-unit-cost').val()
             let subtotal = $(this).find('.subtotal').text()
             let product_id = $(this).attr('data-id')
             product_data = {
               "quantity": quantity,
               "subtotal": subtotal,
               "product_id": product_id,
+              "sale_unit_id": sale_unit_id,
+              "sale_unit_value": sale_unit_value,
+              "sale_price": sale_price,
+              
             }
             products.push(product_data)
 
 
           });
 
-          //console.log(products)
+          console.log(products)
 
           var form = $('AddPurchase')[0]; // You need to use standard javascript object here
           var formData = new FormData(form);

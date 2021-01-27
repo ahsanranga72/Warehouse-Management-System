@@ -17,6 +17,7 @@ class CreateSaleProductDetailsTable extends Migration
             $table->id();
             $table->integer('product_id')->nullable();
             $table->integer('quantity')->nullable();
+            $table->integer('sale_unit_id')->nullable();
             $table->integer('sale_price')->nullable();
             $table->float('subtotal')->nullable();
             $table->integer('sale_product_invoice_id')->nullable();

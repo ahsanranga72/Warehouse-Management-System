@@ -69,7 +69,7 @@ class SaleUnitController extends Controller
     public function edit($id)
     {
         $saleunit = SaleUnit::find($id);
-        $productunits = ProductUnit::get();
+        $productunits = ProductUnit::where('id',$saleunit->parent_id)->get();
         return view('saleunit::edit', compact('saleunit', 'productunits'));
     }
 
@@ -82,7 +82,7 @@ class SaleUnitController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'name' => 'required|unique:sale_units|max:50',
+            'name' => 'required|max:50',
             'value' => 'required',
             'parent_id' => 'required',
         ]);
