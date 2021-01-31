@@ -106,7 +106,7 @@
                       <th>Product Name</th>
                       <th>Product Code</th>
                       <th>Product Quantity</th>
-                   
+
                       <th>Sale Price</th>
                       <th>Product Discount</th>
                       <th>Product Vat</th>
@@ -118,7 +118,11 @@
                       <tr class="orderData dataRow{{$product->id}}" data-id="{{$product->id}}">
                         <td>{{$product->product_name}}</td>
                         <td>{{$product->product_code}}</td>
-                        <td><input type="number" class="form-control quantity" required min="0" name="quantity{{$product->id}}" value="{{$product->quantity}}" id="quantity{{$product->id}}"></td>
+                        <td class="d-flex">
+                          <input type="number" class="form-control quantity" required min="0" name="quantity{{$product->id}}" value="{{$product->quantity}}" id="quantity{{$product->id}}">
+                          <select name="select-sale-unit{{$product->id}}" id="select-sale-unit{{$product->id}}" class="form-control w-50 select-sale-unit">
+                            <option data-unit-id="{{ $product->id }}" value="{{ $product->value }}" {{ ($product->sale_unit_id==$product->id)?"selected":'' }}>{{ $product->name }}</option>
+                        </td>
                         <td class="rcvrow"><input type="number" min="0" class="form-control received " name="received{{$product->id}}" id="received{{$product->id}}"></td>
                         <td class="unitcost" data-unitcost='{{$product->product_cost}}'>{{$product->product_cost}}</td>
                         <td class='discount' data-discount='0'>0</td>
@@ -186,18 +190,18 @@
               <div class="form-group col-lg-4">
                 <div class="form-group">
                   <label for="sale_status">Sale Status</label>
-                  <select name="sale_status"  id="sale_status" class="form-control select2" style="width: 100%;">
-                    <option value="" >--Select a Payment--</option>
-                    <option value="1"{{($sale->sale_status_id==1)?"selected":''}} >Complate</option>
-                    <option value="2"{{($sale->sale_status_id==2)?"selected":''}} >Pending</option>
+                  <select name="sale_status" id="sale_status" class="form-control select2" style="width: 100%;">
+                    <option value="">--Select a Payment--</option>
+                    <option value="1" {{($sale->sale_status_id==1)?"selected":''}}>Complate</option>
+                    <option value="2" {{($sale->sale_status_id==2)?"selected":''}}>Pending</option>
                   </select>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Payment Status <span class="required-field">*</span></label>
-                  <select name="payment_status"  class="form-control payment_status">
-                    <option value="" >--Select payment status--</option>
+                  <select name="payment_status" class="form-control payment_status">
+                    <option value="">--Select payment status--</option>
                     <option value="1" {{($sale->payment_status_id==1)?"selected":''}}>Paid</option>
                     <option value="2" {{($sale->payment_status_id==2)?"selected":''}}>Due</option>
                     <option value="3" {{($sale->payment_status_id==3)?"selected":''}}>Partial</option>
@@ -232,7 +236,7 @@
                 <div class="col-md-3">
                   <div class="form-group">
                     <label>Change</label>
-                    <p name="change" id="change"  class="ml-2 change">0.00</p>
+                    <p name="change" id="change" class="ml-2 change">0.00</p>
                   </div>
                 </div>
               </div>
@@ -267,7 +271,7 @@
             <div class="row">
               <div class="form-group col-lg-6">
                 <label for="sale_note">Sale Note</label>
-                <textarea name="sale_note"  id="sale_note" cols="30" rows="5" class="form-control" placeholder="Note">{{$sale->sale_note}}</textarea>
+                <textarea name="sale_note" id="sale_note" cols="30" rows="5" class="form-control" placeholder="Note">{{$sale->sale_note}}</textarea>
               </div>
               <div class="form-group col-lg-6">
                 <label for="stuff_note">Staff Note</label>
@@ -537,7 +541,7 @@
     $('#shippingCost').on('change', function() {
       CalculateTotal();
     })
-    
+
     $('#receive_amount').on('change', function() {
       var rcv = $(this).val()
       $('#paid_amount').on('change', function() {
@@ -742,14 +746,14 @@
 </script>
 
 <script type="text/javascript">
-   $(document).ready(function(){
-    $('#image').change(function(e){
+  $(document).ready(function() {
+    $('#image').change(function(e) {
       var reader = new FileReader();
-    reader.onload = function(e){
-      $('#showImage').attr('src', e.target.result);
-    }
-    reader.readAsDataURL(e.target.files['0']);
-   });
+      reader.onload = function(e) {
+        $('#showImage').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(e.target.files['0']);
     });
- </script>
+  });
+</script>
 @endpush

@@ -185,8 +185,10 @@ class SaleController extends Controller
         $sale_products_id = DB::table('sale_product_details')
             ->join('sale_product_invoice_details', 'sale_product_invoice_details.id', 'sale_product_details.sale_product_invoice_id')
             ->join('products', 'sale_product_details.product_id', 'products.id')
+            ->join('sale_units', 'sale_product_details.sale_unit_id', 'sale_units.id')
             ->where('sale_product_details.sale_product_invoice_id', $id)
             ->get();
+        
 
         return view('sale::edit', compact('warehouses', 'customers', 'purchasestatus', 'ordertax', 'users', 'bank', 'sale', 'products', 'sale_products_id'));
     }
@@ -361,6 +363,9 @@ class SaleController extends Controller
             $product_id = $request->get('product_id');
             $data['product'] = Product::where('id', $product_id)->get()->first();
             $data['sale_unit'] = SaleUnit::where('parent_id',$data['product']->product_unit)->get();
+            $data['sale_unit_for_value'] = SaleUnit::where('id',$data['product']->sale_unit)->get()->first(); //getting selected sale unit from product details
+            
+            $data['sale_price'] = $data['sale_unit_for_value']->value * $data['product']->product_price;
             //print_r($data['sale_unit']);die();
             return view('sale::sale_orderlist',$data);
             exit(0);

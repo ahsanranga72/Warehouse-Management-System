@@ -407,37 +407,40 @@
     $(document).on('change', '.select-sale-unit', function() {
       var saleprice = parseFloat($(this).closest('tr').find('.unitcost').attr('data-unitcost'))
       var value = parseFloat($(this).val())
-
-      price = parseFloat(saleprice / value)
-
-      $(this).closest('tr').find('.net-unit-cost').val(price)
-
-      var unitcost = $(this).closest('tr').find('.net-unit-cost').val()
-      var discount = parseFloat($(this).closest('tr').find('.discount').attr('data-discount'))
-      var tax = parseFloat($(this).closest('tr').find('.tax').text())
       var quantity = $(this).closest('tr').find('.quantity').val()
+      alert(quantity)
+      if (quantity !== '' && quantity !== undefined) {
+        price = parseFloat(saleprice * value)
 
-      if (unitcost != undefined && unitcost != '' && quantity != undefined && quantity != '') {
-        unitcost = parseFloat(unitcost)
-        quantity = parseFloat(quantity)
+        $(this).closest('tr').find('.net-unit-cost').val(price)
 
-        subtotal = (unitcost * quantity) + tax - discount
+        var unitcost = $(this).closest('tr').find('.net-unit-cost').val()
+        var discount = parseFloat($(this).closest('tr').find('.discount').attr('data-discount'))
+        var tax = parseFloat($(this).closest('tr').find('.tax').text())
 
-        $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
-        CalculateTotal();
-      } else {
-        unitcost = 0
-        quantity = 0
 
-        unitcost = parseFloat(unitcost)
-        $(this).closest('tr').find('.net-unit-cost').text(unitcost)
-        quantity = parseFloat(quantity)
-        $(this).text(quantity)
+        if (unitcost != undefined && unitcost != '' && quantity != undefined && quantity != '') {
+          unitcost = parseFloat(unitcost)
+          quantity = parseFloat(quantity)
 
-        subtotal = (unitcost * quantity) + tax - discount
+          subtotal = (unitcost * quantity) + tax - discount
 
-        $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
-        CalculateTotal();
+          $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
+          CalculateTotal();
+        } else {
+          unitcost = 0
+          quantity = 0
+
+          unitcost = parseFloat(unitcost)
+          $(this).closest('tr').find('.net-unit-cost').text(unitcost)
+          quantity = parseFloat(quantity)
+          $(this).text(quantity)
+
+          subtotal = (unitcost * quantity) + tax - discount
+
+          $(this).closest('tr').find('.subtotal').text(subtotal.toFixed(2));
+          CalculateTotal();
+        }
       }
     })
 
@@ -682,7 +685,7 @@
               "sale_unit_id": sale_unit_id,
               "sale_unit_value": sale_unit_value,
               "sale_price": sale_price,
-              
+
             }
             products.push(product_data)
 
