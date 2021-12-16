@@ -1,4 +1,4 @@
-<p>step 01 - add database connection<br>step 02 - run migration<br>03- Create admin in user table by giving email and password(use $2y$10$y3yHFbM1Wyjp77Ftdhd7ReOLDP21aINHefFCpQeTKm5OlJ8Ck/nW2 as 123456789)<br>step 04 - set the user type for Admin (ADM)</p>
+<p>step 01 - add database connection<br>step 02 - run migration<br>step 03 - Create admin in user table by giving email and password(use $2y$10$y3yHFbM1Wyjp77Ftdhd7ReOLDP21aINHefFCpQeTKm5OlJ8Ck/nW2 as 123456789)<br>step 04 - set the user type for Admin (ADM)</p>
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
